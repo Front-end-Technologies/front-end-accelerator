@@ -1,0 +1,30 @@
+{
+  "name": "my-turborepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev --concurrency=20",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "eslint": "^9.20.1",
+    "prettier": "^3.5.1",
+    "turbo": "^2.4.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.1.42",
+  "workspaces": [
+    "apps/*",
+    "apps/demo/angular/cookbook/*",
+    "apps/demo/react/cookbook/*",
+    "apps/demo/next/cookbook/*",
+    "apps/demo/angular/examples/*",
+    "apps/demo/react/examples/*",
+    "apps/demo/next/examples/*",
+    "packages/*"
+  ]
+}
