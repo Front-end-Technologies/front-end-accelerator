@@ -20,6 +20,6 @@
     "vite": "^6.2.2"
   },
   "optionalDependencies": {
-    "@repo/eslint-config": "latest"
+    "@repo/eslint-config": "*"
   }
 }

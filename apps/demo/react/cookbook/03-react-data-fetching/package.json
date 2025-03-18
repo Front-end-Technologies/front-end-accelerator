@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.69.0",
+    "axios": "^1.8.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -19,6 +21,6 @@
     "vite": "^6.1.0"
   },
   "optionalDependencies": {
-    "@repo/eslint-config": "*" 
+    "@repo/eslint-config": "*"
   }
 }
