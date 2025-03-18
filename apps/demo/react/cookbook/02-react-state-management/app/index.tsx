@@ -1,11 +1,24 @@
 import { useRef, useState } from 'react';
-import ReactDOM from 'react-dom/client';
+import { useEffect } from 'react';
 
-function App() {
+import { useAppStore, useThemeStore } from '../store';
+import '../styles.css';
+
+export function App() {
+  // local state
   const [count, setCount] = useState(0);
-  const countRef = useRef(count);
 
+  // local ref
+  const countRef = useRef(count);
   const tableRef = useRef<string[]>([]);
+
+  // global state
+  const themeStore = useThemeStore();
+  const appStore = useAppStore();
+
+  useEffect(() => {
+    document.body.className = themeStore.theme;
+  }, [themeStore.theme]);
 
   return (
     <>
@@ -106,16 +119,31 @@ function App() {
       <h1>Global state management with store</h1>
       <p>
         Used with client interaction that needs to be shared across components.
-        <p>
-          <strong>DO NOT USE IT TO STORE DATASETS!!!</strong>
-        </p>
         Keep the client state fast, light and simple. Because the store triggers
         re-renders, large datasets will re-render as well if being stored in the
         store.
       </p>
+      <strong>
+        DO NOT USE IT TO STORE DATASETS!!! USE TANSTACK QUERY FOR SERVER STATE
+      </strong>
+
+      <p>
+        for global state we recommend Zustand! It is a small, fast and reactive
+        state management library.
+      </p>
+
+      <h2>Theme store</h2>
+      <p>Current theme: {themeStore.theme}</p>
+      <button onClick={themeStore.toggleTheme}>Toggle Theme</button>
+
+      <h2>App store</h2>
+      <p>Current count: {appStore.count}</p>
+      <button onClick={appStore.decrement}>Decrement</button>
+      <button onClick={appStore.increment}>Increment</button>
+
+      <h2>Store values</h2>
+      <p>Theme: {JSON.stringify(themeStore)}</p>
+      <p>App count: {JSON.stringify(appStore)}</p>
     </>
   );
 }
-
-const rootElement = document.getElementById('root') as HTMLElement;
-ReactDOM.createRoot(rootElement).render(<App />);
