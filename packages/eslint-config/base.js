@@ -12,11 +12,5 @@ export const config = [
   ...tseslint.configs.recommended,
   { plugins: { turbo: turboPlugin } },
   { plugins: { onlyWarn } },
-  { ignores: ['dist/**', 'build/**'] },    
-  {
-    rules: {
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-unused-vars': 'warn',
-    },
-  },
+  { ignores: ['dist/**', 'build/**'] },
 ];
