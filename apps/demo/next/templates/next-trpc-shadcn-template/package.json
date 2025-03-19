@@ -1,0 +1,70 @@
+{
+  "name": "nextjs-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbo",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.1.0",
+    "@radix-ui/react-avatar": "^1.1.3",
+    "@radix-ui/react-checkbox": "^1.1.4",
+    "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-dropdown-menu": "^2.1.6",
+    "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-select": "^2.1.6",
+    "@radix-ui/react-separator": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-toast": "^1.2.4",
+    "@radix-ui/react-tooltip": "^1.1.8",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tailwindcss/postcss": "^4.0.14",
+    "@tanstack/react-query": "^5.64.2",
+    "@tanstack/react-query-devtools": "^5.64.2",
+    "@trpc/client": "^11.0.0-rc.708",
+    "@trpc/react-query": "^11.0.0-rc.708",
+    "@trpc/server": "^11.0.0-rc.708",
+    "ai": "^4.1.0",
+    "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "eslint-plugin-next": "^0.0.0",
+    "geist": "^1.3.1",
+    "lucide-react": "^0.483.0",
+    "next": "^15.1.5",
+    "next-themes": "^0.4.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "server-only": "^0.0.1",
+    "sonner": "^2.0.1",
+    "superjson": "^2.2.2",
+    "tailwind-merge": "^3.0.2",
+    "tailwind-scrollbar-hide": "^2.0.0",
+    "tw-animate-css": "^1.2.4",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
+
+    
+  },
+  "devDependencies": {
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "eslint": "^9.18.0",
+    "eslint-plugin-perfectionist": "^4.7.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.10",
+    "tailwindcss": "^4.0.14",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.38.1"
+  }
+}
