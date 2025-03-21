@@ -115,7 +115,6 @@ export function AppSidebar() {
                     <SidebarMenuItem key={project.name}>
                       <SidebarMenuButton asChild>
                         <Link href={`/${framework}/${type}/${project.name}`}>
-                          <FrameworkLogo framework={framework!} />
                           <span>{project.name}</span>
                         </Link>
                       </SidebarMenuButton>
