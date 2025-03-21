@@ -147,10 +147,11 @@ function WebIDE() {
             setWebContainerFilePath={setWebContainerFilePath}
           />
         </Panel>
+
         <PanelResizeHandle />
         <Panel minSize={20}>
-          <div className="h-full overflow-auto rounded-xl bg-code">
-            <h3 className="sticky top-0 z-50 items-center border-b border-b-gray-200 bg-code p-4 text-center text-sm dark:border-b-gray-600">
+          <div className="bg-code h-full overflow-auto rounded-xl">
+            <h3 className="bg-code sticky top-0 z-50 items-center border-b border-b-gray-200 p-4 text-center text-sm dark:border-b-gray-600">
               {webcontainerFilePath}
             </h3>
             <CodeMirror
@@ -174,7 +175,7 @@ function WebIDE() {
           ></iframe>
         </Panel>
       </PanelGroup>
-      <div className="rounded-xl bg-code p-4">
+      <div className="bg-code rounded-xl p-4">
         <div className="terminal h-40" ref={terminalRef}></div>
       </div>
     </div>

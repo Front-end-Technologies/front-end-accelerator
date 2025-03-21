@@ -1,5 +1,3 @@
-// serving the dist folder
-
 import express from 'express';
 import path from 'path';
 import { dirname } from 'path';
@@ -10,12 +8,10 @@ console.log('__filename: ', __filename);
 const __dirname = dirname(__filename);
 
 const app = express();
-const port = process.env['PORT'] || 3000;
+const port = 8080;
 
-// Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, 'webcontainerbuild')));
 
-// Send all requests to the index.html file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'webcontainerbuild', 'index.html'));
 });
