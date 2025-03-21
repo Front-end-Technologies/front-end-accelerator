@@ -1,5 +1,5 @@
 {
-  "name": "react-recipe-05-authentication",
+  "name": "react-recipe-05-react-routing-file-folder-structure",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router": "^7.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.8",
@@ -19,6 +20,6 @@
     "vite": "^6.1.0"
   },
   "optionalDependencies": {
-    "@repo/eslint-config": "*" 
+    "@repo/eslint-config": "*"
   }
 }
