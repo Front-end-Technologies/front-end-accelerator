@@ -27,7 +27,7 @@ export function FoldersSelect() {
       }}
       value={framework}
     >
-      <SelectTrigger>
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a framework" />
       </SelectTrigger>
       <SelectContent>
