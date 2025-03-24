@@ -24,7 +24,7 @@
     "apps/demo/next/cookbook/*",
     "apps/demo/angular/examples/*",
     "apps/demo/react/examples/*",
-    "apps/demo/next/examples/*",  
+    "apps/demo/next/examples/*",
     "packages/*"
   ]
 }

@@ -25,7 +25,6 @@ export default function LoginTerminal() {
   useEffect(() => {
     const bootWebContainer = async () => {
       const iFrameEl = document.querySelector("iframe");
-
       const fitAddon = new FitAddon();
       const terminal = new Terminal({ convertEol: true });
       terminalInstanceRef.current = terminal;
@@ -77,7 +76,7 @@ export default function LoginTerminal() {
 
   return (
     <>
-      <div className="mx-auto w-[600px] gap-4 space-y-4 rounded-xl border border-dashed bg-code p-4 text-xs">
+      <div className="bg-code mx-auto w-[600px] gap-4 space-y-4 rounded-xl border border-dashed p-4 text-xs">
         <div className="terminal h-60" ref={terminalRef}></div>
       </div>
     </>

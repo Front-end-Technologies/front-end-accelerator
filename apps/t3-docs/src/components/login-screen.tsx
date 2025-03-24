@@ -14,7 +14,7 @@ export function LoginScreen() {
           width={"100%"}
         ></iframe>
       </div>
-      <div className="flex flex-col items-center justify-center gap-8 px-4 text-muted-foreground">
+      <div className="text-muted-foreground flex flex-col items-center justify-center gap-8 px-4">
         <h1 className="text-2xl font-bold text-black">Front-end Accelerator</h1>
         <p className="mx-auto w-2/4 text-center">
           The monorepo playground for your latest Front-end ideas. Learn with
@@ -73,7 +73,7 @@ export function LoginScreen() {
             </a>
           </div>
 
-          <p className="text-balance text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm text-balance">
             <a
               className="underline underline-offset-4"
               href="https://cegekagroup.sharepoint.com/sites/O-AP-ApplicationsGeneral/SitePages/Front-end-Technologies.aspx"
