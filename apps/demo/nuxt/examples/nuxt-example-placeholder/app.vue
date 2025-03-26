@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const title = 'Hello World';
+const count = useState('count', () => 0);
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
+  <h1>{{ count }}</h1>
+  <button @click="count++">Increment</button>
 </template>
