@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.1.0",
     "@codemirror/lang-javascript": "^6.2.3",
     "@radix-ui/react-avatar": "^1.1.3",
     "@radix-ui/react-dialog": "^1.1.6",
@@ -35,9 +36,10 @@
     "@uiw/codemirror-theme-material": "^4.23.8",
     "@uiw/codemirror-theme-tokyo-night-storm": "^4.23.8",
     "@uiw/react-codemirror": "^4.23.8",
-    "@webcontainer/api": "1.5.1-internal.10",
+    "@webcontainer/api": "^1.5.3",
     "@xterm/addon-fit": "latest",
     "@xterm/xterm": "latest",
+    "ai": "^4.1.0",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "client-only": "^0.0.1",
@@ -51,7 +53,7 @@
     "react-resizable-panels": "^2.1.7",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
-    "tailwind-merge": "^3.0.2",   
+    "tailwind-merge": "^3.0.2",
     "tw-animate-css": "^1.2.4",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"

@@ -13,6 +13,7 @@ import { WebContainer } from "@webcontainer/api";
 import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
 import { useParams } from "next/navigation";
+import Script from "next/script";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -104,7 +105,7 @@ function WebIDE() {
 
     const devServerProcess = await webcontainerRef.current?.spawn("npm", [
       "run",
-      "dev",
+      "webcontainer",
     ]);
     devServerProcess?.output.pipeTo(
       new WritableStream({
@@ -140,6 +141,7 @@ function WebIDE() {
 
   return (
     <div className="flex h-[calc(100vh-76px)] flex-col space-y-2">
+      {/* <Script src="/dist/assets/index.js" /> */}
       <PanelGroup className="gap-1" direction="horizontal">
         <Panel defaultSize={15} minSize={5}>
           <FileExplorer

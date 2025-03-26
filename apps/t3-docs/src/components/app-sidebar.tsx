@@ -26,6 +26,7 @@ export const FrameworkLogo = ({ framework }: { framework: string }) => {
   const logos: Record<string, string> = {
     angular: "/angular-logo.svg",
     next: theme === "light" ? "/next-logo.svg" : "/next-logo-dark.svg",
+    nuxt: "/nuxt-logo.svg",
     react: "/react-logo.svg",
   };
 
