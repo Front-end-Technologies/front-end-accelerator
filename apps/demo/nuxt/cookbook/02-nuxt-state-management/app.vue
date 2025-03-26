@@ -17,9 +17,7 @@ const toggle = useToggle();
 </script>
 
 <template>
-  <!-- Wrap the component in a ClientOnly component to prevent server-side rendering
-  only needed to run in webcontainers, not in the browser -->
-  <ClientOnly>
+  <main>
     <h1>useState</h1>
     <p>useState count: {{ count }}</p>
     <p>
@@ -58,5 +56,5 @@ const toggle = useToggle();
     </p>
     <p>Toggle state: {{ toggle.isVisible }}</p>
     <button @click="toggle.toggle">Toggle</button>
-  </ClientOnly>
+  </main>
 </template>
