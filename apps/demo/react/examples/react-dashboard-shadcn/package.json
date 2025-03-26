@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "webcontainer": "vite build && vite preview",
+    "webcontainer": "node server.js",
     "build": "vite build",
     "preview": "vite preview"
   },
