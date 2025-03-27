@@ -14,6 +14,7 @@ export const env = createEnv({
     GITHUB_REPO: process.env.GITHUB_REPO,
     GITHUB_USER: process.env.GITHUB_USER,
     NODE_ENV: process.env.NODE_ENV,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
   server: {
     AUTH_GITHUB_ID: z.string(),
@@ -29,6 +30,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    OPENAI_API_KEY: z.string(),
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });

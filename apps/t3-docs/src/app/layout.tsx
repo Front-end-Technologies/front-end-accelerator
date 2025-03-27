@@ -40,6 +40,8 @@ export default async function RootLayout({ children }: Readonly<Props>) {
               <AppSidebar />
               <Main>{children}</Main>
             </HydrateClient>
+
+            <div id="chatWidget"></div>
           </TRPCReactProvider>
         ) : (
           <LoginScreen />
