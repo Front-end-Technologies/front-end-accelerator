@@ -59,7 +59,7 @@ export function Main({ children }: { children: ReactNode }) {
               <Button
                 onClick={() => {
                   window.open(
-                    `https://github.com//RootDivision/front-end-accelerator-monorepo/tree/main/apps/demo/${framework}/${type}/${name}`,
+                    `https://github.com/Front-end-Technologies/front-end-accelerator-monorepo/tree/main/apps/demo/${framework}/${type}/${name}`,
                     "_blank",
                   );
                 }}
