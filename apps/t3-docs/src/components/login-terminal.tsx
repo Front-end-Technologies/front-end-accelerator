@@ -1,7 +1,7 @@
 "use client";
 import "@xterm/xterm/css/xterm.css";
 import { WebContainer } from "@webcontainer/api";
-import { FitAddon } from "@xterm/addon-fit";
+// import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
 import { useEffect, useRef } from "react";
 
@@ -25,13 +25,13 @@ export default function LoginTerminal() {
   useEffect(() => {
     const bootWebContainer = async () => {
       const iFrameEl = document.querySelector("iframe");
-      const fitAddon = new FitAddon();
+      // const fitAddon = new FitAddon();
       const terminal = new Terminal({ convertEol: true });
       terminalInstanceRef.current = terminal;
 
-      terminal.loadAddon(fitAddon);
+      // terminal.loadAddon(fitAddon);
       terminal.open(terminalRef.current!);
-      fitAddon.fit();
+      // fitAddon.fit();
 
       webcontainerRef.current = await WebContainer.boot();
 
@@ -76,8 +76,8 @@ export default function LoginTerminal() {
 
   return (
     <>
-      <div className="bg-code mx-auto w-[600px] gap-4 space-y-4 rounded-xl border border-dashed p-4 text-xs">
-        <div className="terminal h-60" ref={terminalRef}></div>
+      <div className="bg-code mx-auto w-full gap-4 space-y-4 rounded-xl border border-dashed p-4 text-xs lg:w-[600px]">
+        <div className="terminal overflow-auto" ref={terminalRef}></div>
       </div>
     </>
   );

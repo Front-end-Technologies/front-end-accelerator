@@ -5,7 +5,7 @@ import LoginTerminal from "./login-terminal";
 
 export function LoginScreen() {
   return (
-    <div className="grid h-screen grid-cols-2">
+    <div className="h-screen lg:grid lg:grid-cols-2">
       <div className="hidden lg:block">
         <iframe
           height={"100%"}
@@ -14,9 +14,9 @@ export function LoginScreen() {
           width={"100%"}
         ></iframe>
       </div>
-      <div className="text-muted-foreground flex flex-col items-center justify-center gap-8 px-4">
+      <div className="text-muted-foreground flex flex-col items-center justify-center gap-8 p-4">
         <h1 className="text-2xl font-bold text-black">Front-end Accelerator</h1>
-        <p className="mx-auto w-2/4 text-center">
+        <p className="mx-auto text-center lg:w-2/4">
           The monorepo playground for your latest Front-end ideas. Learn with
           our <strong className="text-black">cookbook</strong>, get a head start
           with our <strong className="text-black">templates</strong>, and build
