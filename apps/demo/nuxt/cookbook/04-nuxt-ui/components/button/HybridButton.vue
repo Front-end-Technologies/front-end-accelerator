@@ -4,11 +4,11 @@ import { cn } from '~/utils';
 import { Primitive, type PrimitiveProps } from 'reka-ui';
 import { type ButtonVariants, buttonVariants } from '.';
 
-interface Props extends PrimitiveProps {
+type Props = PrimitiveProps & {
   variant?: ButtonVariants['variant'];
   size?: ButtonVariants['size'];
   class?: HTMLAttributes['class'];
-}
+};
 
 const props = withDefaults(defineProps<Props>(), {
   as: 'button',
