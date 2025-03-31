@@ -10,8 +10,6 @@ const { data: secureData } = useFetch('/api/user/me');
 // this is a good example of a call to the BFF
 // that needs authentication AND authorization
 const { data: secureUsers } = useFetch<User[]>('/api/user/list');
-
-// bonus: use tRPC to call the BFF with end to end typesafety
 </script>
 
 <template>
@@ -101,8 +99,7 @@ const { data: secureUsers } = useFetch<User[]>('/api/user/list');
       <div>
         <div>
           <h1>
-            Secure Users, only accessible after authentication and
-            authorization
+            Secure Users, only accessible after authentication and authorization
           </h1>
           <ul>
             <li v-for="user in secureUsers" :key="user.id">
