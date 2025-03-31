@@ -8,7 +8,7 @@ interface Props {
   variant?: ButtonVariants['variant'];
   size?: ButtonVariants['size'];
   class?: HTMLAttributes['class'];
-  as: string;
+  as?: string;
   asChild?: boolean;
 }
 

@@ -5,7 +5,7 @@ import HybridButton from './components/button/HybridButton.vue';
 
 <template>
   <ClientOnly>
-    <main class="flex flex-col gap-4">
+    <main class="flex flex-col gap-4 p-4">
       <h1 class="text-3xl font-bold">CSS Only</h1>
       <div>
         <button
