@@ -13,7 +13,7 @@ import { WebContainer } from "@webcontainer/api";
 import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
 import { useParams } from "next/navigation";
-import Script from "next/script";
+// import Script from "next/script";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 

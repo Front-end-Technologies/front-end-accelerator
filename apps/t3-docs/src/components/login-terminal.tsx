@@ -20,14 +20,13 @@ export default function LoginTerminal() {
   const hasBooted = useRef(false);
   const webcontainerRef = useRef<WebContainer>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
-  const terminalInstanceRef = useRef<Terminal>(null);
 
   useEffect(() => {
     const bootWebContainer = async () => {
       const iFrameEl = document.querySelector("iframe");
       // const fitAddon = new FitAddon();
+
       const terminal = new Terminal({ convertEol: true });
-      terminalInstanceRef.current = terminal;
 
       // terminal.loadAddon(fitAddon);
       terminal.open(terminalRef.current!);

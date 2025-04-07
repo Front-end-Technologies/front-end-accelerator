@@ -1,3 +1,4 @@
+import axios from "axios";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 
@@ -16,9 +17,7 @@ export const authConfig = {
         // Initial sign in
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
-        token.expiresAt = Math.floor(
-          Date.now() / 1000 + (account.expires_in as number),
-        );
+        token.expiresAt = account.expires_at;
         return token;
       }
 
@@ -27,31 +26,31 @@ export const authConfig = {
         return token;
       }
 
+      if (!token.refresh_token) {
+        throw new TypeError("Missing refresh_token");
+      }
+
       // Access token has expired, refresh it
       try {
-        const response = await fetch(
+        const response = await axios.post(
           "https://github.com/login/oauth/access_token",
           {
-            body: JSON.stringify({
-              client_id: process.env.AUTH_GITHUB_ID,
-              client_secret: process.env.AUTH_GITHUB_SECRET,
-              grant_type: "refresh_token",
-              refresh_token: token.refreshToken,
-            }),
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
+            client_id: process.env.AUTH_GITHUB_ID,
+            client_secret: process.env.AUTH_GITHUB_SECRET,
+            grant_type: "refresh_token",
+            refresh_token: token.refreshToken,
           },
         );
 
-        const tokens = await response.json();
+        const newTokens = response.data;
 
-        if (!response.ok) throw tokens;
+        if (!newTokens) throw newTokens;
 
         return {
           ...token,
-          accessToken: tokens.access_token,
-          expiresAt: Math.floor(Date.now() / 1000 + tokens.expires_in),
-          refreshToken: tokens.refresh_token ?? token.refreshToken,
+          accessToken: newTokens.access_token,
+          expiresAt: Math.floor(Date.now() / 1000 + newTokens.expires_in),
+          refreshToken: newTokens.refresh_token ?? token.refreshToken,
         };
       } catch (error) {
         console.error("Error refreshing access token", error);
