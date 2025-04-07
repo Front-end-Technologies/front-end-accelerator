@@ -27,8 +27,13 @@ export default function FileExplorer({
     type,
   });
 
-  const repoContent = useMemo(() => {
-    return data?.repoContent;
+  const sortedRepoContent = useMemo(() => {
+    if (!data?.repoContent) return [];
+    return [...data.repoContent].sort((a, b) => {
+      if (a.type === "dir" && b.type !== "dir") return -1;
+      if (a.type !== "dir" && b.type === "dir") return 1;
+      return a.name.localeCompare(b.name);
+    });
   }, [data]);
 
   const renderTree = (item: GitHubContent) => {
@@ -49,7 +54,7 @@ export default function FileExplorer({
               {item.name}
             </Button>
             {expandedDirs[item.name] && (
-              <ul className="pl-2">
+              <ul className="pl-3">
                 {(item.contents as GitHubContent[])?.map((child) =>
                   renderTree(child),
                 )}
@@ -75,8 +80,8 @@ export default function FileExplorer({
   };
 
   return (
-    <ul className="col-span-2 h-full rounded-xl bg-code py-2 pr-8">
-      {repoContent?.map((item) => renderTree(item))}
+    <ul className="bg-code col-span-2 h-full rounded-xl py-2 pr-8">
+      {sortedRepoContent?.map((item) => renderTree(item))}
     </ul>
   );
 }
