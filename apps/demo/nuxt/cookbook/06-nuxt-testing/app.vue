@@ -17,11 +17,11 @@ const filteredTodos = computed(() => {
 });
 
 const activeCount = computed(() => {
-  return todos.value.filter((todo) => !todo.completed).length;
+  return getActiveCount(todos.value);
 });
 
 const completedCount = computed(() => {
-  return todos.value.filter((todo) => todo.completed).length;
+  return getCompletedCount(todos.value);
 });
 
 // Methods
