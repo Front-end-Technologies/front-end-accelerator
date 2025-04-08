@@ -16,7 +16,7 @@ const useFetchUsers = await useFetch<FetchedData>(
   'https://dummyjson.com/users'
 );
 
-const { data: asyncData, error: asyncError } = await useAsyncData<FetchedData>(
+const { data: asyncData } = await useAsyncData<FetchedData>(
   'async-users',
   async () => {
     const response = await fetch('https://dummyjson.com/users');
