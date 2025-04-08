@@ -4,7 +4,6 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-console.log('__filename: ', __filename);
 const __dirname = dirname(__filename);
 
 const app = express();

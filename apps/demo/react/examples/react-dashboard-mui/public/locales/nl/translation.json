@@ -1,0 +1,7 @@
+{
+  "title": "Welkom bij React met react-i18next",
+  "description": {
+    "part1": "Om te beginnen, bewerk src/App.js en sla op om te herladen.",
+    "part2": "Schakel tussen Engels en Duits met de knoppen hierboven."
+  }
+}
