@@ -18,7 +18,7 @@ export function FoldersSelect() {
   const { framework = "" } = useParams() as { framework: string };
   const router = useRouter();
 
-  const [folders] = api.gitHub.getFolders.useSuspenseQuery();
+  const { data: folders } = api.gitHub.getFolders.useQuery();
 
   return (
     <Select
@@ -32,7 +32,7 @@ export function FoldersSelect() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {folders.map((folder) => (
+          {folders?.map((folder) => (
             <SelectItem key={folder.name} value={folder.name}>
               <div className="flex items-center gap-3">
                 <FrameworkLogo framework={folder.name} />

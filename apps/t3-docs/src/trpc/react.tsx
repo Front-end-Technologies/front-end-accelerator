@@ -3,7 +3,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { type AppRouter } from "@/server/api/root";
 import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import { httpBatchStreamLink, loggerLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { SessionProvider } from "next-auth/react";
@@ -19,7 +19,9 @@ const getQueryClient = () => {
     return createQueryClient();
   }
   // Browser: use singleton pattern to keep the same query client
-  return (clientQueryClientSingleton ??= createQueryClient());
+  clientQueryClientSingleton ??= createQueryClient();
+
+  return clientQueryClientSingleton;
 };
 
 export const api = createTRPCReact<AppRouter>();
@@ -49,7 +51,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             process.env.NODE_ENV === "development" ||
             (op.direction === "down" && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
+        httpBatchStreamLink({
           headers: () => {
             const headers = new Headers();
             headers.set("x-trpc-source", "nextjs-react");

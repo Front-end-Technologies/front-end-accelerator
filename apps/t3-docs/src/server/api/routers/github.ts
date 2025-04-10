@@ -15,7 +15,6 @@ export const gitHubRouter = createTRPCRouter({
     const files: GitHubContent[] = await http.get(
       `${baseURL}/contents/apps/demo`,
     );
-
     return files;
   }),
   getProject: protectedProcedure

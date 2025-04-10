@@ -1,12 +1,11 @@
 import "@/styles/globals.css";
+import { auth } from "@/auth";
 import { AppSidebar } from "@/components/app-sidebar";
 import { LoginScreen } from "@/components/login-screen";
-import { api, HydrateClient } from "@/trpc/server";
+import { TRPCReactProvider } from "@/trpc/react";
 import { type Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 
-import { auth } from "../server/auth";
-import { TRPCReactProvider } from "../trpc/react";
 import { Main } from "./main";
 
 const geistMono = Geist_Mono({
@@ -27,21 +26,13 @@ interface Props {
 export default async function RootLayout({ children }: Readonly<Props>) {
   const session = await auth();
 
-  if (session) {
-    void api.gitHub.getFolders.prefetch();
-  }
-
   return (
     <html className={`${geistMono.variable}`} lang="en">
       <body>
         {session ? (
           <TRPCReactProvider>
-            <HydrateClient>
-              <AppSidebar />
-              <Main>{children}</Main>
-            </HydrateClient>
-
-            <div id="chatWidget"></div>
+            <AppSidebar />
+            <Main>{children}</Main>
           </TRPCReactProvider>
         ) : (
           <LoginScreen />

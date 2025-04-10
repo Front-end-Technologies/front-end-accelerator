@@ -1,16 +1,8 @@
 import axios from "axios";
-import { type DefaultSession, type NextAuthConfig } from "next-auth";
+import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: DefaultSession["user"] & {
-      id: string;
-    };
-  }
-}
-
-export const authConfig = {
+export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ account, token }) {
       if (account) {
@@ -70,14 +62,8 @@ export const authConfig = {
   },
   providers: [
     GitHub({
-      authorization: {
-        params: {
-          response_type: "code",
-          scope: "repo offline_access",
-        },
-      },
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
+      clientId: process.env.AUTH_GITHUB_ID || "",
+      clientSecret: process.env.AUTH_GITHUB_SECRET || "",
     }),
   ],
-} satisfies NextAuthConfig;
+});

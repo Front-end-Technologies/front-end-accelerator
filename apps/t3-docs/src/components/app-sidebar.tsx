@@ -48,12 +48,13 @@ export function AppSidebar() {
   const theme = useThemeStore((state) => state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
-  const [folders] = api.gitHub.getFolders.useSuspenseQuery();
+  const { data: folders } = api.gitHub.getFolders.useQuery();
 
   const cookbookQuery = api.gitHub.getProjects.useQuery(
     { framework, type: "cookbook" },
     { enabled: !!framework && !!folders },
   );
+
   const examplesQuery = api.gitHub.getProjects.useQuery(
     { framework, type: "examples" },
     { enabled: !!framework && !!folders },

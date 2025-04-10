@@ -1,7 +1,6 @@
+import { auth } from "@/auth";
 import { GitHubSession } from "@/interfaces";
 import axios from "axios";
-
-import { auth } from "../auth";
 
 export const http = axios.create({
   baseURL: process.env.BASE_URL,
