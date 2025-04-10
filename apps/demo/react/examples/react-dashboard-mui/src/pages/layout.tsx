@@ -118,7 +118,7 @@ export default function Layout() {
   const { toggleDashboard, ui } = useThemeStore((state) => state);
 
   return (
-    <aside className="flex">
+    <div className="flex">
       <AppBar open={ui.dashboard.open} position="fixed">
         <Toolbar>
           <IconButton
@@ -178,10 +178,11 @@ export default function Layout() {
         </List>
       </Drawer>
 
+      {/* Main content */}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Root />
       </Box>
-    </aside>
+    </div>
   );
 }
