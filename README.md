@@ -1,14 +1,30 @@
-# Turborepo starter
+# Front-end Accelerator Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+This is a monorepo based on pnpm workspaces and Turborepo. Maintainted by Cegeka's Front-end Guild
 
-## Using this example
+Currently deployed at: https://front-end-accelerator-t3-docs.vercel.app/
+
+https://cegekagroup.sharepoint.com/sites/O-AP-ApplicationsGeneral/SitePages/Front-end-Technologies.aspx
+
+## Using this monorepo
 
 Run the following command:
 
 ```sh
-npx create-turbo@latest
+pnpm install
+pnpm build
 ```
+
+This will install all dependencies for all apps and packages in the monorepo.
+You can also run the following command to install dependencies for a specific app or package:
+
+```sh
+pnpm i --filter <package-name>
+```
+This will install all dependencies for the specified app or package.
+
+You can also open an app in a separate code editor and work on the app as if it were a standalone app
+
 
 ## What's inside?
 
@@ -16,11 +32,9 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `demo`: this folder contains all our cookbook recipes and examples
+- `t3-docs`: a Next.js app that showcases the power of the T3 stack, documenting our cookbook recipes
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -31,13 +45,13 @@ This Turborepo has some additional tools already setup for you:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
+- [WebContainers](https://webcontainers.io/) for running Node.js apps directly in the browser
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 pnpm build
 ```
 
@@ -46,21 +60,14 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 pnpm dev
 ```
 
 ### Remote Caching
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+Only available on Vercel, not on Azure.
 
 ```
-cd my-turborepo
 npx turbo login
 ```
 
@@ -82,3 +89,5 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
 - [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+
+

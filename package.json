@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "front-end-accelerator",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -16,15 +16,5 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "bun@1.1.42",
-  "workspaces": [
-    "apps/*",
-    "apps/demo/angular/cookbook/*",
-    "apps/demo/react/cookbook/*",
-    "apps/demo/next/cookbook/*",
-    "apps/demo/angular/examples/*",
-    "apps/demo/react/examples/*",
-    "apps/demo/next/examples/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@9.0.0"
 }
