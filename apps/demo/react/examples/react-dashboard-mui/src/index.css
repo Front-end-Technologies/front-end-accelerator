@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 /* styling defaults */
 h1 {
   @apply text-2xl font-bold;
