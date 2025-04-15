@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import createMDX from '@next/mdx'
+import nextMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   }
 };
 
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
 })
 
 export default withMDX(nextConfig)

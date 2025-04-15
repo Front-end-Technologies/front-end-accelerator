@@ -1,0 +1,47 @@
+
+# User Interaction with Vercel AI SDK
+
+The **User Interaction** example demonstrates how to wait for user input before performing tool calls, such as scheduling a meeting.
+
+## Code Example
+
+```typescript
+import { CreateCalendarMeetingParams, tools } from "@/lib/tools";
+import { processToolCalls, CALENDAR_APPROVAL } from "@/lib/utils";
+import { google } from "@ai-sdk/google";
+import { createDataStreamResponse, streamText } from "ai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+
+  const systemMessage = `Be a positive calendar assistant. You can schedule meetings.
+    Format text for Notion.
+    Use emojis to make the conversation more engaging.
+
+    When a user refers to relative dates like "today", "tomorrow", or "next Monday", use the parseDate tool to convert them to actual dates.
+  `;
+
+  return createDataStreamResponse({
+    execute: async (dataStream) => {
+      const processedMessages = await processToolCalls(
+        { tools, dataStream, messages },
+        {
+          createCalendarMeeting: async (args) => {
+            console.log("Adding meeting to calendar:", args);
+            return CALENDAR_APPROVAL.Success;
+          },
+        }
+      );
+
+      const result = streamText({
+        model: google("gemini-2.0-flash-001"),
+        system: systemMessage,
+        messages: processedMessages,
+        maxSteps: 10,
+        tools: { ...tools },
+      });
+
+      result.mergeIntoDataStream(dataStream);
+    },
+  });
+}

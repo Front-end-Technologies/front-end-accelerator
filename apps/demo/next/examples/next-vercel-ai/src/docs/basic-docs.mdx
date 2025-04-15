@@ -1,0 +1,38 @@
+# Basic Usage of Vercel AI SDK
+
+The **Basic** example demonstrates how to use the Vercel AI SDK to create a simple chatbot.
+
+## Prerequisites
+1. Have the Vercel AI SDK installed in your project. Check out [Nextjs Getting started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router).
+
+2. Have the necessary API keys and environment variables set up for the Vercel AI SDK to work properly.
+
+3. You can find the environment variables by looking at the specific [Providers](https://sdk.vercel.ai/docs/foundations/providers-and-models).
+
+## Explanation
+
+This example uses the `streamText` function to process user messages and generate responses. <br/>
+By using the `streamText` function, you can create a streaming response that updates the UI in real-time as the AI generates text.
+
+## Code Example
+
+```typescript
+import { google } from "@ai-sdk/google";
+import { streamText } from "ai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+
+  const systemMessage = `Be a positive assistant.
+    Format for notion. Use titles and subtitles.
+    Use emojis to make the conversation more engaging.
+  `;
+
+  const result = streamText({
+    model: google("gemini-2.0-flash-001"),
+    system: systemMessage,
+    messages: messages,
+  });
+
+  return result.toDataStreamResponse();
+}

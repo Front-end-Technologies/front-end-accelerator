@@ -12,16 +12,67 @@ import {
   getToolsRequiringConfirmation,
 } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
-import { Send } from "lucide-react";
+import { Send, Flame, Zap } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarConfirmation } from "@/components/calendar-confirmation";
 import { CalendarApproval } from "@/components/calendar-success";
-import TestMarkdown from "../app/testmarkdown.mdx";
+import EmptyChat from "./empty-chat";
 
-export function Chat({ apiUrl }: { apiUrl: string }) {
-  const { messages, input, handleInputChange, handleSubmit, addToolResult } =
-    useChat({ api: apiUrl });
+import BasicDocs from "@/docs/basic-docs.mdx";
+import toolCallingDocs from '@/docs/tool-calling-docs.mdx';
+import userInteractionDocs from '@/docs/user-interaction-docs.mdx';
+import mcpDocs from '@/docs/model-context-provider-docs.mdx';
+
+
+export interface ChatQuickActions {
+  section: string;
+  label: string;
+  value: string;
+}
+
+export interface ChatDocs {
+  section: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Doc: any;
+}
+
+interface ChatProps {
+  section: string;
+  apiUrl: string;
+  quickActions?: ChatQuickActions[];
+}
+
+const docs: ChatDocs[] = [
+  {
+    section: 'basic',
+    Doc: BasicDocs
+  },
+  {
+    section: 'tool-calling',
+    Doc: toolCallingDocs
+  },
+  {
+    section: 'user-interaction',
+    Doc: userInteractionDocs
+  },
+  {
+    section: 'mcp',
+    Doc: mcpDocs
+  }
+]
+
+export function Chat({ section, apiUrl, quickActions}: ChatProps) {
+  const { Doc } = docs.find((doc) => doc.section === section) ?? {};
+
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    addToolResult,
+    setInput,
+  } = useChat({ api: apiUrl });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -64,12 +115,22 @@ export function Chat({ apiUrl }: { apiUrl: string }) {
         </h1>
       </div>
       <div className="flex gap-4 h-[calc(100%-2rem)] w-full">
-        <div className="flex flex-col p-4 h-full w-1/3">
-          <TestMarkdown />
-        </div>
+        { Doc && (
+          <div className="p-4 h-full w-1/3 overflow-y-scroll">
+            <Doc />
+          </div>
+        )}
+
         <div className="flex flex-col p-4 w-full">
           <Card className="flex-1 overflow-hidden flex flex-col mb-4">
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className={`flex-1 overflow-y-auto p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+
+              {messages.length === 0 && (
+                <div className="h-full flex items-center justify-center">
+                  <EmptyChat />
+                </div>
+              )}
+
               {messages.map((message, i) => (
                 <div
                   key={i}
@@ -80,7 +141,7 @@ export function Chat({ apiUrl }: { apiUrl: string }) {
                   }`}
                 >
                   <div
-                    className={`flex items-center rounded-lg px-4 ${
+                    className={` rounded-lg px-4 ${
                       message.role === "user"
                         ? "bg-primary text-primary-foreground max-w-[80%] py-2"
                         : "w-full"
@@ -88,6 +149,7 @@ export function Chat({ apiUrl }: { apiUrl: string }) {
                   >
                     {message.parts?.map((part, j) => {
                       if (part.type === "text") {
+                        console.log("Text part:", part.text);
                         return (
                           <div key={j}>
                             <Markdown>{part.text}</Markdown>
@@ -101,6 +163,7 @@ export function Chat({ apiUrl }: { apiUrl: string }) {
                           part.toolInvocation.toolName
                         )
                       ) {
+                        console.log("Tool invocation:", part.toolInvocation);
                         const toolInvocation = part.toolInvocation;
 
                         if (
@@ -182,6 +245,26 @@ export function Chat({ apiUrl }: { apiUrl: string }) {
               <div ref={messagesEndRef} />
             </div>
           </Card>
+
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Flame className={"text-purple-300"} />
+              <h4>Try one of these following questions to get started.</h4>
+            </div>
+            <div className="flex gap-4">
+              {quickActions?.map((action, index) => (
+                <Button
+                  key={index}
+                  onClick={() => setInput(action.value)}
+                  className="bg-purple-300 hover:bg-purple-500 hover:cursor-pointer"
+                >
+                  <Zap />
+                  {action.label}
+                </Button>
+              ))}
+             
+            </div>
+          </div>
 
           <form onSubmit={submitUserMessage} className="flex gap-2">
             <Input

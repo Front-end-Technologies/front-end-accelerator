@@ -1,0 +1,50 @@
+
+# Model Context Protocol (MCP) with Vercel AI SDK
+
+The **Model Context Protocol (MCP)** example demonstrates how to use MCP for advanced tool integration and context management.
+
+## Code Example
+
+```typescript
+import { google } from "@ai-sdk/google";
+import { streamText } from "ai";
+import { experimental_createMCPClient as createMCPClient } from "ai";
+import { Experimental_StdioMCPTransport as StdioMCPTransport } from "ai/mcp-stdio";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+
+  const systemMessage = `Be a positive assistant.
+    Format text for Notion.
+    Use emojis to make the conversation more engaging.
+    Format image links as !image.
+
+    When giving trivias, do not tell the answer right away. Instead, provide the answer if the user asks for it.
+  `;
+
+  try {
+    const mcpClient = await createMCPClient({
+      transport: new StdioMCPTransport({
+        command: "node",
+        args: ["src/mcp-server/stdio/mcp.js"],
+      }),
+    });
+
+    const mcpToolSet = await mcpClient.tools();
+
+    const result = streamText({
+      model: google("gemini-2.0-flash-001"),
+      system: systemMessage,
+      messages: messages,
+      maxSteps: 10,
+      tools: mcpToolSet,
+      onFinish: async () => {
+        await mcpClient.close();
+      },
+    });
+
+    return result.toDataStreamResponse();
+  } catch (error) {
+    console.error(error);
+  }
+}

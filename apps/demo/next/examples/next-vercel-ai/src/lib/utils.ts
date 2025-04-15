@@ -12,8 +12,8 @@ export const APPROVAL = {
 } as const
 
 export const CALENDAR_APPROVAL = {
-  Success: "__CALENDAR_MEETING_ADDED__",
-  Denied: "__CALENDAR_MEETING_DENIED__",
+  Success: "Meeting has been created successfully",
+  Denied: "Meeting denied by user. No meeting created",
 }
 
 function isValidToolName<K extends PropertyKey, T extends object>(key: K, obj: T): key is K & keyof T {
@@ -79,7 +79,7 @@ export async function processToolCalls<
           result = "Error: No execute function found on tool"
         }
       } else if (toolInvocation.result === APPROVAL.NO) {
-        result = CALENDAR_APPROVAL.Denied
+        result = "Meeting denied by user. You may not create a meeting"
       } else {
         // For any unhandled responses, return the original part.
         return part

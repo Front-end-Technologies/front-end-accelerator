@@ -16,7 +16,6 @@ import {
 import { useChat } from "@ai-sdk/react";
 import { Send } from "lucide-react";
 import { useEffect, useRef } from "react";
-import TestMarkdown from "./testmarkdown.mdx";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
@@ -67,7 +66,7 @@ export default function Home() {
       </div>
       <div className="flex gap-4 h-[calc(100%-2rem)] w-full">
         <div className="flex flex-col p-4 h-full w-1/3">
-          <TestMarkdown />
+          {/* <TestMarkdown /> */}
         </div>
         <div className="flex flex-col p-4 w-full">
           <Card className="flex-1 overflow-hidden flex flex-col mb-4">

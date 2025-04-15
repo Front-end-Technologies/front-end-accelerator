@@ -11,7 +11,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Brain, CircleDot, Database, FileImage, FileJson, FunctionSquare, ScatterChart, UserRound } from "lucide-react";
+import {
+  Brain,
+  CircleDot,
+  Database,
+  FileImage,
+  FileJson,
+  FunctionSquare,
+  ScatterChart,
+  UserRound,
+} from "lucide-react";
 import Link from "next/link";
 
 export function AppSidebar() {
@@ -62,24 +71,27 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {/* Model Context Protocol */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Nextjs Vercel AI Advanced">
-                  <div>
-                    <Brain />
-                    <Link href="/sections/next-ai-mcp">
-                      Model Context Protocol
-                    </Link>
-                  </div>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
               {/* Tool calling */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Function Calling with AI">
                   <div>
                     <FunctionSquare />
                     <Link href="/sections/tool-calling">Tool calling</Link>
+                  </div>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* User interaction */}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  tooltip="Human-AI Interaction Patterns"
+                >
+                  <div>
+                    <UserRound />
+                    <Link href="/sections/user-interaction">
+                      User interaction
+                    </Link>
                   </div>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -96,12 +108,15 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {/* Images and files */}
+              {/* Model Context Protocol */}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Media Processing with AI">
+                <SidebarMenuButton
+                  asChild
+                  tooltip="Provide context to AI models"
+                >
                   <div>
-                    <FileImage />
-                    <Link href="/sections/images-files">Images and files</Link>
+                    <Brain />
+                    <Link href="/sections/mcp">Model Context Protocol</Link>
                   </div>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -118,17 +133,12 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {/* User interaction */}
+              {/* Images and files */}
               <SidebarMenuItem>
-                <SidebarMenuButton
-                  asChild
-                  tooltip="Human-AI Interaction Patterns"
-                >
+                <SidebarMenuButton asChild tooltip="Media Processing with AI">
                   <div>
-                    <UserRound />
-                    <Link href="/sections/user-interaction">
-                      User interaction
-                    </Link>
+                    <FileImage />
+                    <Link href="/sections/images-files">Images and files</Link>
                   </div>
                 </SidebarMenuButton>
               </SidebarMenuItem>
