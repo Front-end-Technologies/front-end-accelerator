@@ -1,7 +1,9 @@
 import { GitHubContent, WebcontainerFileSystem } from "@/interfaces";
-import http from "@/server/api/http";
+import { createHttp } from "@/server/api/http";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+const http = createHttp();
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

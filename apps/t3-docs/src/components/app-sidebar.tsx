@@ -12,20 +12,17 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { api } from "@/trpc/react";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { LoaderCircle, MoonIcon, SunIcon } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
 
 import { FoldersSelect } from "./folders-select";
 import { Button } from "./ui/button";
 
 export const FrameworkLogo = ({ framework }: { framework: string }) => {
-  const theme = useThemeStore((state) => state.theme);
-
   const logos: Record<string, string> = {
     angular: "/angular-logo.svg",
-    next: theme === "light" ? "/next-logo.svg" : "/next-logo-dark.svg",
+    next: "/next-logo.svg",
     nuxt: "/nuxt-logo.svg",
     react: "/react-logo.svg",
   };
@@ -50,25 +47,14 @@ export function AppSidebar() {
 
   const { data: folders } = api.gitHub.getFolders.useQuery();
 
-  const cookbookQuery = api.gitHub.getProjects.useQuery(
-    { framework, type: "cookbook" },
+  const {
+    data: projects,
+    isLoading,
+    isSuccess,
+  } = api.gitHub.getProjects.useQuery(
+    { framework },
     { enabled: !!framework && !!folders },
   );
-
-  const examplesQuery = api.gitHub.getProjects.useQuery(
-    { framework, type: "examples" },
-    { enabled: !!framework && !!folders },
-  );
-
-  const mapped = useMemo(
-    () => [
-      { data: cookbookQuery.data, type: "cookbook" },
-      { data: examplesQuery.data, type: "examples" },
-    ],
-    [cookbookQuery.data, examplesQuery.data],
-  );
-
-  const isSuccess = cookbookQuery.isSuccess || examplesQuery.isSuccess;
 
   return (
     <Sidebar>
@@ -105,15 +91,22 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {isLoading && (
+          <div className="flex items-center space-x-2 p-4">
+            <LoaderCircle className="animate-spin" />
+            <span className="grow text-xs">Fetching projects...</span>
+          </div>
+        )}
+
         {isSuccess &&
-          mapped.flatMap(({ data, type }) => (
+          projects.map(({ data, type }) => (
             <SidebarGroup key={type}>
               <SidebarGroupLabel className="font-bold uppercase">
                 {type}
               </SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  {data?.map((project) => (
+                  {data.map((project) => (
                     <SidebarMenuItem key={project.name}>
                       <SidebarMenuButton asChild>
                         <Link href={`/${framework}/${type}/${project.name}`}>

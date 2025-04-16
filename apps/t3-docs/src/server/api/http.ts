@@ -1,30 +1,46 @@
 import { auth } from "@/auth";
 import { GitHubSession } from "@/interfaces";
-import axios from "axios";
+import axios, { CreateAxiosDefaults } from "axios";
 
-export const http = axios.create({
-  baseURL: process.env.BASE_URL,
-  timeout: 10000,
-});
+const defaultURL = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_USER}/${process.env.GITHUB_REPO}`;
 
-http.interceptors.request.use(
-  async (config) => {
-    const { token } = (await auth()) as GitHubSession;
+export const createHttp = (config?: CreateAxiosDefaults) => {
+  const http = axios.create({
+    baseURL: config?.baseURL || defaultURL,
+    timeout: 5000,
+    ...config,
+  });
 
-    return {
-      ...config,
-      headers: new axios.AxiosHeaders({
-        ...config.headers,
-        Authorization: `Bearer ${token.accessToken}`,
-      }),
-    };
-  },
-  (error) => Promise.reject(error),
-);
+  http.interceptors.request.use(
+    async (config) => {
+      const { token } = (await auth()) as GitHubSession;
 
-http.interceptors.response.use(
-  (response) => response.data,
-  (error) => Promise.reject(error),
-);
+      return {
+        ...config,
+        headers: new axios.AxiosHeaders({
+          ...config.headers,
+          Authorization: `Bearer ${token.accessToken}`,
+        }),
+      };
+    },
+    (error) => Promise.reject(error),
+  );
 
-export default http;
+  http.interceptors.response.use(
+    (response) => {
+      return response.data;
+    },
+    (error) => {
+      if (error.response) {
+        // Handle specific HTTP errors
+        if (error.response.status === 401) {
+          // Unauthorized, redirect to login
+          console.error("Unauthorized, please log in again.");
+        }
+      }
+      return Promise.reject(error);
+    },
+  );
+
+  return http;
+};

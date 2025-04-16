@@ -13,7 +13,6 @@ import { WebContainer } from "@webcontainer/api";
 import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
 import { useParams } from "next/navigation";
-// import Script from "next/script";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
@@ -88,9 +87,9 @@ function WebIDE() {
       terminal: { cols: terminal.cols, rows: terminal.rows },
     });
 
-    terminal.write("Running npm install...\r\n");
+    terminal.write("Running pnpm install...\r\n");
 
-    const installProcess = await webcontainerRef.current?.spawn("npm", ["i"]);
+    const installProcess = await webcontainerRef.current?.spawn("pnpm", ["i"]);
     installProcess?.output.pipeTo(
       new WritableStream({
         write(data) {
@@ -103,7 +102,7 @@ function WebIDE() {
 
     terminal.write("Starting dev server...\r\n");
 
-    const devServerProcess = await webcontainerRef.current?.spawn("npm", [
+    const devServerProcess = await webcontainerRef.current?.spawn("pnpm", [
       "run",
       "webcontainer",
     ]);
@@ -141,7 +140,6 @@ function WebIDE() {
 
   return (
     <div className="flex h-[calc(100vh-76px)] flex-col space-y-2">
-      {/* <Script src="/dist/assets/index.js" /> */}
       <PanelGroup className="gap-1" direction="horizontal">
         <Panel defaultSize={15} minSize={5}>
           <FileExplorer

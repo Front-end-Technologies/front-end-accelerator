@@ -15,33 +15,35 @@ import {
 } from "./ui/select";
 
 export function FoldersSelect() {
-  const { framework = "" } = useParams() as { framework: string };
+  const { framework } = useParams() as { framework: string };
   const router = useRouter();
 
   const { data: folders } = api.gitHub.getFolders.useQuery();
 
   return (
-    <Select
-      onValueChange={(value) => {
-        router.push(`/${value}`);
-      }}
-      value={framework}
-    >
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a framework" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {folders?.map((folder) => (
-            <SelectItem key={folder.name} value={folder.name}>
-              <div className="flex items-center gap-3">
-                <FrameworkLogo framework={folder.name} />
-                {folder.name}
-              </div>
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+      <Select
+        onValueChange={(value) => {
+          router.push(`/${value}`);
+        }}
+        value={framework}
+      >
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Select a framework" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {folders?.map((folder) => (
+              <SelectItem key={folder.name} value={folder.name}>
+                <div className="flex items-center gap-3">
+                  <FrameworkLogo framework={folder.name} />
+                  {folder.name}
+                </div>
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   );
 }
