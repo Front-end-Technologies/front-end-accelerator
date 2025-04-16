@@ -26,7 +26,7 @@ export function FoldersSelect() {
         onValueChange={(value) => {
           router.push(`/${value}`);
         }}
-        value={framework}
+        value={framework || ""}
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select a framework" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { FoldersSelect } from "@/components/folders-select";
+import { ProjectSelect } from "@/components/project-select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,14 +42,19 @@ export function Main({ children }: { children: ReactNode }) {
         <div className="flex grow items-center space-x-4">
           <SidebarTrigger className="h-8 w-8" variant="outline" />
           {framework && (
-            <div className="flex items-center space-x-4">
-              <ChevronRight /> <FoldersSelect />
-            </div>
-          )}
-          {framework && name && (
-            <div className="flex items-center space-x-4">
-              <ChevronRight className="w-5" />
-              <span>{name}</span>
+            <div className="flex grow items-center space-x-4">
+              <ChevronRight />
+              <div>
+                <FoldersSelect />
+              </div>
+            
+                <>
+                  <ChevronRight />
+                  <div>
+                    <ProjectSelect />
+                  </div>
+                </>
+              
             </div>
           )}
         </div>
@@ -97,9 +103,6 @@ export function Main({ children }: { children: ReactNode }) {
                   Sign out
                 </Button>
               </DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
