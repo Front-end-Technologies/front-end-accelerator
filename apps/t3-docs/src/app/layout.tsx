@@ -2,11 +2,12 @@ import "@/styles/globals.css";
 import { auth } from "@/auth";
 import { AppSidebar } from "@/components/app-sidebar";
 import { LoginScreen } from "@/components/login-screen";
-import { TRPCReactProvider } from "@/trpc/react";
+import { SidebarInset } from "@/components/ui/sidebar";
+import { Providers } from "@/trpc/react";
 import { type Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 
-import { Main } from "./main";
+import { Header } from "./header";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -30,10 +31,13 @@ export default async function RootLayout({ children }: Readonly<Props>) {
     <html className={`${geistMono.variable}`} lang="en">
       <body>
         {session ? (
-          <TRPCReactProvider>
+          <Providers>
             <AppSidebar />
-            <Main>{children}</Main>
-          </TRPCReactProvider>
+            <SidebarInset>
+              <Header />
+              <div className="px-4">{children}</div>
+            </SidebarInset>
+          </Providers>
         ) : (
           <LoginScreen />
         )}

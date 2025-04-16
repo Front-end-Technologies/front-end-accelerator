@@ -2,6 +2,7 @@
 
 import "@xterm/xterm/css/xterm.css";
 import { useThemeStore } from "@/app/store";
+import { AIChat } from "@/components/ai-chat";
 import FileExplorer from "@/components/file-explorer";
 import { File } from "@/interfaces";
 import { api } from "@/trpc/react";
@@ -18,6 +19,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 function WebIDE() {
   const theme = useThemeStore((state) => state.theme);
+  const ai = useThemeStore((state) => state.ai);
 
   const [editorValue, setEditorValue] = useState("");
   const [webcontainerFilePath, setWebContainerFilePath] = useState("");
@@ -140,44 +142,62 @@ function WebIDE() {
 
   return (
     <div className="flex h-[calc(100vh-76px)] flex-col space-y-2">
-      <PanelGroup className="gap-1" direction="horizontal">
-        <Panel defaultSize={15} minSize={5}>
-          <FileExplorer
-            setEditorValue={setEditorValue}
-            setWebContainerFilePath={setWebContainerFilePath}
-          />
-        </Panel>
+      <PanelGroup className="gap-1" direction="vertical">
+        <Panel>
+          <PanelGroup className="gap-1" direction="horizontal">
+            <Panel defaultSize={15} minSize={5}>
+              <FileExplorer
+                setEditorValue={setEditorValue}
+                setWebContainerFilePath={setWebContainerFilePath}
+              />
+            </Panel>
 
+            <PanelResizeHandle />
+            <Panel minSize={20}>
+              <div className="bg-code h-full overflow-auto rounded-xl">
+                <h3 className="bg-code sticky top-0 z-50 items-center border-b border-b-gray-200 p-4 text-center text-sm dark:border-b-gray-600">
+                  {webcontainerFilePath}
+                </h3>
+                <CodeMirror
+                  className="overflow-auto px-2 py-4 text-sm"
+                  extensions={[javascript({ jsx: true, typescript: true })]}
+                  onChange={onEditorChange}
+                  theme={theme === "dark" ? tokyoNightStorm : materialLight}
+                  value={editorValue}
+                />
+              </div>
+            </Panel>
+
+            <PanelResizeHandle />
+
+            <Panel minSize={20}>
+              <iframe
+                className="rounded-xl border bg-white"
+                height={"100%"}
+                ref={iFrameRef}
+                src="/iFramePlaceholder.html"
+                title="Loading Preview"
+                width={"100%"}
+              ></iframe>
+            </Panel>
+
+            {ai.chat.open && (
+              <>
+                <PanelResizeHandle />
+                <Panel defaultSize={20} minSize={20}>
+                  <AIChat />
+                </Panel>
+              </>
+            )}
+          </PanelGroup>
+        </Panel>
         <PanelResizeHandle />
-        <Panel minSize={20}>
-          <div className="bg-code h-full overflow-auto rounded-xl">
-            <h3 className="bg-code sticky top-0 z-50 items-center border-b border-b-gray-200 p-4 text-center text-sm dark:border-b-gray-600">
-              {webcontainerFilePath}
-            </h3>
-            <CodeMirror
-              className="overflow-auto px-2 py-4 text-sm"
-              extensions={[javascript({ jsx: true, typescript: true })]}
-              onChange={onEditorChange}
-              theme={theme === "dark" ? tokyoNightStorm : materialLight}
-              value={editorValue}
-            />
+        <Panel defaultSize={15} maxSize={40} minSize={15}>
+          <div className="bg-code h-full rounded-xl p-4">
+            <div className="terminal h-full" ref={terminalRef}></div>
           </div>
         </Panel>
-        <PanelResizeHandle />
-        <Panel minSize={20}>
-          <iframe
-            className="rounded-xl border bg-white"
-            height={"100%"}
-            ref={iFrameRef}
-            src="/iFramePlaceholder.html"
-            title="Loading Preview"
-            width={"100%"}
-          ></iframe>
-        </Panel>
       </PanelGroup>
-      <div className="bg-code rounded-xl p-4">
-        <div className="terminal h-40" ref={terminalRef}></div>
-      </div>
     </div>
   );
 }

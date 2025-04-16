@@ -1,12 +1,11 @@
 import { auth } from "@/auth";
 import { GitHubSession } from "@/interfaces";
+import { githubURL } from "@/lib/const";
 import axios, { CreateAxiosDefaults } from "axios";
-
-const defaultURL = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_USER}/${process.env.GITHUB_REPO}`;
 
 export const createHttp = (config?: CreateAxiosDefaults) => {
   const http = axios.create({
-    baseURL: config?.baseURL || defaultURL,
+    baseURL: config?.baseURL || githubURL,
     timeout: 5000,
     ...config,
   });

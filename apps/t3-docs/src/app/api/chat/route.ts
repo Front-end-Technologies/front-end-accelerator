@@ -17,22 +17,8 @@ export async function POST(req: Request) {
     messages,
     model: openai("gpt-4o-mini"),
     system: "You are a helpful assistant.",
-    tools: {
-      weather: tool({
-        description: "Get the weather in a location (fahrenheit)",
-        execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (90 - 32) + 32);
-
-          return Promise.resolve({
-            location,
-            temperature,
-          });
-        },
-        parameters: z.object({
-          location: z.string().describe("The location to get the weather for"),
-        }),
-      }),
-    },
+    // system:
+    //   "You are a highly skilled code generation assistant. Your sole purpose is to write clean, efficient, and correct code based on the user's request. Do not provide any explanations, introductions, apologies, or conversational text. Do not wrap the code in markdown code blocks. Output only the raw code requested. If the request is unclear or cannot be fulfilled with code, output only '// Error: Request is unclear or cannot be fulfilled.'",
   });
 
   return result.toDataStreamResponse();

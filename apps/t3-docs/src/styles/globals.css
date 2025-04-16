@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -123,6 +124,42 @@
   }
 }
 
+h1 {
+  @apply text-4xl font-bold;
+}
+
+h2 {
+  @apply text-3xl font-semibold;
+}
+
+h3 {
+  @apply text-2xl font-medium;
+}
+
+h4 {
+  @apply text-xl font-medium;
+}
+
+h5 {
+  @apply text-lg font-normal;
+}
+
+h6 {
+  @apply text-base font-normal;
+}
+ol {
+  @apply flex flex-col gap-4;
+}
+
+pre {
+  @apply bg-accent my-4 rounded-xl border p-4 text-xs text-wrap;
+}
+
+#loginIframe {
+  background: url("/login.jpg") center center;
+  background-size: cover;
+}
+
 .xterm .xterm-viewport {
   @apply bg-code!;
 }
@@ -137,9 +174,4 @@ span.xterm-dim {
 
 span.xterm-bold {
   @apply text-green-600!;
-}
-
-#loginIframe {
-  background: url("/login.jpg") center center;
-  background-size: cover;
 }

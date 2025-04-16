@@ -3,7 +3,6 @@
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 import {
   Select,
@@ -41,7 +40,7 @@ export function ProjectSelect() {
 
           router.push(`/${framework}/${currentProject?.type}/${value}`);
         }}
-        value={name|| ""}
+        value={name || ""}
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select a project" />
