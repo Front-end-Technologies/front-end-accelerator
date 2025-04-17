@@ -2,8 +2,8 @@ import { tool } from "ai"
 import { z } from "zod"
 import { createDateTime, parseRelativeDate } from "../date-utils"
 
-export const createCalendarMeeting = tool({
-  description: "Create a calendar meeting with the specified details",
+export const createCalendarMeetingSuggestion = tool({
+  description: "Create a calendar suggestion meeting with the specified details",
   parameters: z.object({
     title: z.string().describe("The title of the meeting"),
     startDate: z.coerce.date().describe("The start date and time of the meeting"),
@@ -14,7 +14,7 @@ export const createCalendarMeeting = tool({
   }),
 })
 
-export type CreateCalendarMeetingParams = z.infer<typeof createCalendarMeeting["parameters"]>
+export type createCalendarMeetingSuggestionParams = z.infer<typeof createCalendarMeetingSuggestion["parameters"]>
 
 // Add a new tool specifically for handling relative dates
 export const parseDate = tool({

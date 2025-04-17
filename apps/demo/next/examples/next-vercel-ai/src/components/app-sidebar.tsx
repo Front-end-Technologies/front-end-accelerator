@@ -12,6 +12,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
+  Bot,
   Brain,
   CircleDot,
   Database,
@@ -33,6 +34,7 @@ export function AppSidebar() {
             {open ? (
               <div className="flex items-center space-x-2">
                 <Link className="flex items-center space-x-2" href="/">
+                  <Bot className="h-8 w-8 text-white" />
                   <p className="font-bold">Next Vercel AI</p>
                 </Link>
               </div>
@@ -42,7 +44,7 @@ export function AppSidebar() {
                   className="flex items-center space-x-2 text-center"
                   href="/"
                 >
-                  <p className="font-bold">Next AI</p>
+                  <Bot className="h-8 w-8 text-white" />
                 </Link>
               </div>
             )}
@@ -64,47 +66,51 @@ export function AppSidebar() {
               {/* Basic */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Fundamental AI Concepts">
-                  <div>
-                    <CircleDot />
-                    <Link href="/sections/basic">Basic</Link>
-                  </div>
+                  <Link href="/sections/basic">
+                    <div className="flex items-center gap-2">
+                      <CircleDot className="w-4 h-4 shrink-0" />
+                      <span>Basic</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               {/* Tool calling */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Function Calling with AI">
-                  <div>
-                    <FunctionSquare />
-                    <Link href="/sections/tool-calling">Tool calling</Link>
-                  </div>
+                  <Link href="/sections/tool-calling">
+                    <div className="flex items-center gap-2">
+                      <FunctionSquare className="w-4 h-4 shrink-0"/>
+                      <span>Tool calling</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {/* User interaction */}
+              {/* Human in the loop */}
               <SidebarMenuItem>
                 <SidebarMenuButton
                   asChild
                   tooltip="Human-AI Interaction Patterns"
                 >
-                  <div>
-                    <UserRound />
-                    <Link href="/sections/user-interaction">
-                      User interaction
-                    </Link>
-                  </div>
+                  <Link href="/sections/human-in-the-loop">
+                    <div className="flex items-center gap-2">
+                      <UserRound className="w-4 h-4 shrink-0"/>
+                      <span>Human in the loop</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               {/* Structured outputs */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Formatted Data Responses">
-                  <div>
-                    <FileJson />
-                    <Link href="/sections/structured-outputs">
-                      Structured outputs
-                    </Link>
-                  </div>
+                  <Link href="/sections/structured-outputs">
+                    <div className="flex items-center gap-2">
+                      <FileJson className="w-4 h-4 shrink-0"/>
+                      <span>Structured outputs</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
@@ -114,32 +120,36 @@ export function AppSidebar() {
                   asChild
                   tooltip="Provide context to AI models"
                 >
-                  <div>
-                    <Brain />
-                    <Link href="/sections/mcp">Model Context Protocol</Link>
-                  </div>
+                  <Link href="/sections/mcp">
+                    <div className="flex items-center gap-2">
+                      <Brain className="w-4 h-4 shrink-0"/>
+                      <span>Model Context Protocol</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               {/* Database integrations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Connect AI to Data Sources">
-                  <div>
-                    <Database />
-                    <Link href="/sections/database-integrations">
-                      Database integrations
-                    </Link>
-                  </div>
+                  <Link href="/sections/database-integrations">
+                    <div className="flex items-center gap-2">
+                      <Database className="w-4 h-4 shrink-0"/>
+                      <span>Database integrations</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               {/* Images and files */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Media Processing with AI">
-                  <div>
-                    <FileImage />
-                    <Link href="/sections/images-files">Images and files</Link>
-                  </div>
+                  <Link href="/sections/images-files">
+                    <div className="flex items-center gap-2">
+                      <FileImage className="w-4 h-4 shrink-0"/>
+                      <span>Images and files</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
@@ -149,10 +159,12 @@ export function AppSidebar() {
                   asChild
                   tooltip="Vector Embeddings and Semantic Search"
                 >
-                  <div>
-                    <ScatterChart />
-                    <Link href="/sections/embeddings">Embeddings</Link>
-                  </div>
+                  <Link href="/sections/embeddings">
+                    <div className="flex items-center gap-2">
+                      <ScatterChart className="w-4 h-4 shrink-0"/>
+                      <span>Embeddings</span>
+                    </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

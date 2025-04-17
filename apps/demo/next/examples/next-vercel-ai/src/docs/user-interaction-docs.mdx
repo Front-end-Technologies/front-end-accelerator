@@ -6,7 +6,7 @@ The **User Interaction** example demonstrates how to wait for user input before 
 ## Code Example
 
 ```typescript
-import { CreateCalendarMeetingParams, tools } from "@/lib/tools";
+import { createCalendarMeetingSuggestionParams, tools } from "@/lib/tools";
 import { processToolCalls, CALENDAR_APPROVAL } from "@/lib/utils";
 import { google } from "@ai-sdk/google";
 import { createDataStreamResponse, streamText } from "ai";
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       const processedMessages = await processToolCalls(
         { tools, dataStream, messages },
         {
-          createCalendarMeeting: async (args) => {
+          createCalendarMeetingSuggestion: async (args) => {
             console.log("Adding meeting to calendar:", args);
             return CALENDAR_APPROVAL.Success;
           },

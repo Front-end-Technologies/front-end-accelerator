@@ -10,6 +10,7 @@ interface CalendarApprovalProps {
 }
 
 export function CalendarApproval({ title, startDate, endDate, attendees, state }: CalendarApprovalProps) {
+  console.log("CalendarApproval component rendered: ", startDate)
   // Format dates for display
   const formattedStartDate = startDate.toLocaleDateString();
   const formattedStartTime = startDate.toLocaleTimeString();

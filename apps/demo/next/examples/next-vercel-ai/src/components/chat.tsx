@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { createCalendarMeeting, tools } from "@/lib/tools";
+import { createCalendarMeetingSuggestion, tools } from "@/lib/tools";
 import {
   APPROVAL,
-  CALENDAR_APPROVAL,
   getToolsRequiringConfirmation,
 } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
@@ -17,13 +16,12 @@ import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarConfirmation } from "@/components/calendar-confirmation";
 import { CalendarApproval } from "@/components/calendar-success";
-import EmptyChat from "./empty-chat";
+import EmptyChat from "./chats/empty-chat";
 
 import BasicDocs from "@/docs/basic-docs.mdx";
-import toolCallingDocs from '@/docs/tool-calling-docs.mdx';
-import userInteractionDocs from '@/docs/user-interaction-docs.mdx';
-import mcpDocs from '@/docs/model-context-provider-docs.mdx';
-
+import toolCallingDocs from "@/docs/tool-calling-docs.mdx";
+import userInteractionDocs from "@/docs/user-interaction-docs.mdx";
+import mcpDocs from "@/docs/model-context-provider-docs.mdx";
 
 export interface ChatQuickActions {
   section: string;
@@ -45,24 +43,24 @@ interface ChatProps {
 
 const docs: ChatDocs[] = [
   {
-    section: 'basic',
-    Doc: BasicDocs
+    section: "basic",
+    Doc: BasicDocs,
   },
   {
-    section: 'tool-calling',
-    Doc: toolCallingDocs
+    section: "tool-calling",
+    Doc: toolCallingDocs,
   },
   {
-    section: 'user-interaction',
-    Doc: userInteractionDocs
+    section: "user-interaction",
+    Doc: userInteractionDocs,
   },
   {
-    section: 'mcp',
-    Doc: mcpDocs
-  }
-]
+    section: "mcp",
+    Doc: mcpDocs,
+  },
+];
 
-export function Chat({ section, apiUrl, quickActions}: ChatProps) {
+export function Chat({ section, apiUrl, quickActions }: ChatProps) {
   const { Doc } = docs.find((doc) => doc.section === section) ?? {};
 
   const {
@@ -115,16 +113,17 @@ export function Chat({ section, apiUrl, quickActions}: ChatProps) {
         </h1>
       </div>
       <div className="flex gap-4 h-[calc(100%-2rem)] w-full">
-        { Doc && (
+        {Doc && (
           <div className="p-4 h-full w-1/3 overflow-y-scroll">
             <Doc />
           </div>
         )}
 
         <div className="flex flex-col p-4 w-full">
-          <Card className="flex-1 overflow-hidden flex flex-col mb-4">
-            <div className={`flex-1 overflow-y-auto p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
-
+          <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
+            <div
+              className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}
+            >
               {messages.length === 0 && (
                 <div className="h-full flex items-center justify-center">
                   <EmptyChat />
@@ -167,16 +166,16 @@ export function Chat({ section, apiUrl, quickActions}: ChatProps) {
                         const toolInvocation = part.toolInvocation;
 
                         if (
-                          toolInvocation.toolName === "createCalendarMeeting"
+                          toolInvocation.toolName === "createCalendarMeetingSuggestion"
                         ) {
-                          const args = createCalendarMeeting.parameters.parse(
+                          const args = createCalendarMeetingSuggestion.parameters.parse(
                             toolInvocation.args
                           );
                           if (toolInvocation.state === "call") {
                             return (
                               <div
                                 key={toolInvocation.toolCallId}
-                                className="my-3 w-full"
+                                className="mb-3 w-full"
                               >
                                 <CalendarConfirmation
                                   key={toolInvocation.toolCallId}
@@ -195,8 +194,6 @@ export function Chat({ section, apiUrl, quickActions}: ChatProps) {
 
                           if (toolInvocation.state === "result") {
                             const approvalState =
-                              toolInvocation.result ===
-                                CALENDAR_APPROVAL.Success ||
                               toolInvocation.result === APPROVAL.YES
                                 ? "success"
                                 : "denied";
@@ -204,7 +201,7 @@ export function Chat({ section, apiUrl, quickActions}: ChatProps) {
                             return (
                               <div
                                 key={toolInvocation.toolCallId}
-                                className="my-3 w-full"
+                                className="mb-3 w-full"
                               >
                                 <CalendarApproval
                                   title={args.title}
@@ -262,7 +259,6 @@ export function Chat({ section, apiUrl, quickActions}: ChatProps) {
                   {action.label}
                 </Button>
               ))}
-             
             </div>
           </div>
 

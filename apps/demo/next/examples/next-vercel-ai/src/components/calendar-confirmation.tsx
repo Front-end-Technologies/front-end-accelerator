@@ -34,6 +34,7 @@ export function CalendarConfirmation({
   const handleDeny = () => {
     onConfirm({toolCallId, result: APPROVAL.NO})
   }
+  console.log("CalendarConfirmation component rendered: ", startDate)
 
   // Format dates for display
   const formattedStartDate = startDate.toLocaleDateString();

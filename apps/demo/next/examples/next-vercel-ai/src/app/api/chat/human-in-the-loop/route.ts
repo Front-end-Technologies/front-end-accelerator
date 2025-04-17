@@ -1,10 +1,10 @@
-import { CreateCalendarMeetingParams, tools } from "@/lib/tools";
-import { processToolCalls, CALENDAR_APPROVAL } from "@/lib/utils";
+import { createCalendarMeetingSuggestionParams, tools } from "@/lib/tools";
+import { processToolCalls,APPROVAL } from "@/lib/utils";
 import { google } from "@ai-sdk/google";
 import { createDataStreamResponse, streamText } from "ai";
 
 // Mock function to add a meeting to calendar
-async function addToCalendar(meetingDetails: CreateCalendarMeetingParams) {
+async function addToCalendar(meetingDetails: createCalendarMeetingSuggestionParams) {
   console.log("Adding meeting to calendar:", meetingDetails)
   // In a real app, you would integrate with a calendar API here
   return {
@@ -24,12 +24,16 @@ export async function POST(req: Request) {
     
     When a user refers to relative dates like "today", "tomorrow", or "next Monday", use the parseDate tool to convert them to actual dates.
 
-    For meeting requests, use the createDateRange tool to generate proper start and end times, then use createCalendarMeeting to create the meeting.
+    For meeting requests, use the createDateRange tool to generate proper start and end times, then use createCalendarMeetingSuggestion to create the meeting.
     Example: If a user says "Schedule a team meeting tomorrow at 2pm", you should:
-    1. Use parseDate to convert "tomorrow" to an actual date
-    2. Use createDateRange to create a time range from 2pm to 3pm
-    3. Use createCalendarMeeting with the resulting dates to create the meeting
+    1. Use 'parseDate' to convert "tomorrow" to an actual date
+    2. Use 'createDateRange' to create a time range from 2pm to 3pm
+    3. Use 'createCalendarMeetingSuggestion' with the resulting dates to create the meeting
+
+    If the 'createCalendarMeetingSuggestion' tool returns ${APPROVAL.NO}. Tell the user you will not schedule the meeting.
     `
+
+    console.log('doing this call')
 
     return createDataStreamResponse({
         execute: async (dataStream) => {
@@ -37,11 +41,11 @@ export async function POST(req: Request) {
           const processedMessages = await processToolCalls(
             { tools, dataStream, messages },
             {
-              createCalendarMeeting: async (args) => {
+              createCalendarMeetingSuggestion: async (args) => {
                 // This is where we would actually add the meeting to the calendar
                 // after user confirmation
                 await addToCalendar(args)
-                return CALENDAR_APPROVAL.Success;
+                return APPROVAL.YES;
               },
             },
           )
@@ -52,7 +56,10 @@ export async function POST(req: Request) {
             system: systemMessage,
             messages: processedMessages,
             maxSteps: 10,
-            tools: {...tools,},
+            tools: tools,
+            onError: (error) => {
+              console.error("Error:", error)
+            }
           })
     
           result.mergeIntoDataStream(dataStream)
