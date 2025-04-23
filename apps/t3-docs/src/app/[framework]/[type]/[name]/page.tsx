@@ -1,5 +1,5 @@
 import WebIDE from "./web-ide";
 
-export default async function Detail() {
+export default function Detail() {
   return <WebIDE />;
 }

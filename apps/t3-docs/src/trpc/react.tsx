@@ -1,8 +1,10 @@
 "use client";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { type AppRouter } from "@/server/api/root";
 import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { httpBatchStreamLink, loggerLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
@@ -40,7 +42,7 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-export function TRPCReactProvider(props: { children: React.ReactNode }) {
+export function Providers(props: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
 
   const [trpcClient] = useState(() =>
@@ -66,13 +68,21 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 
   return (
     <SessionProvider>
-      <SidebarProvider>
-        <QueryClientProvider client={queryClient}>
-          <api.Provider client={trpcClient} queryClient={queryClient}>
-            {props.children}
-          </api.Provider>
-        </QueryClientProvider>
-      </SidebarProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        disableTransitionOnChange
+        enableSystem
+      >
+        <SidebarProvider>
+          <QueryClientProvider client={queryClient}>
+            <api.Provider client={trpcClient} queryClient={queryClient}>
+              {props.children}
+            </api.Provider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </SidebarProvider>
+      </ThemeProvider>
     </SessionProvider>
   );
 }

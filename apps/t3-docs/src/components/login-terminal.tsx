@@ -76,7 +76,10 @@ export default function LoginTerminal() {
   return (
     <>
       <div className="bg-code mx-auto w-full gap-4 space-y-4 rounded-xl border border-dashed p-4 text-xs lg:w-[600px]">
-        <div className="terminal overflow-auto" ref={terminalRef}></div>
+        <div
+          className="terminal scrollbar-hide overflow-auto"
+          ref={terminalRef}
+        ></div>
       </div>
     </>
   );

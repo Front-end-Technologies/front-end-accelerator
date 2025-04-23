@@ -1,20 +1,18 @@
 import { GitHubContent } from "@/interfaces";
-import {
-  fetchFolderFiles,
-  mapGithubToWebcontainerFileSystem,
-} from "@/lib/utils";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 
-import http from "../http";
+import { createHttp } from "../http";
+import {
+  fetchFolderFiles,
+  mapGithubToWebcontainerFileSystem,
+} from "../webcontainer";
 
-const baseURL = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_USER}/${process.env.GITHUB_REPO}`;
+const http = createHttp();
 
 export const gitHubRouter = createTRPCRouter({
   getFolders: protectedProcedure.query(async () => {
-    const files: GitHubContent[] = await http.get(
-      `${baseURL}/contents/apps/demo`,
-    );
+    const files: GitHubContent[] = await http.get(`/contents/apps/demo`);
     return files;
   }),
   getProject: protectedProcedure
@@ -23,7 +21,7 @@ export const gitHubRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const repoContent = await fetchFolderFiles(
-        `${baseURL}/contents/apps/demo/${input.framework}/${input.type}/${input.name}`,
+        `/contents/apps/demo/${input.framework}/${input.type}/${input.name}`,
       );
       const webcontainerFiles = mapGithubToWebcontainerFileSystem(repoContent);
 
@@ -32,14 +30,24 @@ export const gitHubRouter = createTRPCRouter({
         webcontainerFiles,
       };
     }),
-
   getProjects: protectedProcedure
-    .input(z.object({ framework: z.string(), type: z.string() }))
+    .input(z.object({ framework: z.string() }))
     .query(async ({ input }) => {
-      const projects: GitHubContent[] = await http.get(
-        `${baseURL}/contents/apps/demo/${input.framework}/${input.type}`,
+      const cookbookResponse: Promise<GitHubContent[]> = http.get(
+        `/contents/apps/demo/${input.framework}/cookbook`,
+      );
+      const exampleResponse: Promise<GitHubContent[]> = http.get(
+        `/contents/apps/demo/${input.framework}/examples`,
       );
 
-      return projects;
+      const [cookbook, examples] = await Promise.all([
+        cookbookResponse,
+        exampleResponse,
+      ]);
+
+      return [
+        { data: cookbook, type: "cookbook" },
+        { data: examples, type: "examples" },
+      ];
     }),
 });
