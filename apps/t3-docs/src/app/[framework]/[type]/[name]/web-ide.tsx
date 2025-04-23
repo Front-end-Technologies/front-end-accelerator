@@ -26,7 +26,13 @@ import CodeMirror, {
 import { WebContainer } from "@webcontainer/api";
 import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
-import { GitCompare, Sparkles } from "lucide-react";
+import {
+  GitCompare,
+  MessageCircleCode,
+  Sparkles,
+  SpeechIcon,
+  WandSparkles,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -208,6 +214,63 @@ function WebIDE() {
                           onClick={async () => {
                             try {
                               const controller = new AbortController();
+                              const response = await fetch("/api/ai/improve", {
+                                body: JSON.stringify({
+                                  code: editorValue,
+                                  framework: {
+                                    input: framework,
+                                    output: ai.framework.output,
+                                  },
+                                  llm: ai.llm,
+                                  role: ai.role,
+                                  slang: ai.slang,
+                                }),
+                                method: "POST",
+                                signal: controller.signal,
+                              });
+
+                              let chunk = "";
+
+                              handleAIStream(response, {
+                                onComplete: async () => {
+                                  await webcontainerRef.current?.fs.writeFile(
+                                    webcontainerFilePath,
+                                    chunk,
+                                  );
+                                },
+                                onData: async (data) => {
+                                  chunk += data;
+                                  setEditorValue(chunk);
+                                },
+                              });
+
+                              // onComplete update the file system
+
+                              await webcontainerRef.current?.fs.writeFile(
+                                webcontainerFilePath,
+                                chunk,
+                              );
+                              // copyToClipboard(data);
+                            } catch (error) {
+                              // toast
+                              console.error("error: ", error);
+                            }
+                          }}
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <WandSparkles />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Improve code in file</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          className="cursor-pointer"
+                          onClick={async () => {
+                            try {
+                              const controller = new AbortController();
                               const response = await fetch("/api/ai/explain", {
                                 body: JSON.stringify({
                                   code: selectedCode,
@@ -223,8 +286,10 @@ function WebIDE() {
                                 signal: controller.signal,
                               });
 
-                              handleAIStream(response, (data) => {
-                                setAiOutput((prevCode) => prevCode + data);
+                              handleAIStream(response, {
+                                onData: (data) => {
+                                  setAiOutput((prevCode) => prevCode + data);
+                                },
                               });
                               // copyToClipboard(data);
                             } catch (error) {
@@ -235,7 +300,7 @@ function WebIDE() {
                           size="icon"
                           variant="ghost"
                         >
-                          <Sparkles />
+                          <MessageCircleCode />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
@@ -266,8 +331,10 @@ function WebIDE() {
                               signal: controller.signal,
                             });
 
-                            handleAIStream(response, (data) => {
-                              setAiOutput((prevCode) => prevCode + data);
+                            handleAIStream(response, {
+                              onData: (data) => {
+                                setAiOutput((prevCode) => prevCode + data);
+                              },
                             });
                           }}
                           size="icon"

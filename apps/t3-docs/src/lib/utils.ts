@@ -21,7 +21,13 @@ export async function copyToClipboard(text: string): Promise<void> {
 
 export async function handleAIStream(
   res: Response,
-  callback: (text: string) => void,
+  {
+    onComplete,
+    onData,
+  }: {
+    onComplete?: () => void;
+    onData: (data: string) => void;
+  },
 ) {
   if (!res.body) throw new Error("No res body");
 
@@ -31,9 +37,10 @@ export async function handleAIStream(
     const { done, value } = await reader.read();
     const decodedChunk = decoder.decode(value);
 
-    callback(decodedChunk);
+    onData(decodedChunk);
 
     if (done) {
+      if (onComplete) onComplete();
       break;
     }
   }
