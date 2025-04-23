@@ -10,11 +10,11 @@ export function Main({ children }: { children: ReactNode }) {
   return (
     <main
       className={cn("flex flex-col space-y-4 gradient-sidebar-lr", {
-        "w-[calc(100vw-224px)]": open,
+        "w-full md:w-[calc(100vw-224px)]": open,
         "w-full": !open,
       })}
     >
-      <div className="bg-black my-4 mr-4 p-8 rounded-2xl h-[calc(100svh-2rem)] ">
+      <div className="bg-black md:my-4 md:mr-4 p-4 md:p-8 md:rounded-2xl h-svh md:h-[calc(100svh-2rem)] ">
         {children}
       </div>
     </main>

@@ -14,6 +14,9 @@ export async function POST(req: Request) {
     model: google("gemini-2.0-flash-001"),
     system: systemMessage,
     messages: messages,
+    onError: (error) => {
+      console.error("Error:", error);
+    }
   });
 
   return result.toDataStreamResponse();

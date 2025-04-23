@@ -15,12 +15,12 @@ function Pre({ children }: { children: JSX.Element }) {
 
   return (
     <div className="relative group">
-      <pre className="bg-gray-900 text-purple-300 p-4 rounded-lg border border-gray-700 overflow-x-auto my-4 max-w-md">
+      <pre className="bg-gray-900 text-purple-300 p-4 rounded-lg border border-gray-700 overflow-x-auto my-4 w-full lg:max-w-md">
         {children}
       </pre>
       <button
         onClick={handleCopy}
-        className="absolute top-2 right-2 bg-purple-500 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity hover:cursor-pointer"
+        className="absolute top-2 right-2 bg-purple-500 text-white text-sm px-2 py-1 rounded lg:opacity-0 group-hover:opacity-100 transition-opacity hover:cursor-pointer"
       >
         {copied ? "Copied!" : "Copy"}
       </button>
