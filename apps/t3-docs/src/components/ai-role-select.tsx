@@ -14,7 +14,6 @@ import {
 export function AiRoleSelect() {
   const role = useThemeStore((state) => state.ai.role);
   const slang = useThemeStore((state) => state.ai.slang);
-
   const setAiRole = useThemeStore((state) => state.setAiRole);
   const setAiSlang = useThemeStore((state) => state.setAiSlang);
 

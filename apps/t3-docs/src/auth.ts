@@ -9,13 +9,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         // Initial sign in
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
+        // seconds
         token.expiresAt = account.expires_at;
+
         return token;
       }
 
-      // Return previous token if the access token has not expired
-      // *1000 for milliseconds
-      if (Date.now() < (token.expiresAt as number) * 1000) {
+      // expiresAt is in seconds
+      // Date.now() is in milliseconds, so divide by 1000
+      if (Math.floor(Date.now() / 1000) < Number(token.expiresAt)) {
         return token;
       }
 
@@ -42,9 +44,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return {
           ...token,
           accessToken: newTokens.access_token,
-          //expiresAt is in milliseconds and expires in 4 hours
-          expiresAt: Math.floor(Date.now() + newTokens.expires_in),
-          refreshToken: newTokens.refresh_token ?? token.refreshToken,
+          // expires_in = 28800 seconds (8hours)
+          // expiresAt is in seconds, add 8 hours to current time
+          // date.now() is in milliseconds, so divide by 1000
+          expiresAt: Math.floor(Date.now() / 1000) + newTokens.expires_in,
+          refreshToken: newTokens.refresh_token || token.refreshToken,
         };
       } catch (error) {
         console.error("Error refreshing access token", error);

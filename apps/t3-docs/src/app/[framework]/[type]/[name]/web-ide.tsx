@@ -29,8 +29,6 @@ import { Terminal } from "@xterm/xterm";
 import {
   GitCompare,
   MessageCircleCode,
-  Sparkles,
-  SpeechIcon,
   WandSparkles,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -238,7 +236,7 @@ function WebIDE() {
                                     chunk,
                                   );
                                 },
-                                onData: async (data) => {
+                                onData: (data) => {
                                   chunk += data;
                                   setEditorValue(chunk);
                                 },
