@@ -244,12 +244,6 @@ function WebIDE() {
                                 },
                               });
 
-                              // onComplete update the file system
-
-                              await webcontainerRef.current?.fs.writeFile(
-                                webcontainerFilePath,
-                                chunk,
-                              );
                               // copyToClipboard(data);
                             } catch (error) {
                               // toast
