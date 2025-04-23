@@ -184,7 +184,7 @@ export default function FileExplorer({
   };
 
   return (
-    <ul className="bg-code col-span-2 h-full overflow-auto rounded-xl py-2">
+    <ul className="bg-code scrollbar-hide col-span-2 h-full overflow-auto rounded-xl py-2">
       {sortedRepoContent?.map((item) => renderTree(item))}
     </ul>
   );

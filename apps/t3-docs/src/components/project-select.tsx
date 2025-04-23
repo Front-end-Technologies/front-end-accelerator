@@ -20,7 +20,7 @@ export function ProjectSelect() {
     name: string;
     type: string;
   };
-  console.log("name: ", name);
+
   const router = useRouter();
 
   const { data: folders } = api.gitHub.getFolders.useQuery();

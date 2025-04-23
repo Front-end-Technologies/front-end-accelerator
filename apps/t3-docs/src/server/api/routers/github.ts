@@ -1,12 +1,12 @@
 import { GitHubContent } from "@/interfaces";
-import {
-  fetchFolderFiles,
-  mapGithubToWebcontainerFileSystem,
-} from "@/lib/utils";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 
 import { createHttp } from "../http";
+import {
+  fetchFolderFiles,
+  mapGithubToWebcontainerFileSystem,
+} from "../webcontainer";
 
 const http = createHttp();
 

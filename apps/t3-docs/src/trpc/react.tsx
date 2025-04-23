@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { type AppRouter } from "@/server/api/root";
 import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -67,14 +68,21 @@ export function Providers(props: { children: React.ReactNode }) {
 
   return (
     <SessionProvider>
-      <SidebarProvider>
-        <QueryClientProvider client={queryClient}>
-          <api.Provider client={trpcClient} queryClient={queryClient}>
-            {props.children}
-          </api.Provider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </SidebarProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        disableTransitionOnChange
+        enableSystem
+      >
+        <SidebarProvider>
+          <QueryClientProvider client={queryClient}>
+            <api.Provider client={trpcClient} queryClient={queryClient}>
+              {props.children}
+            </api.Provider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </SidebarProvider>
+      </ThemeProvider>
     </SessionProvider>
   );
 }

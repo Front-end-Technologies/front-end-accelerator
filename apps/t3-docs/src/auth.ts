@@ -14,11 +14,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
 
       // Return previous token if the access token has not expired
+      // *1000 for milliseconds
       if (Date.now() < (token.expiresAt as number) * 1000) {
         return token;
       }
 
-      if (!token.refresh_token) {
+      if (!token.refreshToken) {
         throw new TypeError("Missing refresh_token");
       }
 
@@ -41,7 +42,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return {
           ...token,
           accessToken: newTokens.access_token,
-          expiresAt: Math.floor(Date.now() / 1000 + newTokens.expires_in),
+          //expiresAt is in milliseconds and expires in 4 hours
+          expiresAt: Math.floor(Date.now() + newTokens.expires_in),
           refreshToken: newTokens.refresh_token ?? token.refreshToken,
         };
       } catch (error) {

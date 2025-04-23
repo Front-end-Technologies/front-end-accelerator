@@ -3,37 +3,59 @@
 import "@xterm/xterm/css/xterm.css";
 import { useThemeStore } from "@/app/store";
 import { AIChat } from "@/components/ai-chat";
+import { AiResponseDialog } from "@/components/ai-response-dialog";
+import { AiRoleSelect } from "@/components/ai-role-select";
 import FileExplorer from "@/components/file-explorer";
+import { FrameworkSelect } from "@/components/framework-select";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { File } from "@/interfaces";
+import { handleAIStream } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { javascript } from "@codemirror/lang-javascript";
 import { materialLight } from "@uiw/codemirror-theme-material";
 import { tokyoNightStorm } from "@uiw/codemirror-theme-tokyo-night-storm";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, {
+  EditorView,
+  ReactCodeMirrorRef,
+} from "@uiw/react-codemirror";
 import { WebContainer } from "@webcontainer/api";
 import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
+import { GitCompare, Sparkles } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
+interface Params {
+  [key: string]: string;
+  framework: string;
+  name: string;
+  type: string;
+}
+
 function WebIDE() {
-  const theme = useThemeStore((state) => state.theme);
+  const { framework, name, type } = useParams<Params>();
+  const { theme } = useTheme();
+
   const ai = useThemeStore((state) => state.ai);
+  const role = useThemeStore((state) => state.ai.role);
 
-  const [editorValue, setEditorValue] = useState("");
   const [webcontainerFilePath, setWebContainerFilePath] = useState("");
+  const [selectedCode, setSelectedCode] = useState("");
+  const [editorValue, setEditorValue] = useState("");
+  const [aiOutput, setAiOutput] = useState("");
 
-  const hasBooted = useRef(false);
+  const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
   const iFrameRef = useRef<HTMLIFrameElement>(null);
-  const webcontainerRef = useRef<WebContainer>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
-
-  const { framework, name, type } = useParams<{
-    framework: string;
-    name: string;
-    type: string;
-  }>();
+  const webcontainerRef = useRef<WebContainer>(null);
+  const hasBooted = useRef(false);
 
   const { data } = api.gitHub.getProject.useQuery({
     framework,
@@ -44,6 +66,28 @@ function WebIDE() {
   const files = useMemo(() => {
     return data?.webcontainerFiles;
   }, [data?.webcontainerFiles]);
+
+  // codemirror
+  useEffect(() => {
+    if (codeMirrorRef.current?.view) {
+      const { view } = codeMirrorRef.current;
+
+      const getSelection = () => {
+        if (view) {
+          const selection = view.state.selection.main;
+          return view.state.doc.sliceString(selection.from, selection.to);
+        }
+      };
+
+      view.dom.addEventListener("mousedown", () => {
+        console.log("currently selecting code");
+      });
+
+      view.dom.addEventListener("mouseup", () => {
+        setSelectedCode(getSelection() || "");
+      });
+    }
+  }, [codeMirrorRef.current?.state, codeMirrorRef.current?.view]);
 
   useEffect(() => {
     const bootWebContainer = async () => {
@@ -61,7 +105,7 @@ function WebIDE() {
 
       await startShell(terminal);
 
-      webcontainerRef.current.on("server-ready", (_port, url) => {
+      webcontainerRef.current.on("server-ready", (port, url) => {
         iFrameRef.current?.setAttribute("src", url);
       });
     };
@@ -151,17 +195,103 @@ function WebIDE() {
                 setWebContainerFilePath={setWebContainerFilePath}
               />
             </Panel>
-
             <PanelResizeHandle />
             <Panel minSize={20}>
-              <div className="bg-code h-full overflow-auto rounded-xl">
-                <h3 className="bg-code sticky top-0 z-50 items-center border-b border-b-gray-200 p-4 text-center text-sm dark:border-b-gray-600">
-                  {webcontainerFilePath}
-                </h3>
+              <div className="bg-code scrollbar-hide h-full overflow-auto rounded-xl">
+                <div className="bg-code scrollbar-hide sticky top-0 z-50 flex items-center justify-between gap-4 overflow-auto border-b border-b-gray-200 p-4 text-center text-sm dark:border-b-gray-600">
+                  <strong className="">{webcontainerFilePath}</strong>
+                  <div className="flex items-center gap-1">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          className="cursor-pointer"
+                          onClick={async () => {
+                            try {
+                              const controller = new AbortController();
+                              const response = await fetch("/api/ai/explain", {
+                                body: JSON.stringify({
+                                  code: selectedCode,
+                                  framework: {
+                                    input: framework,
+                                    output: ai.framework.output,
+                                  },
+                                  llm: ai.llm,
+                                  role: ai.role,
+                                  slang: ai.slang,
+                                }),
+                                method: "POST",
+                                signal: controller.signal,
+                              });
+
+                              handleAIStream(response, (data) => {
+                                setAiOutput((prevCode) => prevCode + data);
+                              });
+                              // copyToClipboard(data);
+                            } catch (error) {
+                              // toast
+                              console.error("error: ", error);
+                            }
+                          }}
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <Sparkles />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        Explain selected code as {role}
+                      </TooltipContent>
+                    </Tooltip>
+
+                    <AiRoleSelect />
+
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          onClick={async () => {
+                            const controller = new AbortController();
+
+                            const response = await fetch("/api/ai/compare", {
+                              body: JSON.stringify({
+                                code: selectedCode,
+                                framework: {
+                                  input: framework,
+                                  output: ai.framework.output,
+                                },
+                                llm: ai.llm,
+                                role: ai.role,
+                                slang: ai.slang,
+                              }),
+                              method: "POST",
+                              signal: controller.signal,
+                            });
+
+                            handleAIStream(response, (data) => {
+                              setAiOutput((prevCode) => prevCode + data);
+                            });
+                          }}
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <GitCompare />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        Compare selected code to {ai.framework.output}
+                      </TooltipContent>
+                    </Tooltip>
+
+                    <FrameworkSelect />
+                  </div>
+                </div>
                 <CodeMirror
-                  className="overflow-auto px-2 py-4 text-sm"
-                  extensions={[javascript({ jsx: true, typescript: true })]}
+                  className="scrollbar-hide overflow-auto px-2 py-4 text-sm text-wrap"
+                  extensions={[
+                    javascript({ jsx: true, typescript: true }),
+                    EditorView.lineWrapping,
+                  ]}
                   onChange={onEditorChange}
+                  ref={codeMirrorRef}
                   theme={theme === "dark" ? tokyoNightStorm : materialLight}
                   value={editorValue}
                 />
@@ -184,7 +314,7 @@ function WebIDE() {
             {ai.chat.open && (
               <>
                 <PanelResizeHandle />
-                <Panel defaultSize={20} minSize={20}>
+                <Panel defaultSize={25} minSize={20}>
                   <AIChat />
                 </Panel>
               </>
@@ -198,6 +328,11 @@ function WebIDE() {
           </div>
         </Panel>
       </PanelGroup>
+
+      <AiResponseDialog
+        aiOutput={aiOutput}
+        onOpenChange={() => setAiOutput("")}
+      />
     </div>
   );
 }

@@ -1,63 +1,54 @@
-import { GitHubContent, WebcontainerFileSystem } from "@/interfaces";
-import { createHttp } from "@/server/api/http";
+import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-const http = createHttp();
+import { providers } from "./const";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const fetchFolderFiles = async (url: string) => {
-  const folderData: GitHubContent[] = await http.get(url);
+export async function copyToClipboard(text: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log("Text copied to clipboard");
+  } catch (error) {
+    console.error("Failed to copy text to clipboard", error);
+  }
+}
 
-  const folderFiles = await Promise.all(
-    folderData.map(async (folderFile) => {
-      if (folderFile.type === "dir") {
-        const subFolderFiles: GitHubContent[] = await fetchFolderFiles(
-          folderFile.url,
-        );
-        return {
-          ...folderFile,
-          contents: subFolderFiles,
-        };
-      }
-      const folderFileData: GitHubContent[] = await http.get(
-        folderFile.download_url,
-        { responseType: "text" },
-      );
+export async function handleAIStream(
+  res: Response,
+  callback: (text: string) => void,
+) {
+  if (!res.body) throw new Error("No res body");
 
-      return {
-        ...folderFile,
-        contents: folderFileData,
-      };
-    }),
-  );
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  while (true) {
+    const { done, value } = await reader.read();
+    const decodedChunk = decoder.decode(value);
 
-  return folderFiles;
-};
+    callback(decodedChunk);
 
-export const mapGithubToWebcontainerFileSystem = (
-  input: GitHubContent[],
-): WebcontainerFileSystem => {
-  const output: WebcontainerFileSystem = {};
-
-  input.forEach((item) => {
-    if (item.type === "file") {
-      output[item.name] = {
-        file: {
-          contents: item.contents as string,
-        },
-      };
-    } else if (item.type === "dir") {
-      output[item.name] = {
-        directory: mapGithubToWebcontainerFileSystem(
-          item.contents as GitHubContent[],
-        ),
-      };
+    if (done) {
+      break;
     }
-  });
+  }
+}
 
-  return output;
+export const getAiModel = (provider: string, name: string) => {
+  switch (provider) {
+    case providers.ANTHROPIC:
+      return anthropic(name);
+    case providers.GOOGLE:
+      return google(name);
+    case providers.OPENAI:
+      return openai(name);
+    // Add more cases here for other providers
+    default:
+      throw new Error(`Unsupported provider: ${provider}`);
+  }
 };

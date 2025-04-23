@@ -1,28 +1,26 @@
+import { useThemeStore } from "@/app/store";
 import { useChat } from "@ai-sdk/react";
 import clsx from "clsx";
 import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef } from "react";
-import Markdown from "react-markdown";
 
+import { MarkdownContent } from "./markdown-content";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 
 export function AIChat() {
   const { data: session } = useSession();
 
+  const llm = useThemeStore((state) => state.ai.llm);
+  const role = useThemeStore((state) => state.ai.role);
+
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  // make endpoint for helpful assistant that explains code and concepts in the chatwindow
-
-  // make endpoint for pure code generation
-
-  // make endpoint for explaining code and concepts
-
   const { error, handleInputChange, handleSubmit, input, messages } = useChat({
-    api: `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat`,
+    api: `${process.env.NEXT_PUBLIC_BASE_URL}/api/ai/chat`,
+    body: { llm },
     initialMessages: [
       {
         content: "Hello, how can I help you?",
@@ -43,68 +41,63 @@ export function AIChat() {
   }, [messages]);
 
   return (
-    <div className="bg-sidebar flex h-full flex-col space-y-4 rounded-xl border p-4">
+    <div className="bg-sidebar flex h-full flex-col space-y-4 rounded-xl border">
       <div
-        className="flex h-full flex-col space-y-4 overflow-y-auto"
+        className="scrollbar-hide flex h-full flex-col space-y-4 overflow-y-auto"
         ref={messagesRef}
       >
-        <div className="bg-code sticky top-0 flex items-center py-2">
+        <div className="bg-code sticky top-0 z-50 flex items-center rounded-t-xl p-4">
           <div className="flex grow items-center space-x-4">
-            <div>AI</div>
+            <Avatar>
+              <AvatarImage src="/openai-logo.svg" />
+              <AvatarFallback>AI</AvatarFallback>
+            </Avatar>
             <div>
-              <p className="text-xs font-semibold">AI-Chatbot</p>
-              <p className="text-xs">Demo AI chatbot gpt-4-mini</p>
+              <p className="text-xs font-semibold">{role}</p>
+              <p className="text-xs">
+                {llm.provider} {llm.name}
+              </p>
             </div>
           </div>
         </div>
 
-        {messages.map(
-          ({
-            content,
-            id,
-            role,
-            // toolInvocations
-          }) => (
-            <div className="flex flex-col space-y-2" key={id}>
-              <div
-                className={clsx("flex items-center gap-4", {
-                  "flex-row": isAi(role),
-                  "flex-row-reverse": isUser(role),
-                })}
-              >
-                {isUser(role) && session?.user?.image ? (
-                  <Avatar>
-                    <AvatarImage src={session.user.image} />
-                    <AvatarFallback>{session.user.name}</AvatarFallback>
-                  </Avatar>
-                ) : (
-                  <Avatar>
-                    <AvatarImage src="/openai-logo.svg" />
-                    <AvatarFallback>AI</AvatarFallback>
-                  </Avatar>
-                )}
-
-                <div
-                  className={clsx(
-                    "border-border space-y-4 rounded-xl border p-3",
-                    {
-                      "bg-emerald-100 dark:bg-emerald-900": isUser(role),
-                      "bg-sky-100 dark:bg-sky-900": isAi(role),
-                    },
-                  )}
-                >
-                  {/* {toolInvocations && (
-                      <pre>{JSON.stringify(toolInvocations, null, 2)}</pre>
-                    )} */}
-                  <Markdown>{content}</Markdown>
-                </div>
-              </div>
-              {isAi(role) && (
-                <div className="flex items-center justify-end"></div>
+        {messages.map(({ content, id, role }) => (
+          <div className="flex flex-col space-y-2 p-4" key={id}>
+            <div
+              className={clsx("flex items-center gap-4", {
+                "flex-row": isAi(role),
+                "flex-row-reverse": isUser(role),
+              })}
+            >
+              {isUser(role) && session?.user?.image ? (
+                <Avatar>
+                  <AvatarImage src={session.user.image} />
+                  <AvatarFallback>{session.user.name}</AvatarFallback>
+                </Avatar>
+              ) : (
+                <Avatar>
+                  <AvatarImage src="/openai-logo.svg" />
+                  <AvatarFallback>AI</AvatarFallback>
+                </Avatar>
               )}
+
+              <div
+                className={clsx(
+                  "border-border space-y-4 rounded-xl border p-3",
+                  {
+                    "bg-emerald-100 dark:bg-emerald-900": isUser(role),
+                    "bg-sky-100 dark:bg-sky-900": isAi(role),
+                  },
+                )}
+              >
+                <MarkdownContent>{content}</MarkdownContent>
+              </div>
             </div>
-          ),
-        )}
+            {isAi(role) && (
+              <div className="flex items-center justify-end"></div>
+            )}
+          </div>
+        ))}
       </div>
 
       {error && (
@@ -114,7 +107,7 @@ export function AIChat() {
         </p>
       )}
 
-      <form className="flex items-center space-x-4" onSubmit={handleSubmit}>
+      <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
         <Input
           onChange={handleInputChange}
           onSubmit={handleSubmit}

@@ -1,5 +1,6 @@
 "use client";
 
+import { AiLLMSelect } from "@/components/ai-llm-select";
 import { FoldersSelect } from "@/components/folders-select";
 import { ProjectSelect } from "@/components/project-select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,23 +12,24 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { githubURL } from "@/lib/const";
-import { ExternalLink, LogOut, SparklesIcon } from "lucide-react";
+import { githubRepoURL } from "@/lib/const";
+import {
+  CircleX,
+  ExternalLink,
+  LogOut,
+  Settings,
+  SparklesIcon,
+} from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useLayoutEffect } from "react";
 
 import { useThemeStore } from "./store";
 
 export function Header() {
-  const theme = useThemeStore((state) => state.theme);
   const toggleAIChat = useThemeStore((state) => state.toggleAIChat);
+  const aiChatIsOpen = useThemeStore((state) => state.ai.chat.open);
   const { framework, name, type } = useParams();
   const { data: session } = useSession();
-
-  useLayoutEffect(() => {
-    document.documentElement.className = theme;
-  }, [theme]);
 
   return (
     <header className="flex items-center justify-between p-4">
@@ -49,7 +51,7 @@ export function Header() {
             <Button
               onClick={() => {
                 window.open(
-                  `${githubURL}/tree/main/apps/demo/${framework}/${type}/${name}`,
+                  `${githubRepoURL}/tree/main/apps/demo/${framework}/${type}/${name}`,
                   "_blank",
                 );
               }}
@@ -58,12 +60,27 @@ export function Header() {
               <ExternalLink />
               Open in GitHub
             </Button>
-            <Button onClick={toggleAIChat} variant="outline">
-              <SparklesIcon />
-              Open AI Chat
+            <Button
+              aria-label={aiChatIsOpen ? "Close AI Chat" : "Open AI Chat"}
+              onClick={toggleAIChat}
+              variant="outline"
+            >
+              {aiChatIsOpen ? (
+                <>
+                  <CircleX />
+                  <span>Close AI Chat</span>
+                </>
+              ) : (
+                <>
+                  <SparklesIcon />
+                  <span>Open AI Chat</span>
+                </>
+              )}
             </Button>
           </>
         )}
+
+        <AiLLMSelect />
 
         <p>{session?.user?.name}</p>
 
@@ -78,6 +95,17 @@ export function Header() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-4">
+            <DropdownMenuItem>
+              <Button
+                className="flex space-x-2"
+                onClick={() => signOut()}
+                type="submit"
+                variant="ghost"
+              >
+                <Settings />
+                Settings
+              </Button>
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <Button
                 className="flex space-x-2"

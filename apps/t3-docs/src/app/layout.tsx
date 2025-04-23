@@ -28,7 +28,12 @@ export default async function RootLayout({ children }: Readonly<Props>) {
   const session = await auth();
 
   return (
-    <html className={`${geistMono.variable}`} lang="en">
+    <html
+      className={`${geistMono.variable}`}
+      lang="en"
+      // Required for shadCNui light dark theme
+      suppressHydrationWarning
+    >
       <body>
         {session ? (
           <Providers>

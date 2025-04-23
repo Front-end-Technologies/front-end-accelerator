@@ -1,6 +1,5 @@
 "use client";
 
-import { useThemeStore } from "@/app/store";
 import {
   Sidebar,
   SidebarContent,
@@ -12,12 +11,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { api } from "@/trpc/react";
-import { LoaderCircle, MoonIcon, SunIcon } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { FoldersSelect } from "./folders-select";
-import { Button } from "./ui/button";
+import { ThemeDropdown } from "./theme-dropdown";
 
 export const FrameworkLogo = ({ framework }: { framework: string }) => {
   const logos: Record<string, string> = {
@@ -42,8 +41,6 @@ export const FrameworkLogo = ({ framework }: { framework: string }) => {
 
 export function AppSidebar() {
   const { framework } = useParams<{ framework: string }>();
-  const theme = useThemeStore((state) => state.theme);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   const { data: folders } = api.gitHub.getFolders.useQuery();
 
@@ -72,9 +69,8 @@ export function AppSidebar() {
                 </picture>
                 <p className="font-bold">Front-end Accelerator</p>
               </Link>
-              <Button className="w-9" onClick={toggleTheme} variant="ghost">
-                {theme === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
+
+              <ThemeDropdown />
             </div>
 
             <p className="flex flex-col space-y-4 text-xs leading-5">
