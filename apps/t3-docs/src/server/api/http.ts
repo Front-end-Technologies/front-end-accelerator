@@ -18,7 +18,7 @@ export const createHttp = (config?: CreateAxiosDefaults) => {
         ...config,
         headers: new axios.AxiosHeaders({
           ...config.headers,
-          Authorization: `Bearer ${token.accessToken}`,
+          Authorization: `Bearer ${token.access_token}`,
         }),
       };
     },

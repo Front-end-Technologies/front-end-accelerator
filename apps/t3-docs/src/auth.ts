@@ -6,22 +6,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ account, token }) {
       if (account) {
-        // Initial sign in
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-        // seconds
-        token.expiresAt = account.expires_at;
+        return {
+          ...token,
+          access_token: account.access_token,
+          expires_at: account.expires_at,
+          refresh_token: account.refresh_token,
+        };
+      }
 
+      if (Date.now() < Number(token.expires_at) * 1000) {
         return token;
       }
 
-      // expiresAt is in seconds
-      // Date.now() is in milliseconds, so divide by 1000
-      if (Math.floor(Date.now() / 1000) < Number(token.expiresAt)) {
-        return token;
-      }
-
-      if (!token.refreshToken) {
+      if (!token.refresh_token) {
         throw new TypeError("Missing refresh_token");
       }
 
@@ -33,26 +30,29 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             client_id: process.env.AUTH_GITHUB_ID,
             client_secret: process.env.AUTH_GITHUB_SECRET,
             grant_type: "refresh_token",
-            refresh_token: token.refreshToken,
+            refresh_token: token.refresh_token,
           },
         );
 
-        const newTokens = response.data;
+        const tokenUrlParams = new URLSearchParams(response.data);
 
-        if (!newTokens) throw newTokens;
+        const newTokens = {
+          ...token,
+          access_token: tokenUrlParams.get("access_token"),
+          expires_at:
+            Math.floor(Date.now() / 1000) +
+            Number(tokenUrlParams.get("expires_in")),
+          refresh_token: tokenUrlParams.get("refresh_token"),
+        };
+
+        return newTokens;
+      } catch (error) {
+        console.error("Error refreshing access token", error);
 
         return {
           ...token,
-          accessToken: newTokens.access_token,
-          // expires_in = 28800 seconds (8hours)
-          // expiresAt is in seconds, add 8 hours to current time
-          // date.now() is in milliseconds, so divide by 1000
-          expiresAt: Math.floor(Date.now() / 1000) + newTokens.expires_in,
-          refreshToken: newTokens.refresh_token || token.refreshToken,
+          error: "RefreshAccessTokenError",
         };
-      } catch (error) {
-        console.error("Error refreshing access token", error);
-        return { ...token, error: "RefreshAccessTokenError" };
       }
     },
 
@@ -60,16 +60,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return {
         ...session,
         token: {
-          accessToken: token.accessToken,
-          error: token.error,
+          access_token: token.access_token,
         },
       };
     },
   },
   providers: [
     GitHub({
-      clientId: process.env.AUTH_GITHUB_ID || "",
-      clientSecret: process.env.AUTH_GITHUB_SECRET || "",
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
   ],
 });

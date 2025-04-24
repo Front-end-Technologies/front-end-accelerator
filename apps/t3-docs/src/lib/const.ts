@@ -9,6 +9,16 @@ export const providers = {
 
 export const llm = [
   {
+    description: "Google Gemini 2.5 Pro Experimental 03-25",
+    name: "gemini-2.5-pro-exp-03-25",
+    provider: "google",
+  },
+  {
+    description: "Google Gemini 2.0 Flash 001",
+    name: "gemini-2.0-flash-001",
+    provider: "google",
+  },
+  {
     description: "Google Gemini 1.5 Flash (Latest)",
     name: "gemini-1.5-flash-latest",
     provider: "google",
