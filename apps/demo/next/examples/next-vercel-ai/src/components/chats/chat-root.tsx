@@ -36,40 +36,42 @@ export default function ChatRoot({
             className="h-8 w-8 hover:cursor-pointer"
             variant="outline"
           />
-          <div className="lg:hidden">
-            <Drawer>
-              <DrawerTrigger
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                  }),
-                  "hover:cursor-pointer"
-                )}
-              >
-                <BookOpen />
-                Explain
-                <span className="sr-only">Toggle Explanation</span>
-              </DrawerTrigger>
-              <DrawerContent>
-                <div className="w-full overflow-y-scroll">
-                  <DrawerHeader className="pb-0">
-                    <DrawerTitle>Basic</DrawerTitle>
-                    <DrawerDescription>
-                      Explanation of basic functionality within Vercel AI-sdk
-                    </DrawerDescription>
-                  </DrawerHeader>
-                  <div className="px-4 pb-0">
-                    <MarkdownContent />
+          {MarkdownContent && (
+            <div className="lg:hidden">
+              <Drawer>
+                <DrawerTrigger
+                  className={cn(
+                    buttonVariants({
+                      variant: "outline",
+                    }),
+                    "hover:cursor-pointer"
+                  )}
+                >
+                  <BookOpen />
+                  Explain
+                  <span className="sr-only">Toggle Explanation</span>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <div className="w-full overflow-y-scroll">
+                    <DrawerHeader className="pb-0">
+                      <DrawerTitle>Basic</DrawerTitle>
+                      <DrawerDescription>
+                        Explanation of basic functionality within Vercel AI-sdk
+                      </DrawerDescription>
+                    </DrawerHeader>
+                    <div className="px-4 pb-0">
+                      <MarkdownContent />
+                    </div>
                   </div>
-                </div>
-                <DrawerFooter className="sticky bottom-2 w-full bg-background">
-                  <DrawerClose asChild>
-                    <Button variant="outline">Close</Button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          </div>
+                  <DrawerFooter className="sticky bottom-2 w-full bg-background">
+                    <DrawerClose asChild>
+                      <Button variant="outline">Close</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            </div>
+          )}
         </div>
         <div className="flex items-center justify-center md:w-max">
           <picture className="size-10">
