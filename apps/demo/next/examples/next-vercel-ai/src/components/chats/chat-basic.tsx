@@ -1,40 +1,24 @@
 "use client";
 
 import { Markdown } from "@/components/markdown";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useChat } from "@ai-sdk/react";
 import {
   Send,
-  Flame,
-  Zap,
   CircleStop,
-  FileText,
-  BookOpenCheck,
-  BookOpen,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import EmptyChat from "./empty-chat";
+import ChatEmpty from "./chat-empty";
 
 import BasicDocs from "@/docs/basic-docs.mdx";
-import { ChatQuickActions } from "@/lib/interfaces";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "../ui/drawer";
-import { cn } from "@/lib/utils";
 import ChatRoot from "./chat-root";
+import { ChatQuickActions } from "./chat-quick-action";
+import { QuickAction } from "../chat";
 
-const quickActions: ChatQuickActions[] = [
+const quickActions: QuickAction[] = [
   {
     section: "basic",
     label: "Get to know Jack Sparrow",
@@ -69,7 +53,7 @@ export function ChatBasic() {
         <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
           {messages.length === 0 && (
             <div className="h-full flex items-center justify-center">
-              <EmptyChat />
+              <ChatEmpty />
             </div>
           )}
 
@@ -150,24 +134,7 @@ export function ChatBasic() {
         </div>
       </Card>
 
-      <div className="mb-4">
-        <div className="flex items-center gap-2 mb-4">
-          <Flame className={"text-purple-300"} />
-          <h4>Try one of these following questions to get started.</h4>
-        </div>
-        <div className="flex gap-4">
-          {quickActions?.map((action, index) => (
-            <Button
-              key={index}
-              onClick={() => setInput(action.value)}
-              className="bg-purple-300 hover:bg-purple-500 hover:cursor-pointer"
-            >
-              <Zap />
-              {action.label}
-            </Button>
-          ))}
-        </div>
-      </div>
+      <ChatQuickActions quickActions={quickActions} setInput={setInput} />
 
       <form onSubmit={handleSubmit} className="flex gap-2">
         <Input

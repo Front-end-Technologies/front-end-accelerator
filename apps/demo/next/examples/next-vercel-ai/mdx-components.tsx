@@ -14,8 +14,8 @@ function Pre({ children }: { children: JSX.Element }) {
   };
 
   return (
-    <div className="relative group">
-      <pre className="bg-gray-900 text-purple-300 p-4 rounded-lg border border-gray-700 overflow-x-auto my-4 w-full lg:max-w-md">
+    <div className="relative group w-full lg:max-w-xl">
+      <pre className="bg-gray-900 text-purple-300 p-4 rounded-lg border border-gray-700 overflow-x-auto my-4 ">
         {children}
       </pre>
       <button

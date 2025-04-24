@@ -16,14 +16,14 @@ import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarConfirmation } from "@/components/calendar-confirmation";
 import { CalendarApproval } from "@/components/calendar-success";
-import EmptyChat from "./chats/empty-chat";
+import ChatEmpty from "./chats/chat-empty";
 
 import BasicDocs from "@/docs/basic-docs.mdx";
 import toolCallingDocs from "@/docs/tool-calling-docs.mdx";
 import userInteractionDocs from "@/docs/user-interaction-docs.mdx";
 import mcpDocs from "@/docs/model-context-provider-docs.mdx";
 
-export interface ChatQuickActions {
+export interface QuickAction {
   section: string;
   label: string;
   value: string;
@@ -38,7 +38,7 @@ export interface ChatDocs {
 interface ChatProps {
   section: string;
   apiUrl: string;
-  quickActions?: ChatQuickActions[];
+  quickActions?: QuickAction[];
 }
 
 const docs: ChatDocs[] = [
@@ -126,7 +126,7 @@ export function Chat({ section, apiUrl, quickActions }: ChatProps) {
             >
               {messages.length === 0 && (
                 <div className="h-full flex items-center justify-center">
-                  <EmptyChat />
+                  <ChatEmpty />
                 </div>
               )}
 

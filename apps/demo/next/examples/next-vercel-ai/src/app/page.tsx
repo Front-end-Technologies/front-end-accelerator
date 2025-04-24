@@ -1,19 +1,20 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import EmptyChat from "@/components/chats/empty-chat";
+import ChatEmpty from "@/components/chats/chat-empty";
+import ChatRoot from "@/components/chats/chat-root";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
 
   return (
-    <>
-      <div className="flex items-center gap-4 mb-4">
-        <SidebarTrigger className="h-8 w-8" variant="outline" />
-        <h1 className="text-2xl font-bold">
-          Frontend Accelerator Nextjs Vercel AI
-        </h1>
-      </div>
-      <div className="h-full flex items-center justify-center">
-        <EmptyChat />
-      </div>
-    </>
+
+
+    <ChatRoot>
+      <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
+        <div className="flex-1 p-4">
+          <div className="h-full flex items-center justify-center">
+            <ChatEmpty />
+          </div>
+        </div>
+      </Card>
+    </ChatRoot>
   );
 }

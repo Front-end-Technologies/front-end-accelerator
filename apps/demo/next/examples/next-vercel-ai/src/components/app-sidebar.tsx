@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -25,7 +26,12 @@ import {
 import Link from "next/link";
 
 export function AppSidebar() {
-  const { open } = useSidebar();
+  const { open, setOpenMobile } = useSidebar();
+
+  const closeSidebar = () => {
+    setOpenMobile(false);
+  };
+
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
@@ -33,7 +39,11 @@ export function AppSidebar() {
           <SidebarGroupContent className="flex flex-col space-y-8 py-2">
             {open ? (
               <div className="flex items-center space-x-2">
-                <Link className="flex items-center space-x-2" href="/">
+                <Link
+                  className="flex items-center space-x-2"
+                  href="/"
+                  onClick={closeSidebar}
+                >
                   <Bot className="h-8 w-8 text-white" />
                   <p className="font-bold">Next Vercel AI</p>
                 </Link>
@@ -43,6 +53,7 @@ export function AppSidebar() {
                 <Link
                   className="flex items-center space-x-2 text-center"
                   href="/"
+                  onClick={closeSidebar}
                 >
                   <Bot className="h-8 w-8 text-white" />
                 </Link>
@@ -66,7 +77,7 @@ export function AppSidebar() {
               {/* Basic */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Fundamental AI Concepts">
-                  <Link href="/sections/basic">
+                  <Link href="/sections/basic" onClick={closeSidebar}>
                     <div className="flex items-center gap-2">
                       <CircleDot className="w-4 h-4 shrink-0" />
                       <span>Basic</span>
@@ -80,7 +91,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild tooltip="Function Calling with AI">
                   <Link href="/sections/tool-calling">
                     <div className="flex items-center gap-2">
-                      <FunctionSquare className="w-4 h-4 shrink-0"/>
+                      <FunctionSquare className="w-4 h-4 shrink-0" />
                       <span>Tool calling</span>
                     </div>
                   </Link>
@@ -95,7 +106,7 @@ export function AppSidebar() {
                 >
                   <Link href="/sections/human-in-the-loop">
                     <div className="flex items-center gap-2">
-                      <UserRound className="w-4 h-4 shrink-0"/>
+                      <UserRound className="w-4 h-4 shrink-0" />
                       <span>Human in the loop</span>
                     </div>
                   </Link>
@@ -107,7 +118,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild tooltip="Formatted Data Responses">
                   <Link href="/sections/structured-outputs">
                     <div className="flex items-center gap-2">
-                      <FileJson className="w-4 h-4 shrink-0"/>
+                      <FileJson className="w-4 h-4 shrink-0" />
                       <span>Structured outputs</span>
                     </div>
                   </Link>
@@ -122,7 +133,7 @@ export function AppSidebar() {
                 >
                   <Link href="/sections/mcp">
                     <div className="flex items-center gap-2">
-                      <Brain className="w-4 h-4 shrink-0"/>
+                      <Brain className="w-4 h-4 shrink-0" />
                       <span>Model Context Protocol</span>
                     </div>
                   </Link>
@@ -134,7 +145,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild tooltip="Connect AI to Data Sources">
                   <Link href="/sections/database-integrations">
                     <div className="flex items-center gap-2">
-                      <Database className="w-4 h-4 shrink-0"/>
+                      <Database className="w-4 h-4 shrink-0" />
                       <span>Database integrations</span>
                     </div>
                   </Link>
@@ -146,7 +157,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild tooltip="Media Processing with AI">
                   <Link href="/sections/images-files">
                     <div className="flex items-center gap-2">
-                      <FileImage className="w-4 h-4 shrink-0"/>
+                      <FileImage className="w-4 h-4 shrink-0" />
                       <span>Images and files</span>
                     </div>
                   </Link>
@@ -161,7 +172,7 @@ export function AppSidebar() {
                 >
                   <Link href="/sections/embeddings">
                     <div className="flex items-center gap-2">
-                      <ScatterChart className="w-4 h-4 shrink-0"/>
+                      <ScatterChart className="w-4 h-4 shrink-0" />
                       <span>Embeddings</span>
                     </div>
                   </Link>
@@ -171,6 +182,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <div className="flex items-center justify-between px-4 py-2">
+          <Link href="https://front-end-accelerator-t3-docs.vercel.app" target="_blank" className="flex flex-col text-sm">
+            <span>Powered by</span> <span>Frontend Accelerator</span>
+          </Link>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }

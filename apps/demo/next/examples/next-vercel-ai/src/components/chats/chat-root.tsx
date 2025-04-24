@@ -13,9 +13,14 @@ import { BookOpen } from "lucide-react";
 import { Button, buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import BasicDocs from "@/docs/basic-docs.mdx";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "../ui/resizable";
 
 type ChatRootParams = {
-  readonly MarkdownContent: typeof BasicDocs;
+  readonly MarkdownContent?: typeof BasicDocs;
   readonly children?: React.ReactNode;
 };
 
@@ -25,7 +30,7 @@ export default function ChatRoot({
 }: ChatRootParams) {
   return (
     <>
-      <div className="flex items-center justify-between md:justify-start md:gap-4 mb-4 px-4">
+      <div className="flex items-center justify-between lg:justify-start md:gap-4 mb-4 px-4">
         <div className="flex items-center gap-4">
           <SidebarTrigger
             className="h-8 w-8 hover:cursor-pointer"
@@ -70,16 +75,36 @@ export default function ChatRoot({
           <picture className="size-10">
             <img alt="Front-end Accelerator" src="/logo.svg" />
           </picture>
-          <h1 className="flex items-center gap-3 font-bold md:text-2xl">
+          <h1 className="flex items-center gap-3 font-bold lg:text-2xl">
             <span>Nextjs Vercel AI</span>
           </h1>
         </div>
       </div>
+
       <div className="flex gap-4 h-[calc(100%-3rem)] w-full">
-        <div className="p-4 h-full w-1/3 overflow-y-scroll hidden lg:block">
-          <BasicDocs />
-        </div>
-        <div className="flex flex-col p-4 w-full">{children}</div>
+        <ResizablePanelGroup direction="horizontal">
+          {MarkdownContent && (
+            <ResizablePanel
+              defaultSize={25}
+              minSize={10}
+              className="hidden lg:block"
+            >
+              <div className="p-4 pr-0 mr-4 h-full overflow-y-scroll">
+                <MarkdownContent />
+              </div>
+            </ResizablePanel>
+          )}
+
+          {MarkdownContent && <ResizableHandle className="hidden lg:block" />}
+
+          <ResizablePanel
+            defaultSize={75}
+            minSize={25}
+            className="flex flex-col p-4"
+          >
+            {children}
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </>
   );
