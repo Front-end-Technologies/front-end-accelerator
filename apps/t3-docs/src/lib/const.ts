@@ -1,11 +1,20 @@
+export enum Frameworks {
+  ANGULAR = "angular",
+  NEXT = "next",
+  NUXT = "nuxt",
+  REACT = "react",
+  SVELTE = "svelte",
+  VUE = "vue",
+}
+
+export enum Providers {
+  ANTHROPIC = "anthropic",
+  GOOGLE = "google",
+  OPENAI = "openai",
+}
+
 export const githubApiURL = `${process.env.NEXT_PUBLIC_GITHUB_API_URL}/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 export const githubRepoURL = `https://www.github.com/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
-
-export const providers = {
-  ANTHROPIC: "anthropic",
-  GOOGLE: "google",
-  OPENAI: "openai",
-};
 
 export const llm = [
   {

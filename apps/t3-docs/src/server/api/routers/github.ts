@@ -1,8 +1,8 @@
 import { GitHubContent } from "@/interfaces";
+import { createHttp } from "@/lib/api";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 
-import { createHttp } from "../http";
 import {
   fetchFolderFiles,
   mapGithubToWebcontainerFileSystem,

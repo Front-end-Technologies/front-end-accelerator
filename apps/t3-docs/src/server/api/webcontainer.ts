@@ -1,5 +1,5 @@
 import { GitHubContent, WebcontainerFileSystem } from "@/interfaces";
-import { createHttp } from "@/server/api/http";
+import { createHttp } from "@/lib/api";
 
 export const fetchFolderFiles = async (url: string) => {
   const http = createHttp();
