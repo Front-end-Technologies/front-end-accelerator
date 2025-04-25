@@ -152,6 +152,15 @@
   background-color: var(--scrollbar-thumb-hover);
 }
 
+.gradient-lr {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--sidebar-gradient-start)) 0%,
+    hsl(var(--sidebar-gradient-mid)) 50%,
+    hsl(var(--sidebar-gradient-end)) 100%
+  );
+}
+
 .gradient-sidebar-lr {
   background: linear-gradient(
     180deg,
@@ -200,3 +209,5 @@
   position: relative;
   z-index: 1;
 }
+
+

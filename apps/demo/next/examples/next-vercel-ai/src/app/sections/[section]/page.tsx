@@ -1,6 +1,7 @@
 import { ChatBasic } from "@/components/chats/chat-basic";
 import { ChatHitl } from "@/components/chats/chat-human-in-the-loop";
 import { ChatMcp } from "@/components/chats/chat-mcp";
+import { ChatStructuredOutputs } from "@/components/chats/chat-structured-outputs";
 import { ChatTools } from "@/components/chats/chat-tools";
 import { JSX } from "react";
 
@@ -21,6 +22,10 @@ const chatRenders: {
     render: <ChatHitl />,
   },
   {
+    section: 'structured-outputs',
+    render: <ChatStructuredOutputs />,
+  },
+  {
     section: 'mcp',
     render: <ChatMcp />,
   }
@@ -29,7 +34,7 @@ const chatRenders: {
 export default async function SectionPage({
     params,
   }: {
-    params: Promise<{ section: string }>
+    readonly params: Promise<{ section: string }>
   }) {
     const { section } = await params
     const chatRender = chatRenders.find((chatrender) => chatrender.section === section)?.render;

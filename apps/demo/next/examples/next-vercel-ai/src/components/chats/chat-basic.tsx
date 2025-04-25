@@ -26,6 +26,9 @@ const quickActions: QuickAction[] = [
   },
 ];
 
+const title = "Basic";
+const description = "Explanation of basic functionality within Vercel AI-sdk";
+
 export function ChatBasic() {
   const {
     error,
@@ -48,7 +51,7 @@ export function ChatBasic() {
   }, [messages]);
 
   return (
-    <ChatRoot MarkdownContent={BasicDocs}>
+    <ChatRoot drawerTitle={title} drawerDescription={description} MarkdownContent={BasicDocs}>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
         <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
           {messages.length === 0 && (

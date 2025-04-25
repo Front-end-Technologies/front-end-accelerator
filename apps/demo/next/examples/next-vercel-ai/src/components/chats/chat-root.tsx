@@ -20,12 +20,16 @@ import {
 } from "../ui/resizable";
 
 type ChatRootParams = {
+  readonly drawerTitle?: string;
+  readonly drawerDescription?: string;
   readonly MarkdownContent?: typeof BasicDocs;
   readonly children?: React.ReactNode;
 };
 
 export default function ChatRoot({
   children,
+  drawerTitle,
+  drawerDescription,
   MarkdownContent,
 }: ChatRootParams) {
   return (
@@ -54,9 +58,9 @@ export default function ChatRoot({
                 <DrawerContent>
                   <div className="w-full overflow-y-scroll">
                     <DrawerHeader className="pb-0">
-                      <DrawerTitle>Basic</DrawerTitle>
-                      <DrawerDescription>
-                        Explanation of basic functionality within Vercel AI-sdk
+                      <DrawerTitle>{drawerTitle}</DrawerTitle>
+                      <DrawerDescription className="text-sm text-muted-foreground">
+                        {drawerDescription}
                       </DrawerDescription>
                     </DrawerHeader>
                     <div className="px-4 pb-0">
