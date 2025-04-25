@@ -1,15 +1,40 @@
+# Human in the Loop with Vercel AI SDK
 
-# User Interaction with Vercel AI SDK
+The **Human in the Loop (HITL)** example demonstrates how to involve user input during tool calls, such as scheduling a meeting, before finalizing the action.
 
-The **User Interaction** example demonstrates how to wait for user input before performing tool calls, such as scheduling a meeting.
+## Prerequisites
+
+1. Ensure the Vercel AI SDK is installed in your project. Refer to [Next.js Getting Started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router).
+
+2. Set up the necessary API keys and environment variables for the Vercel AI SDK. Check the [Providers documentation](https://sdk.vercel.ai/docs/foundations/providers-and-models) for details.
+
+3. Define tools and utility functions for handling tool calls and user confirmations. For example, tools like `parseDate`, `createDateRange`, and `createCalendarMeetingSuggestion` are used in this implementation.
+
+## Explanation
+
+This example uses the `streamText` function to process user messages and generate responses. It integrates tools for scheduling meetings and waits for user confirmation before finalizing actions. This ensures that the user has control over critical operations.
 
 ## Code Example
 
+### API Route
+
+The following API route handles requests to generate responses using HITL. It uses the `streamText` function with tools for scheduling meetings and processes user confirmations.
+
 ```typescript
 import { createCalendarMeetingSuggestionParams, tools } from "@/lib/tools";
-import { processToolCalls, CALENDAR_APPROVAL } from "@/lib/utils";
+import { processToolCalls, APPROVAL } from "@/lib/utils";
 import { google } from "@ai-sdk/google";
 import { createDataStreamResponse, streamText } from "ai";
+
+// Mock function to add a meeting to the calendar
+async function addToCalendar(meetingDetails: createCalendarMeetingSuggestionParams) {
+  console.log("Adding meeting to calendar:", meetingDetails);
+  return {
+    success: true,
+    meetingId: `meeting-${Date.now()}`,
+    details: meetingDetails,
+  };
+}
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
@@ -19,6 +44,14 @@ export async function POST(req: Request) {
     Use emojis to make the conversation more engaging.
 
     When a user refers to relative dates like "today", "tomorrow", or "next Monday", use the parseDate tool to convert them to actual dates.
+
+    For meeting requests, use the createDateRange tool to generate proper start and end times, then use createCalendarMeetingSuggestion to create the meeting.
+    Example: If a user says "Schedule a team meeting tomorrow at 2pm", you should:
+    1. Use 'parseDate' to convert "tomorrow" to an actual date
+    2. Use 'createDateRange' to create a time range from 2pm to 3pm
+    3. Use 'createCalendarMeetingSuggestion' with the resulting dates to create the meeting
+
+    If the 'createCalendarMeetingSuggestion' tool returns ${APPROVAL.NO}, tell the user you will not schedule the meeting.
   `;
 
   return createDataStreamResponse({
@@ -27,8 +60,8 @@ export async function POST(req: Request) {
         { tools, dataStream, messages },
         {
           createCalendarMeetingSuggestion: async (args) => {
-            console.log("Adding meeting to calendar:", args);
-            return CALENDAR_APPROVAL.Success;
+            await addToCalendar(args);
+            return APPROVAL.YES;
           },
         }
       );
@@ -38,10 +71,175 @@ export async function POST(req: Request) {
         system: systemMessage,
         messages: processedMessages,
         maxSteps: 10,
-        tools: { ...tools },
+        tools: tools,
       });
 
       result.mergeIntoDataStream(dataStream);
     },
   });
 }
+```
+
+### Frontend Integration
+
+The `ChatHitl` component demonstrates how to integrate HITL into a Next.js application. It uses the `useChat` hook from the Vercel AI SDK to handle API requests and display the AI-generated responses.
+
+```tsx
+"use client";
+
+import { useChat } from "@ai-sdk/react";
+import { Button, Card, Input } from "@/components/ui";
+import { Send, CircleStop } from "lucide-react";
+import { useEffect, useRef } from "react";
+import ChatEmpty from "./chat-empty";
+import ChatRoot from "./chat-root";
+import { ChatQuickActions } from "./chat-quick-action";
+import { CalendarConfirmation } from "@/components/calendar-confirmation";
+import { CalendarApproval } from "@/components/calendar-success";
+import { tools, createCalendarMeetingSuggestion } from "@/lib/tools";
+import { APPROVAL, getToolsRequiringConfirmation } from "@/lib/utils";
+
+const quickActions = [
+  {
+    section: "user-interaction",
+    label: "Schedule a team meeting",
+    value: "Schedule a meeting with the team tomorrow at 9am for our standup",
+  },
+  {
+    section: "user-interaction",
+    label: "Schedule a long meeting",
+    value: "Schedule a meeting with the team tomorrow at 2pm for 2 hours for an integration checkup",
+  },
+  {
+    section: "user-interaction",
+    label: "Schedule a meeting next week",
+    value: "Schedule a meeting next Friday at 2pm for 2 hours for a project review",
+  },
+];
+
+export function ChatHitl() {
+  const {
+    error,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    addToolResult,
+    setInput,
+    status,
+    reload,
+    stop,
+  } = useChat({ api: "/api/chat/human-in-the-loop" });
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messages.length && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  const toolsRequiringConfirmation = getToolsRequiringConfirmation(tools);
+
+  const pendingToolCallConfirmation = messages.some((m) =>
+    m.parts?.some(
+      (part) =>
+        part.type === "tool-invocation" &&
+        part.toolInvocation.state === "call" &&
+        toolsRequiringConfirmation.includes(part.toolInvocation.toolName)
+    )
+  );
+
+  return (
+    <ChatRoot>
+      <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
+        <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+          {messages.length === 0 && (
+            <div className="h-full flex items-center justify-center">
+              <ChatEmpty />
+            </div>
+          )}
+
+          {messages.map((message, i) => (
+            <div key={i} className={`flex gap-4 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div className={`rounded-lg px-4 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-gray-200"}`}>
+                {message.parts?.map((part, j) => {
+                  if (part.type === "tool-invocation") {
+                    const toolInvocation = part.toolInvocation;
+                    const toolCallId = toolInvocation.toolCallId;
+
+                    if (toolsRequiringConfirmation.includes(toolInvocation.toolName)) {
+                      if (toolInvocation.toolName === "createCalendarMeetingSuggestion") {
+                        const args = createCalendarMeetingSuggestion.parameters.parse(toolInvocation.args);
+                        return (
+                          <CalendarConfirmation
+                            key={toolCallId}
+                            title={args.title}
+                            startDate={args.startDate}
+                            endDate={args.endDate}
+                            attendees={args.attendees}
+                            description={args.description}
+                            location={args.location}
+                            toolCallId={toolCallId}
+                            onConfirm={addToolResult}
+                          />
+                        );
+                      }
+                    }
+                  }
+                  return null;
+                })}
+              </div>
+            </div>
+          ))}
+
+          {error && (
+            <div className="mt-4">
+              <p className="text-red-500">An error occurred.</p>
+              <button onClick={reload} className="text-blue-500">Retry</button>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </Card>
+
+      <ChatQuickActions quickActions={quickActions} setInput={setInput} />
+
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Input
+          disabled={pendingToolCallConfirmation}
+          value={input}
+          onChange={handleInputChange}
+          placeholder="Ask me to schedule a meeting..."
+          className="flex-1"
+        />
+        {status === "streaming" ? (
+          <Button onClick={stop}>
+            <CircleStop />
+          </Button>
+        ) : (
+          <Button type="submit">
+            <Send />
+          </Button>
+        )}
+      </form>
+    </ChatRoot>
+  );
+}
+```
+
+## Use Case
+
+This example is ideal for applications that require user confirmation before performing critical actions, such as:
+
+- Scheduling meetings
+- Approving transactions
+- Confirming sensitive operations
+
+By involving the user in the loop, you can ensure accuracy and provide a better user experience.
+
+## Quick Links
+
+- [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
+- [Providers and Models](https://sdk.vercel.ai/docs/foundations/providers-and-models)
+- [Human in the Loop Documentation](https://sdk.vercel.ai/docs/hitl)

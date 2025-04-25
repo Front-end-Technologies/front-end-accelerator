@@ -1,9 +1,24 @@
-
 # Model Context Protocol (MCP) with Vercel AI SDK
 
 The **Model Context Protocol (MCP)** example demonstrates how to use MCP for advanced tool integration and context management.
 
+## Prerequisites
+
+1. Ensure the Vercel AI SDK is installed in your project. Refer to [Next.js Getting Started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router).
+
+2. Set up the necessary API keys and environment variables for the Vercel AI SDK. Check the [Providers documentation](https://sdk.vercel.ai/docs/foundations/providers-and-models) for details.
+
+3. Install and configure the MCP server. For example, the `StdioMCPTransport` is used in this implementation to communicate with the MCP server.
+
+## Explanation
+
+This example uses the `streamText` function to process user messages and generate responses while leveraging MCP for tool integration. The MCP client provides access to tools that enhance the AI's capabilities, such as invoking external APIs or performing specific tasks.
+
 ## Code Example
+
+### API Route
+
+The following API route handles requests to generate responses using MCP. It uses the `streamText` function with the MCP client to integrate tools and manage context.
 
 ```typescript
 import { google } from "@ai-sdk/google";
@@ -48,3 +63,123 @@ export async function POST(req: Request) {
     console.error(error);
   }
 }
+```
+
+### Frontend Integration
+
+The `ChatMcp` component demonstrates how to integrate MCP into a Next.js application. It uses the `useChat` hook from the Vercel AI SDK to handle API requests and display the AI-generated responses.
+
+```tsx
+"use client";
+
+import { useChat } from "@ai-sdk/react";
+import { Button, Card, Input } from "@/components/ui";
+import { Send, CircleStop } from "lucide-react";
+import { useEffect, useRef } from "react";
+import ChatEmpty from "./chat-empty";
+import ChatRoot from "./chat-root";
+import { ChatQuickActions } from "./chat-quick-action";
+
+const quickActions = [
+  {
+    section: "mcp",
+    label: "5 Trivias about gaming",
+    value: "Give me 5 Trivias about gaming",
+  },
+  {
+    section: "mcp",
+    label: "5 Trivias about films",
+    value: "Give me 5 Trivias about films",
+  },
+  {
+    section: "mcp",
+    label: "Get to know Henry the monkey",
+    value: 'Give me details about the monkey named "Henry"',
+  },
+];
+
+export function ChatMcp() {
+  const {
+    error,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    setInput,
+    status,
+    reload,
+    stop,
+  } = useChat({ api: "/api/chat/mcp" });
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messages.length && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  return (
+    <ChatRoot>
+      <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
+        <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+          {messages.length === 0 && (
+            <div className="h-full flex items-center justify-center">
+              <ChatEmpty />
+            </div>
+          )}
+
+          {messages.map((message, i) => (
+            <div key={i} className={`flex gap-4 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div className={`rounded-lg px-4 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-gray-200"}`}>
+                {message.parts?.map((part, j) => (
+                  <div key={j}>{part.text}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {error && (
+            <div className="mt-4">
+              <p className="text-red-500">An error occurred.</p>
+              <button onClick={reload} className="text-blue-500">Retry</button>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </Card>
+
+      <ChatQuickActions quickActions={quickActions} setInput={setInput} />
+
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Input value={input} onChange={handleInputChange} placeholder="Ask me something..." className="flex-1" />
+        {status === "streaming" ? (
+          <Button onClick={stop}>
+            <CircleStop />
+          </Button>
+        ) : (
+          <Button type="submit">
+            <Send />
+          </Button>
+        )}
+      </form>
+    </ChatRoot>
+  );
+}
+```
+
+## Use Case
+
+This example is ideal for applications that require advanced tool integration and context management, such as:
+
+- Interactive chatbots with external tool support
+- AI assistants that perform specific tasks
+- Applications requiring dynamic context switching
+
+By using MCP, you can extend the AI's capabilities and provide more robust and interactive user experiences.
+
+## Quick Links
+
+- [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
+- [Providers and Models](https://sdk.vercel.ai/docs/foundations/providers-and-models)
+- [MCP Documentation](https://sdk.vercel.ai/docs/mcp)
