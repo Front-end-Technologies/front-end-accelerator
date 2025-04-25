@@ -184,9 +184,12 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <div className="flex items-center justify-between px-4 py-2">
-          <Link href="https://front-end-accelerator-t3-docs.vercel.app" target="_blank" className="flex flex-col text-sm">
+          { open && (
+            <Link href="https://front-end-accelerator-t3-docs.vercel.app" target="_blank" className="flex flex-col text-sm">
             <span>Powered by</span> <span>Frontend Accelerator</span>
           </Link>
+          )}
+          
         </div>
       </SidebarFooter>
     </Sidebar>

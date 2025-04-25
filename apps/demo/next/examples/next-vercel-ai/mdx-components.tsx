@@ -111,7 +111,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ children, ...props }) => {
       return (
         <Link
-          className="bg-purple-300 rounded-xl px-2 hover:bg-purple-500 text-black hover:text-white transition-colors duration-200"
+          className="bg-purple-300 text-nowrap rounded-xl px-2 hover:bg-purple-500 text-black hover:text-white transition-colors duration-200"
           target="_blank"
           rel="noreferrer"
           href={props.href!}
