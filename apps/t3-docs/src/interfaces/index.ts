@@ -33,7 +33,7 @@ export interface GitHubContent {
 // TODO: infer the type with nesxt auth module
 export interface GitHubSession extends Session {
   token: {
-    accessToken: string;
+    access_token: string;
   };
 }
 

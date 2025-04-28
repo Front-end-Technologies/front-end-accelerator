@@ -1,8 +1,10 @@
 import { auth } from "@/auth";
 import { GitHubSession } from "@/interfaces";
 import { githubApiURL } from "@/lib/const";
+import { AtpAgent } from "@atproto/api";
 import axios, { CreateAxiosDefaults } from "axios";
 
+// axios instance
 export const createHttp = (config?: CreateAxiosDefaults) => {
   const http = axios.create({
     baseURL: config?.baseURL || githubApiURL,
@@ -18,7 +20,7 @@ export const createHttp = (config?: CreateAxiosDefaults) => {
         ...config,
         headers: new axios.AxiosHeaders({
           ...config.headers,
-          Authorization: `Bearer ${token.accessToken}`,
+          Authorization: `Bearer ${token.access_token}`,
         }),
       };
     },
@@ -43,3 +45,12 @@ export const createHttp = (config?: CreateAxiosDefaults) => {
 
   return http;
 };
+
+// bluesky agent
+export const agent = new AtpAgent({
+  // App View URL
+  service: "https://api.bsky.app",
+  // If you were making an authenticated client, you would
+  // use the PDS URL here instead - the main one is bsky.social
+  // service: "https://bsky.social",
+});

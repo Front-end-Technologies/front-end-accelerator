@@ -1,13 +1,32 @@
 export const githubApiURL = `${process.env.NEXT_PUBLIC_GITHUB_API_URL}/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 export const githubRepoURL = `https://www.github.com/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 
-export const providers = {
-  ANTHROPIC: "anthropic",
-  GOOGLE: "google",
-  OPENAI: "openai",
-};
+export enum Frameworks {
+  ANGULAR = "angular",
+  NEXT = "next",
+  NUXT = "nuxt",
+  REACT = "react",
+  SVELTE = "svelte",
+  VUE = "vue",
+}
+
+export enum Providers {
+  ANTHROPIC = "anthropic",
+  GOOGLE = "google",
+  OPENAI = "openai",
+}
 
 export const llm = [
+  {
+    description: "Google Gemini 2.5 Pro Experimental 03-25",
+    name: "gemini-2.5-pro-exp-03-25",
+    provider: "google",
+  },
+  {
+    description: "Google Gemini 2.0 Flash 001",
+    name: "gemini-2.0-flash-001",
+    provider: "google",
+  },
   {
     description: "Google Gemini 1.5 Flash (Latest)",
     name: "gemini-1.5-flash-latest",
