@@ -24,7 +24,6 @@ export function AiResponseDialog({
 
   return (
     <Dialog onOpenChange={onOpenChange} open={!!aiOutput}>
-      {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent className="max-h-[90vh] min-w-1/2 overflow-auto bg-sky-100 leading-normal dark:bg-sky-900">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-4">

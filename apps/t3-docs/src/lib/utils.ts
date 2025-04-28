@@ -4,7 +4,7 @@ import { openai } from "@ai-sdk/openai";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { Providers } from "./const";
+import { Provider } from "./const";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -48,11 +48,11 @@ export async function handleAIStream(
 
 export const getAiModel = (provider: string, name: string) => {
   switch (provider) {
-    case Providers.ANTHROPIC:
+    case Provider.ANTHROPIC:
       return anthropic(name);
-    case Providers.GOOGLE:
+    case Provider.GOOGLE:
       return google(name);
-    case Providers.OPENAI:
+    case Provider.OPENAI:
       return openai(name);
     // Add more cases here for other providers
     default:

@@ -1,5 +1,6 @@
 "use client";
 
+import { Framework } from "@/lib/const";
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -15,7 +16,7 @@ import {
 } from "./ui/select";
 
 export function FoldersSelect() {
-  const { framework } = useParams() as { framework: string };
+  const { framework } = useParams() as { framework: Framework };
   const router = useRouter();
 
   const { data: folders } = api.gitHub.getFolders.useQuery();
@@ -36,7 +37,7 @@ export function FoldersSelect() {
             {folders?.map((folder) => (
               <SelectItem key={folder.name} value={folder.name}>
                 <div className="flex items-center gap-3">
-                  <FrameworkLogo framework={folder.name} />
+                  <FrameworkLogo framework={folder.name as Framework} />
                   {folder.name}
                 </div>
               </SelectItem>

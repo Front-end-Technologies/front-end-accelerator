@@ -1,6 +1,7 @@
 "use client";
 
 import { AiLLMSelect } from "@/components/ai-llm-select";
+import { AiRoleSelect } from "@/components/ai-role-select";
 import { FoldersSelect } from "@/components/folders-select";
 import { ProjectSelect } from "@/components/project-select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,8 +18,8 @@ import {
   CircleX,
   ExternalLink,
   LogOut,
+  MessageCircleCode,
   Settings,
-  SparklesIcon,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -29,10 +30,11 @@ export function Header() {
   const toggleAIChat = useThemeStore((state) => state.toggleAIChat);
   const aiChatIsOpen = useThemeStore((state) => state.ai.chat.open);
   const { framework, name, type } = useParams();
+
   const { data: session } = useSession();
 
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="bg-background sticky top-0 z-50 flex items-center justify-between p-4">
       <div className="flex grow items-center space-x-4">
         <SidebarTrigger className="h-8 w-8" variant="outline" />
         {framework && (
@@ -46,6 +48,26 @@ export function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
+        <Button
+          aria-label={aiChatIsOpen ? "Close AI Assistant" : "Open AI Assistant"}
+          onClick={toggleAIChat}
+          size="icon"
+          variant="outline"
+        >
+          {aiChatIsOpen ? (
+            <>
+              <CircleX />
+            </>
+          ) : (
+            <>
+              <MessageCircleCode />
+            </>
+          )}
+        </Button>
+        <AiLLMSelect />
+        <span>as</span>
+        <AiRoleSelect />
+
         {framework && name && (
           <>
             <Button
@@ -55,35 +77,15 @@ export function Header() {
                   "_blank",
                 );
               }}
+              size="icon"
               variant="outline"
             >
               <ExternalLink />
-              Open in GitHub
-            </Button>
-            <Button
-              aria-label={aiChatIsOpen ? "Close AI Chat" : "Open AI Chat"}
-              onClick={toggleAIChat}
-              variant="outline"
-            >
-              {aiChatIsOpen ? (
-                <>
-                  <CircleX />
-                  <span>Close AI Chat</span>
-                </>
-              ) : (
-                <>
-                  <SparklesIcon />
-                  <span>Open AI Chat</span>
-                </>
-              )}
             </Button>
           </>
         )}
 
-        <AiLLMSelect />
-
         <p>{session?.user?.name}</p>
-
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>

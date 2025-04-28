@@ -1,5 +1,6 @@
 "use client";
 
+import { Framework } from "@/lib/const";
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -16,7 +17,7 @@ import {
 
 export function ProjectSelect() {
   const { framework, name } = useParams() as {
-    framework: string;
+    framework: Framework;
     name: string;
     type: string;
   };

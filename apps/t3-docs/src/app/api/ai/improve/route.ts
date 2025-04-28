@@ -18,8 +18,8 @@ export async function POST(req: Request) {
 
     const result = streamText({
       model: getAiModel(llm.provider, llm.name),
-      prompt: `You are an expert in front-end development with deep knowledge of all front-end frameworks. Your task is to improve the following code snippet to make it more readable, maintainable, and aligned with best practices. Focus on clarity, simplicity, and modern conventions. The framework being used is: ${framework.input}. Here is the code snippet:\n\n${code}\n\nProvide only the improved code snippet as the response. Do not include any explanations or additional comments. Do not add anything else besides the code. Don't include markdown or any other formatting. Just provive the code as text.
-      Only return the improved code snippet.`,
+      prompt: `Improve the following code snippet \n\n${code}`,
+      system: `You are code generator with deep knowledge of ${framework.input}. You generate code only, that is improved, more readable, maintainable, and aligned with best practices. Do not output any explanation, comments or markup. You add comments emphasizing the improvements made.`,
     });
 
     return result.toTextStreamResponse();

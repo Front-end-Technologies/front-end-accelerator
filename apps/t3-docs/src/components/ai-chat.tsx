@@ -5,6 +5,7 @@ import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef } from "react";
 
+import { AiCoach } from "./ai-coach";
 import { MarkdownContent } from "./markdown-content";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -12,9 +13,8 @@ import { Input } from "./ui/input";
 
 export function AIChat() {
   const { data: session } = useSession();
-
   const llm = useThemeStore((state) => state.ai.llm);
-  const role = useThemeStore((state) => state.ai.role);
+
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
@@ -41,24 +41,16 @@ export function AIChat() {
   }, [messages]);
 
   return (
-    <div className="bg-sidebar flex h-full flex-col space-y-4 rounded-xl border">
+    <div
+      className="bg-sidebar flex h-full flex-col space-y-4 overflow-y-auto rounded-xl border"
+      style={{ height: "calc(100vh - 5rem)" }}
+    >
       <div
         className="scrollbar-hide flex h-full flex-col space-y-4 overflow-y-auto"
         ref={messagesRef}
       >
         <div className="bg-code sticky top-0 z-50 flex items-center rounded-t-xl p-4">
-          <div className="flex grow items-center space-x-4">
-            <Avatar>
-              <AvatarImage src="/openai-logo.svg" />
-              <AvatarFallback>AI</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-xs font-semibold">{role}</p>
-              <p className="text-xs">
-                {llm.provider} {llm.name}
-              </p>
-            </div>
-          </div>
+          <AiCoach />
         </div>
 
         {messages.map(({ content, id, role }) => (

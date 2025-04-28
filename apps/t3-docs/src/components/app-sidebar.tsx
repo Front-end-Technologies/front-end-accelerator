@@ -10,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Framework } from "@/lib/const";
 import { api } from "@/trpc/react";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
@@ -18,29 +19,27 @@ import { useParams } from "next/navigation";
 import { FoldersSelect } from "./folders-select";
 import { ThemeDropdown } from "./theme-dropdown";
 
-export const FrameworkLogo = ({ framework }: { framework: string }) => {
-  const logos: Record<string, string> = {
+export const FrameworkLogo = ({ framework }: { framework: Framework }) => {
+  const logos = {
     angular: "/angular-logo.svg",
     next: "/next-logo.svg",
     nuxt: "/nuxt-logo.svg",
     react: "/react-logo.svg",
   };
 
-  if (!logos[framework]) return null;
-
   return (
     <picture>
       <img
         alt={`${framework} logo`}
         className="h-6 w-6"
-        src={logos[framework]}
+        src={logos[framework as keyof typeof logos]}
       />
     </picture>
   );
 };
 
 export function AppSidebar() {
-  const { framework } = useParams<{ framework: string }>();
+  const { framework } = useParams<{ framework: Framework }>();
 
   const { data: folders } = api.gitHub.getFolders.useQuery();
 
@@ -74,8 +73,10 @@ export function AppSidebar() {
             </div>
 
             <p className="flex flex-col space-y-4 text-xs leading-5">
-              Speed up your Front-end development with pre-made building blocks
-              in React, Next, Angular, Vue, Nuxt, Svelte, SvelteKit,...
+              Speed up your Front-end development with our AI-infused cookbooks
+              and examples. Explore the latest trends and best practices to
+              enhance your skills and stay up-to-date with the ever-evolving
+              world of front-end development.
             </p>
           </SidebarGroupContent>
         </SidebarGroup>

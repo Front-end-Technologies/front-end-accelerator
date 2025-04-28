@@ -8,6 +8,7 @@ import { type Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 
 import { Header } from "./header";
+import Main from "./main";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -40,7 +41,7 @@ export default async function RootLayout({ children }: Readonly<Props>) {
             <AppSidebar />
             <SidebarInset>
               <Header />
-              <div className="px-4">{children}</div>
+              <Main>{children}</Main>
             </SidebarInset>
           </Providers>
         ) : (

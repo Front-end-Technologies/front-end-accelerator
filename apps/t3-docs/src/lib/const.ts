@@ -1,7 +1,6 @@
-export const githubApiURL = `${process.env.NEXT_PUBLIC_GITHUB_API_URL}/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 export const githubRepoURL = `https://www.github.com/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 
-export enum Frameworks {
+export enum Framework {
   ANGULAR = "angular",
   NEXT = "next",
   NUXT = "nuxt",
@@ -10,10 +9,15 @@ export enum Frameworks {
   VUE = "vue",
 }
 
-export enum Providers {
+export enum Provider {
   ANTHROPIC = "anthropic",
   GOOGLE = "google",
   OPENAI = "openai",
+}
+
+export enum Type {
+  COOKBOOK = "cookbook",
+  EXAMPLES = "examples",
 }
 
 export const llm = [
