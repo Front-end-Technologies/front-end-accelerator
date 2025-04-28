@@ -18,7 +18,7 @@ This example uses the `streamText` function to process user messages and generat
 
 ### API Route
 
-The following API route handles requests to generate responses using HITL. It uses the `streamText` function with tools for scheduling meetings and processes user confirmations.
+The following API route handles requests to generate responses using "Human in the loop". It uses the `streamText` function with tools for scheduling meetings and processes user confirmations.
 
 ```typescript
 import { createCalendarMeetingSuggestionParams, tools } from "@/lib/tools";
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
 
 ### Frontend Integration
 
-The `ChatHitl` component demonstrates how to integrate HITL into a Next.js application. It uses the `useChat` hook from the Vercel AI SDK to handle API requests and display the AI-generated responses.
+The `ChatHitl` component demonstrates how to integrate "Human in the loop" into a Next.js application. It uses the `useChat` hook from the Vercel AI SDK to handle API requests and display the AI-generated responses.
 
 ```tsx
 "use client";
@@ -242,4 +242,4 @@ By involving the user in the loop, you can ensure accuracy and provide a better 
 
 - [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
 - [Providers and Models](https://sdk.vercel.ai/docs/foundations/providers-and-models)
-- [Human in the Loop Documentation](https://sdk.vercel.ai/docs/hitl)
+- [Human in the Loop Documentation](https://sdk.vercel.ai/cookbook/next/human-in-the-loop)

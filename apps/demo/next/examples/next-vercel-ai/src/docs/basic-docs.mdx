@@ -3,7 +3,8 @@
 The **Basic** example demonstrates how to use the Vercel AI SDK to create a simple chatbot.
 
 ## Prerequisites
-1. Have the Vercel AI SDK installed in your project. Check out [Nextjs Getting started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router).
+
+1. Have the Vercel AI SDK installed in your project. Check out [Next.js Getting Started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router).
 
 2. Have the necessary API keys and environment variables set up for the Vercel AI SDK to work properly.
 
@@ -11,10 +12,14 @@ The **Basic** example demonstrates how to use the Vercel AI SDK to create a simp
 
 ## Explanation
 
-This example uses the `streamText` function to process user messages and generate responses. <br/>
+This example uses the `streamText` function to process user messages and generate responses.  
 By using the `streamText` function, you can create a streaming response that updates the UI in real-time as the AI generates text.
 
 ## Code Example
+
+### API Route
+
+The following API route handles requests to generate responses. It uses the `streamText` function to process user messages and generate responses in real-time.
 
 ```typescript
 import { google } from "@ai-sdk/google";
@@ -32,7 +37,152 @@ export async function POST(req: Request) {
     model: google("gemini-2.0-flash-001"),
     system: systemMessage,
     messages: messages,
+    onError: (error) => {
+      console.error("Error:", error);
+    },
   });
 
   return result.toDataStreamResponse();
 }
+```
+
+### Frontend Integration
+
+The `ChatBasic` component demonstrates how to integrate the basic functionality of the Vercel AI SDK into a Next.js application. It uses the `useChat` hook to handle API requests and display the AI-generated responses.
+
+```tsx
+"use client";
+
+import { useChat } from "@ai-sdk/react";
+import { Button, Card, Input } from "@/components/ui";
+import { Send, CircleStop } from "lucide-react";
+import { useEffect, useRef } from "react";
+import ChatEmpty from "./chat-empty";
+import ChatRoot from "./chat-root";
+import { ChatQuickActions } from "./chat-quick-action";
+import { Markdown } from "@/components/markdown";
+
+const quickActions = [
+  {
+    section: "basic",
+    label: "Get to know Jack Sparrow",
+    value: "Tell me something about Jack Sparrow",
+  },
+];
+
+export function ChatBasic() {
+  const {
+    error,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    setInput,
+    status,
+    reload,
+    stop,
+  } = useChat({ api: "/api/chat/basic" });
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messages.length && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  return (
+    <ChatRoot drawerTitle="Basic" drawerDescription="Explanation of basic functionality within Vercel AI-sdk">
+      <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
+        <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+          {messages.length === 0 && (
+            <div className="h-full flex items-center justify-center">
+              <ChatEmpty />
+            </div>
+          )}
+
+          {messages.map((message, i) => (
+            <div
+              key={"message-" + i}
+              className={`flex gap-2 md:gap-4 ${
+                message.role === "user"
+                  ? "justify-end"
+                  : "justify-start md:max-w-[80%] flex-row-reverse"
+              }`}
+            >
+              <div
+                className={`rounded-lg px-4 ${
+                  message.role === "user"
+                    ? "bg-primary text-primary-foreground md:max-w-[80%] py-2"
+                    : "w-full"
+                }`}
+              >
+                {message.parts
+                  .filter((part) => part.type === "text")
+                  .map((part, j) => (
+                    <div key={"message" + i + "-" + j}>
+                      <Markdown>{part.text}</Markdown>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
+
+          {status === "submitted" && (
+            <div className="flex gap-4 justify-start max-w-[80%] flex-row-reverse">
+              <div className="flex items-center rounded-lg px-4 w-full animate-pulse">
+                Thinking...
+              </div>
+            </div>
+          )}
+
+          {error && (
+            <div className="mt-4">
+              <div className="text-red-500">An error occurred.</div>
+              <button
+                type="button"
+                className="px-4 py-2 mt-4 text-blue-500 border border-blue-500 rounded-md"
+                onClick={() => reload()}
+              >
+                Retry
+              </button>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </Card>
+
+      <ChatQuickActions quickActions={quickActions} setInput={setInput} />
+
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Input
+          value={input}
+          onChange={handleInputChange}
+          placeholder="Ask me something..."
+          className="flex-1 h-full"
+        />
+
+        {status === "submitted" || status === "streaming" ? (
+          <Button onClick={stop} size={"lg"} className="bg-purple-300">
+            <CircleStop className="h-4 w-4" />
+          </Button>
+        ) : (
+          <Button type="submit" size={"lg"}>
+            <Send className="h-4 w-4" />
+          </Button>
+        )}
+      </form>
+    </ChatRoot>
+  );
+}
+```
+
+## Use Case
+
+This example is ideal for creating simple chatbots or assistants that provide real-time responses. It demonstrates the basic functionality of the Vercel AI SDK and how to integrate it into a Next.js application.
+
+## Quick Links
+
+- [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
+- [Providers and Models](https://sdk.vercel.ai/docs/foundations/providers-and-models)
+- [StreamText Function](https://sdk.vercel.ai/docs/reference/ai-sdk-core/stream-text)

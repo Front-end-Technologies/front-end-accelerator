@@ -141,7 +141,7 @@ export function AppSidebar() {
               </SidebarMenuItem>
 
               {/* Database integrations */}
-              <SidebarMenuItem>
+              {/* <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Connect AI to Data Sources">
                   <Link href="/sections/database-integrations">
                     <div className="flex items-center gap-2">
@@ -150,10 +150,10 @@ export function AppSidebar() {
                     </div>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
 
               {/* Images and files */}
-              <SidebarMenuItem>
+              {/* <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Media Processing with AI">
                   <Link href="/sections/images-files">
                     <div className="flex items-center gap-2">
@@ -162,10 +162,10 @@ export function AppSidebar() {
                     </div>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
 
               {/* Embeddings */}
-              <SidebarMenuItem>
+              {/* <SidebarMenuItem>
                 <SidebarMenuButton
                   asChild
                   tooltip="Vector Embeddings and Semantic Search"
@@ -177,7 +177,7 @@ export function AppSidebar() {
                     </div>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
