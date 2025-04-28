@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Frameworks } from "@/lib/const";
 import { handleAIStream } from "@/lib/utils";
 import { api } from "@/trpc/react";
+import { AppBskyEmbedExternal } from "@atproto/api";
 import { Link, Sparkle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -23,7 +24,7 @@ export default function Detail() {
 
   return (
     <div
-      className="flex gap-8 overflow-auto p-4"
+      className="flex gap-8 overflow-auto p-4 font-sans"
       style={{ height: "calc(100vh - 5rem)" }}
     >
       <div
@@ -39,16 +40,18 @@ export default function Detail() {
               <div className="flex flex-col gap-8">
                 <div className="flex flex-row items-start">
                   <div>
-                    <h5>
-                      <a
-                        className="font-bold hover:underline"
-                        href={post.record.embed?.external?.uri}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {post.record.embed?.external?.title}
-                      </a>
-                    </h5>
+                    {AppBskyEmbedExternal.isView(post.embed) && (
+                      <h5>
+                        <a
+                          className="font-bold hover:underline"
+                          href={post.embed.external.uri}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {post.embed.external.title}
+                        </a>
+                      </h5>
+                    )}
                     <p>
                       @{post.author.handle} -{" "}
                       {new Date(`${post.record.createdAt}`).toLocaleDateString(
@@ -64,18 +67,26 @@ export default function Detail() {
 
               <div className="flex items-center justify-between gap-4">
                 <picture>
-                  <img
-                    alt={post.author.handle}
-                    className="h-8 w-8 rounded-full"
-                    src={`${framework}-logo.svg`}
-                  />
+                  <a
+                    href={`https://bsky.app/profile/${post.author.handle}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <picture>
+                      <img
+                        alt={post.author.handle}
+                        className="h-8 w-8 rounded-full"
+                        src={`${framework}-logo.svg`}
+                      />
+                    </picture>
+                  </a>
                 </picture>
 
                 <div className="flex justify-between gap-4">
-                  {post.record.embed?.external?.uri && (
+                  {AppBskyEmbedExternal.isView(post.embed) && (
                     <a
                       className="flex items-center"
-                      href={post.record.embed.external.uri}
+                      href={post.embed.external.uri}
                       rel="noopener noreferrer"
                       target="_blank"
                     >

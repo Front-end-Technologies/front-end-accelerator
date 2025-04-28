@@ -23,7 +23,7 @@ export const blueskyRouter = createTRPCRouter({
     .query(async ({ input }) => {
       const feed = await agent.getAuthorFeed({
         actor: blueSkyHandles[input.framework],
-        filter: "posts_no_replies",
+        filter: "posts_and_author_threads",
       });
 
       return feed.data.feed;
