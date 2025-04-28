@@ -17,7 +17,10 @@ export default function Home() {
   const { data } = api.gitHub.getMembers.useQuery();
 
   return (
-    <div className="container mx-auto flex flex-col gap-8">
+    <div
+      className="scrollbar-hide flex flex-col gap-8 overflow-auto"
+      style={{ height: "calc(100vh - 5rem)" }}
+    >
       <h1 className="mb-4 text-4xl font-bold">Overview</h1>
       <p>
         Our mission is to accelerate frontend development by offering a robust

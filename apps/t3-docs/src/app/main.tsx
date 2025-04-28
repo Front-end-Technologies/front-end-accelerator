@@ -16,7 +16,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
       direction="horizontal"
       style={{ width: open ? `calc(100vw - 16rem)` : `100vw` }}
     >
-      <Panel>{children}</Panel>
+      <Panel defaultSize={100}>{children}</Panel>
       {ai.chat.open && (
         <>
           <PanelResizeHandle />

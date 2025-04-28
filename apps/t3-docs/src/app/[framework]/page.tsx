@@ -28,7 +28,7 @@ export default function Detail() {
     <PanelGroup className="gap-2" direction="horizontal">
       <Panel defaultSize={30} maxSize={50} minSize={30}>
         <div
-          className={cn("overflow-auto", {
+          className={cn("scrollbar-hide overflow-auto", {
             "flex flex-col gap-4": detailToggle.open,
             "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4":
               !detailToggle.open,
