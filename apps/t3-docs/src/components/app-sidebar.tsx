@@ -41,7 +41,7 @@ export const FrameworkLogo = ({ framework }: { framework: Framework }) => {
 export function AppSidebar() {
   const { framework } = useParams<{ framework: Framework }>();
 
-  const { data: folders } = api.gitHub.getFolders.useQuery();
+  const [folders] = api.gitHub.getFolders.useSuspenseQuery();
 
   const {
     data: projects,

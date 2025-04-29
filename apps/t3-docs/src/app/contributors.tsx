@@ -1,16 +1,8 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { api } from "@/trpc/react";
-import { BuildingIcon, MapIcon } from "lucide-react";
 
 export default function Contributors() {
   const [data] = api.gitHub.getMembers.useSuspenseQuery();
@@ -26,43 +18,27 @@ export default function Contributors() {
                 <AvatarFallback>UI</AvatarFallback>
               </Avatar>
               <div className="flex flex-col gap-2">
-                <span>{member.login || "/"}</span>
-                {member.user.name && (
-                  <a
-                    className="text-xs font-normal italic"
-                    href={`https://github.com/${member.login}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    @{member.user.name}
-                  </a>
-                )}
+                <a
+                  className="text-sm font-bold"
+                  href={`https://github.com/${member.login}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {`@${member.login || "/"}`}
+                </a>
+
+                <div className="text-xs font-normal italic">
+                  {[member.user.name, member.user.location, member.user.company]
+                    .filter(Boolean)
+                    .join(", ")}
+                </div>
               </div>
             </CardTitle>
           </CardHeader>
 
           <CardContent>
-            {member.user.bio && (
-              <CardDescription className="text-xs italic">
-                {member.user.bio}
-              </CardDescription>
-            )}
+            {member.user.bio && <p className="text-xs">{member.user.bio}</p>}
           </CardContent>
-
-          <CardFooter className="flex flex-wrap justify-end gap-8 text-sm">
-            {member.user.location && (
-              <span className="flex items-center gap-2">
-                <MapIcon />
-                {member.user.location}
-              </span>
-            )}
-            {member.user.company && (
-              <span className="flex items-center gap-2">
-                <BuildingIcon />
-                {member.user.company}
-              </span>
-            )}
-          </CardFooter>
         </Card>
       ))}
     </div>

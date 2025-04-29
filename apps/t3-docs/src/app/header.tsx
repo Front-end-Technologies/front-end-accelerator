@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { githubRepoURL } from "@/lib/const";
+import { Framework, githubRepoURL } from "@/lib/const";
 import {
   CircleX,
   ExternalLink,
@@ -22,14 +22,22 @@ import {
   Settings,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { useThemeStore } from "./store";
 
+interface Params {
+  [key: string]: Framework | string;
+  framework: Framework;
+  name: string;
+  type: string;
+}
+
 export function Header() {
   const toggleAIChat = useThemeStore((state) => state.toggleAIChat);
   const aiChatIsOpen = useThemeStore((state) => state.ai.chat.open);
-  const { framework, name, type } = useParams();
+  const { framework, name, type } = useParams<Params>();
 
   const { data: session } = useSession();
 
@@ -48,44 +56,30 @@ export function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
-        <Button
-          aria-label={aiChatIsOpen ? "Close AI Assistant" : "Open AI Assistant"}
-          onClick={toggleAIChat}
-          size="icon"
-          variant="outline"
-        >
-          {aiChatIsOpen ? (
-            <>
-              <CircleX />
-            </>
-          ) : (
-            <>
-              <MessageCircleCode />
-            </>
-          )}
+        <Button onClick={toggleAIChat} size="icon" variant="outline">
+          {aiChatIsOpen ? <CircleX /> : <MessageCircleCode />}
         </Button>
         <AiLLMSelect />
         <span>as</span>
         <AiRoleSelect />
 
         {framework && name && (
-          <>
-            <Button
-              onClick={() => {
-                window.open(
-                  `${githubRepoURL}/tree/main/apps/demo/${framework}/${type}/${name}`,
-                  "_blank",
-                );
-              }}
-              size="icon"
-              variant="outline"
-            >
-              <ExternalLink />
-            </Button>
-          </>
+          <Button
+            onClick={() => {
+              window.open(
+                `${githubRepoURL}/tree/main/apps/demo/${framework}/${type}/${name}`,
+                "_blank",
+              );
+            }}
+            size="icon"
+            variant="outline"
+          >
+            <ExternalLink />
+          </Button>
         )}
 
-        <p>{session?.user?.name}</p>
+        <span>{session?.user?.name}</span>
+
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
@@ -99,13 +93,15 @@ export function Header() {
           <DropdownMenuContent className="mr-4">
             <DropdownMenuItem>
               <Button
+                asChild
                 className="flex space-x-2"
-                onClick={() => signOut()}
                 type="submit"
                 variant="ghost"
               >
-                <Settings />
-                Settings
+                <Link href="/settings">
+                  <Settings />
+                  Settings
+                </Link>
               </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>

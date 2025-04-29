@@ -1,5 +1,5 @@
 import { Footer } from "@/components/footer";
-import { api, HydrateClient } from "@/trpc/server";
+import { api } from "@/trpc/server";
 
 import Contributors from "./contributors";
 
@@ -24,9 +24,7 @@ export default async function Home() {
         encouraged to join us!
       </p>
 
-      <HydrateClient>
-        <Contributors />
-      </HydrateClient>
+      <Contributors />
 
       <div className="my-16">
         <Footer />

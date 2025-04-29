@@ -42,8 +42,8 @@ function WebIDE() {
   const { framework, name, type } = useParams<Params>();
   const { theme } = useTheme();
 
-  const ai = useThemeStore((state) => state.ai);
   const role = useThemeStore((state) => state.ai.role);
+  const ai = useThemeStore((state) => state.ai);
 
   const [webcontainerFilePath, setWebContainerFilePath] = useState("");
   const [selectedCode, setSelectedCode] = useState("");

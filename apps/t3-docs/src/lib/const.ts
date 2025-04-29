@@ -22,67 +22,67 @@ export enum Type {
 
 export const llm = [
   {
-    description: "Google Gemini 2.5 Pro Experimental 03-25",
+    description: "Best for complex reasoning and advanced problem-solving.",
     name: "gemini-2.5-pro-exp-03-25",
     provider: "google",
   },
   {
-    description: "Google Gemini 2.0 Flash 001",
+    description: "Ideal for real-time chatbots and live support.",
     name: "gemini-2.0-flash-001",
     provider: "google",
   },
   {
-    description: "Google Gemini 1.5 Flash (Latest)",
+    description: "Great for summarization, Q&A, and content drafting.",
     name: "gemini-1.5-flash-latest",
     provider: "google",
   },
   {
-    description: "Google Gemini 1.5 Pro (Latest)",
+    description: "Reliable for technical writing and code generation.",
     name: "gemini-1.5-pro-latest",
     provider: "google",
   },
   {
-    description: "OpenAI GPT-3 Mini",
+    description: "Suited for lightweight mobile and embedded apps.",
     name: "o3-mini",
     provider: "openai",
   },
   {
-    description: "OpenAI GPT-4 Mini",
+    description: "Efficient for quick prototyping and low-latency tasks.",
     name: "o4-mini",
     provider: "openai",
   },
   {
-    description: "OpenAI GPT-4.1",
+    description: "Excels at advanced reasoning and content creation.",
     name: "gpt-4.1",
     provider: "openai",
   },
   {
-    description: "OpenAI GPT-4.1 Mini",
+    description: "Faster for scalable deployments with moderate complexity.",
     name: "gpt-4.1-mini",
     provider: "openai",
   },
   {
-    description: "OpenAI GPT-4.1 Nano",
+    description: "Best for IoT and edge computing with minimal resources.",
     name: "gpt-4.1-nano",
     provider: "openai",
   },
   {
-    description: "OpenAI GPT-4o Mini",
+    description: "Optimized for domain-specific chatbots.",
     name: "gpt-4o-mini",
     provider: "openai",
   },
   {
-    description: "Anthropic Claude 3.5 Haiku (Latest)",
+    description: "Great for brainstorming and creative writing.",
     name: "claude-3-5-haiku-latest",
     provider: "anthropic",
   },
   {
-    description: "Anthropic Claude 3.5 Sonnet (Latest)",
+    description: "Best for structured outputs and workflow automation.",
     name: "claude-3-5-sonnet-latest",
     provider: "anthropic",
   },
   {
-    description: "Anthropic Claude 3 Opus (Latest)",
+    description: "Robust for enterprise and high-volume content generation.",
     name: "claude-3-opus-latest",
     provider: "anthropic",
   },
