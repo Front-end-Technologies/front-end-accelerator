@@ -86,13 +86,12 @@ export function AiRoleSelect() {
           >
             Gen-Z
           </DropdownMenuCheckboxItem>
+
           <DropdownMenuCheckboxItem
-            checked={slang === "With diagrams"}
-            onCheckedChange={(checked) =>
-              checked && setAiSlang("With diagrams")
-            }
+            checked={slang === "Emoji"}
+            onCheckedChange={(checked) => checked && setAiSlang("Emoji")}
           >
-            With diagrams
+            Emoji
           </DropdownMenuCheckboxItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

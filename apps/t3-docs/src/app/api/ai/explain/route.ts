@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const result = streamText({
       model: getAiModel(llm.provider, llm.name),
       prompt: `Explain the following code snippet \n\n${code}`,
-      system: `You are a helpful expert in front-end development with deep knowledge of ${framework}. You explain like a ${role} with a ${slang} slang. Your output should be a summary, key concepts, and best practices.`,
+      system: `You are a helpful expert in front-end development with deep knowledge of ${framework}. You explain like a ${role} with a ${slang} slang. Your outputs are a visual diagram, key concepts, best practices, and a summary.`,
     });
 
     return result.toTextStreamResponse();

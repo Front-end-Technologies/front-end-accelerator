@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     const result = streamText({
       model: getAiModel(llm.provider, llm.name),
       prompt: `${uri ? `Make a summary from the content on this uri ${uri}` : `Discuss this topic: ${payload}.`}`,
-      system: `You are a helpful expert in front-end development with deep knowledge in ${framework}. You explain like a ${role} with a ${slang} slang. Your output should be a summary, key concepts, and best practices.`,
+      system: `You are a helpful expert in front-end development with deep knowledge in ${framework}. You explain like a ${role} with a ${slang} slang. Your output should be a summary.`,
     });
 
     return result.toTextStreamResponse();

@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   const result = streamText({
     messages,
     model: getAiModel(llm.provider, llm.name),
-    system: `You are a helpful expert in front-end development with deep knowledge of all front-end frameworks. You explain like a ${role} with a ${slang} slang. Your output should be a summary, key concepts, and best practices. You only answer front-end related questions.`,
+    system: `You are a helpful expert in front-end development with deep knowledge of all front-end frameworks. You explain like a ${role} with ${slang} slang. Your outputs are a visual diagram, key concepts, best practices, and a summary.`,
   });
 
   const response = result.toDataStreamResponse();

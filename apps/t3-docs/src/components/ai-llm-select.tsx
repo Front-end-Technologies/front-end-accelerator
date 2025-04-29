@@ -51,9 +51,12 @@ export function AiLLMSelect() {
                 .map((model) => (
                   <DropdownMenuCheckboxItem
                     checked={currentLLM.name === model.name}
-                    className={cn("flex flex-col items-start justify-center", {
-                      "bg-muted": currentLLM.name === model.name,
-                    })}
+                    className={cn(
+                      "flex flex-col items-start justify-center gap-1",
+                      {
+                        "bg-muted": currentLLM.name === model.name,
+                      },
+                    )}
                     key={model.name}
                     onCheckedChange={() => setAiLLM(model)}
                   >
