@@ -64,9 +64,7 @@ export default function Detail() {
                       </p>
                     </div>
                   </div>
-                  <div>
-                    <p>{`${post.record.text}`}</p>
-                  </div>
+                  <p>{`${post.record.text}`}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4">
