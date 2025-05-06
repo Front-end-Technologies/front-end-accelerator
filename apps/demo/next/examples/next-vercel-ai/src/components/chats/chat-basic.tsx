@@ -57,7 +57,7 @@ export function ChatBasic() {
 
           {messages.map((message, i) => (
             <div
-              key={"message-" + i}
+              key={`"message-${message.id}`}
               className={`flex gap-2 md:gap-4 ${
                 message.role === "user"
                   ? "justify-end"
@@ -75,7 +75,7 @@ export function ChatBasic() {
                   .filter((part) => part.type === "text")
                   .map((part, j) => {
                     return (
-                      <div key={"message" + i + "-" + j}>
+                      <div key={`message-${message.id}-${j}`}>
                         <Markdown>{part.text}</Markdown>
                       </div>
                     );

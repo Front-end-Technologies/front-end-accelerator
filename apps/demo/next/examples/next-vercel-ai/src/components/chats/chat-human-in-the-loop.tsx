@@ -86,7 +86,7 @@ export function ChatHitl() {
 
           {messages.map((message, i) => (
             <div
-              key={i}
+              key={message.id}
               className={`flex gap-4 ${
                 message.role === "user"
                   ? "justify-end"
@@ -104,7 +104,7 @@ export function ChatHitl() {
                   switch (part.type) {
                     case "text":
                       return (
-                        <div key={j}>
+                        <div key={`message-${message.id}-${j}`}>
                           <Markdown>{part.text}</Markdown>
                         </div>
                       );

@@ -63,7 +63,7 @@ export function ChatMcp() {
 
           {messages.map((message, i) => (
             <div
-              key={i}
+              key={message.id}
               className={`flex gap-4 ${
                 message.role === "user"
                   ? "justify-end"

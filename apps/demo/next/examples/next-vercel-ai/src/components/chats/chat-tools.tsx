@@ -71,7 +71,7 @@ export function ChatTools() {
 
           {messages.map((message, i) => (
             <div
-              key={i}
+              key={message.id}
               className={`flex gap-4 ${
                 message.role === "user"
                   ? "justify-end"
@@ -88,14 +88,14 @@ export function ChatTools() {
                 {message.parts.map((part, index) => {
                   switch (part.type) {
                     case "text":
-                      return <Markdown key={index}>{part.text}</Markdown>;
+                      return <Markdown key={`${message.id}-${index}`}>{part.text}</Markdown>;
                     case "tool-invocation": {
                       switch (part.toolInvocation.toolName) {
                         case "askForConfirmation": {
                           switch (part.toolInvocation.state) {
                             case "call":
                               return (
-                                <div key={index} className="text-gray-500">
+                                <div key={`${message.id}-${index}`} className="text-gray-500">
                                   {part.toolInvocation.args.message}
                                   <div className="flex gap-2 my-2">
                                     <Button
@@ -127,7 +127,7 @@ export function ChatTools() {
                               );
                             case "result":
                               return (
-                                <div key={index} className="text-gray-500 my-4">
+                                <div key={`${message.id}-${index}`} className="text-gray-500 my-4">
                                   Location access allowed
                                 </div>
                               );
@@ -139,13 +139,13 @@ export function ChatTools() {
                           switch (part.toolInvocation.state) {
                             case "call":
                               return (
-                                <div key={index} className="text-gray-500">
+                                <div key={`${message.id}-${index}`} className="text-gray-500">
                                   Getting location...
                                 </div>
                               );
                             case "result":
                               return (
-                                <div key={index} className="text-gray-500 my-4">
+                                <div key={`${message.id}-${index}`} className="text-gray-500 my-4">
                                   Location: {part.toolInvocation.result}
                                 </div>
                               );

@@ -69,7 +69,7 @@ export function CalendarConfirmation({
             <Users className="h-4 w-4 mt-0.5" />
             <div className="flex flex-col">
               {attendees.map((attendee, i) => (
-                <span key={i}>{attendee}</span>
+                <span key={attendee}>{attendee}</span>
               ))}
             </div>
           </div>
