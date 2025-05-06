@@ -1,9 +1,5 @@
 import { google } from "@ai-sdk/google";
-import {
-  streamText,
-} from "ai";
-
-import { experimental_createMCPClient as createMCPClient } from 'ai';
+import { streamText, experimental_createMCPClient as createMCPClient } from 'ai';
 import { Experimental_StdioMCPTransport as StdioMCPTransport } from 'ai/mcp-stdio';
 
 export async function POST(req: Request) {

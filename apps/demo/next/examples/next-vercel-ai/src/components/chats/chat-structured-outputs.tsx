@@ -8,8 +8,6 @@ import { FormEvent, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatEmpty from "./chat-empty";
 
-import StructuredOuputsDocs from "@/docs/structured-output-docs.mdx";
-import ChatRoot from "./chat-root";
 import { ChatQuickActions } from "./chat-quick-action";
 import { QuickAction } from "../chat";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
@@ -68,11 +66,7 @@ export function ChatStructuredOutputs() {
   };
 
   return (
-    <ChatRoot
-      drawerTitle={title}
-      drawerDescription={description}
-      MarkdownContent={StructuredOuputsDocs}
-    >
+    <>
       {object && (
         <Button
           className="mb-4 bg-purple-300 hover:bg-purple-500 hover:cursor-pointer"
@@ -170,6 +164,6 @@ export function ChatStructuredOutputs() {
           </Button>
         )}
       </form>
-    </ChatRoot>
+    </>
   );
 }

@@ -10,8 +10,6 @@ import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatEmpty from "./chat-empty";
 
-import ToolCallingDocs from "@/docs/tool-calling-docs.mdx";
-import ChatRoot from "./chat-root";
 import { ChatQuickActions } from "./chat-quick-action";
 import { QuickAction } from "../chat";
 
@@ -62,7 +60,7 @@ export function ChatTools() {
   }, [messages]);
 
   return (
-    <ChatRoot MarkdownContent={ToolCallingDocs}>
+    <>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
         <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
           {messages.length === 0 && (
@@ -230,6 +228,6 @@ export function ChatTools() {
           </Button>
         )}
       </form>
-    </ChatRoot>
+    </>
   );
 }

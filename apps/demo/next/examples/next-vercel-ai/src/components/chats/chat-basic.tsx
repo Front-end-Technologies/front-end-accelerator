@@ -13,8 +13,6 @@ import { useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatEmpty from "./chat-empty";
 
-import BasicDocs from "@/docs/basic-docs.mdx";
-import ChatRoot from "./chat-root";
 import { ChatQuickActions } from "./chat-quick-action";
 import { QuickAction } from "../chat";
 
@@ -51,7 +49,7 @@ export function ChatBasic() {
   }, [messages]);
 
   return (
-    <ChatRoot drawerTitle={title} drawerDescription={description} MarkdownContent={BasicDocs}>
+    <>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
         <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
           {messages.length === 0 && (
@@ -157,6 +155,6 @@ export function ChatBasic() {
           </Button>
         )}
       </form>
-    </ChatRoot>
+    </>
   );
 }

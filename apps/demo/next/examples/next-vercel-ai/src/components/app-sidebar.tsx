@@ -16,11 +16,8 @@ import {
   Bot,
   Brain,
   CircleDot,
-  Database,
-  FileImage,
   FileJson,
   FunctionSquare,
-  ScatterChart,
   UserRound,
 } from "lucide-react";
 import Link from "next/link";

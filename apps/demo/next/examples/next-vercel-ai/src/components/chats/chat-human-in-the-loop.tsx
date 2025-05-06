@@ -19,8 +19,6 @@ import { CalendarConfirmation } from "@/components/calendar-confirmation";
 import { CalendarApproval } from "@/components/calendar-success";
 import ChatEmpty from "./chat-empty";
 
-import UserInteractionDocs from "@/docs/user-interaction-docs.mdx";
-import ChatRoot from "./chat-root";
 import { ChatQuickActions } from "./chat-quick-action";
 import { QuickAction } from "../chat";
 
@@ -77,7 +75,7 @@ export function ChatHitl() {
     )
   );
   return (
-    <ChatRoot MarkdownContent={UserInteractionDocs}>
+    <>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
         <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
           {messages.length === 0 && (
@@ -335,6 +333,6 @@ export function ChatHitl() {
           </Button>
         )}
       </form>
-    </ChatRoot>
+    </>
   );
 }
