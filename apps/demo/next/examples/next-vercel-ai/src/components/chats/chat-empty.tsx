@@ -15,6 +15,7 @@ import {
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { useSidebar } from "../ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const cardData = [
   {
@@ -89,32 +90,35 @@ export default function ChatEmpty() {
 
       <h3 className="text-lg md:text-xl mb-2 text-white">Get started here</h3>
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 w-full max-w-4xl ${
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 w-full max-w-4xl",
           open ? "grid-cols-2" : "xl:grid-cols-3"
-        }`}
+        )}
       >
         {cardData.map((card, index) => (
           <Link key={`${card.title}-${index}`} href={card.href}>
             <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
               <div
-                className={`flex items-start space-x-3 ${
+                className={cn(
+                  "flex items-start space-x-3",
                   open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""
-                }`}
+                )}
               >
                 <div
-                  className={`${
+                  className={cn(
                     open
                       ? "flex justify-between items-center w-full xl:w-max"
                       : ""
-                  }`}
+                  )}
                 >
                   <div className="bg-blue-900/30 p-2 rounded-lg">
                     {card.icon}
                   </div>
                   <ArrowRight
-                    className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${
+                    className={cn(
+                      "h-5 w-5 text-gray-500 group-hover:text-white transition-colors",
                       open ? "xl:hidden" : "hidden"
-                    }`}
+                    )}
                   />
                 </div>
                 <div className="flex-1 text-left">
@@ -122,9 +126,10 @@ export default function ChatEmpty() {
                   <p className="text-sm text-gray-400">{card.description}</p>
                 </div>
                 <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${
+                  className={cn(
+                    "h-5 w-5 text-gray-500 group-hover:text-white transition-colors",
                     open ? "hidden xl:block" : ""
-                  }`}
+                  )}
                 />
               </div>
             </Card>

@@ -98,6 +98,7 @@ import { CalendarConfirmation } from "@/components/calendar-confirmation";
 import { CalendarApproval } from "@/components/calendar-success";
 import { tools, createCalendarMeetingSuggestion } from "@/lib/tools";
 import { APPROVAL, getToolsRequiringConfirmation } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const quickActions = [
   {
@@ -153,7 +154,7 @@ export function ChatHitl() {
   return (
     <ChatRoot>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
-        <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+        <div className={cn("flex-1 p-4", messages.length > 0 ? "space-y-4" : "")}>
           {messages.length === 0 && (
             <div className="h-full flex items-center justify-center">
               <ChatEmpty />
@@ -161,8 +162,8 @@ export function ChatHitl() {
           )}
 
           {messages.map((message, i) => (
-            <div key={i} className={`flex gap-4 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`rounded-lg px-4 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-gray-200"}`}>
+            <div key={i} className={cn("flex gap-4", message.role === "user" ? "justify-end" : "justify-start")}>
+              <div className={cn("rounded-lg px-4", message.role === "user" ? "bg-primary text-primary-foreground" : "bg-gray-200")}>
                 {message.parts?.map((part, j) => {
                   if (part.type === "tool-invocation") {
                     const toolInvocation = part.toolInvocation;

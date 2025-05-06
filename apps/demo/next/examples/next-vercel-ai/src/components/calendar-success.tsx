@@ -1,12 +1,13 @@
 import { CheckCircle, CalendarIcon, Clock, Users, XCircle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 interface CalendarApprovalProps {
-  title: string
-  startDate: Date
-  endDate: Date
-  attendees?: string[]
-  state: "success" | "denied"
+  readonly title: string
+  readonly startDate: Date
+  readonly endDate: Date
+  readonly attendees?: string[]
+  readonly state: "success" | "denied"
 }
 
 export function CalendarApproval({ title, startDate, endDate, attendees, state }: CalendarApprovalProps) {
@@ -25,11 +26,11 @@ export function CalendarApproval({ title, startDate, endDate, attendees, state }
   const Icon = isSuccess ? CheckCircle : XCircle;
 
   return (
-    <Card className={`border ${borderColor} ${bgColor}`}>
+    <Card className={cn("border", borderColor, bgColor)}>
       <CardHeader className="pb-2">
         <div className="flex items-center gap-2">
-          <Icon className={`h-5 w-5 ${iconColor}`} />
-          <CardTitle className={`text-lg font-semibold ${textColor}`}>
+          <Icon className={cn("h-5 w-5", iconColor)} />
+          <CardTitle className={cn("text-lg font-semibold", textColor)}>
             {isSuccess ? "Meeting Added to Calendar" : "Meeting Denied"}
           </CardTitle>
         </div>

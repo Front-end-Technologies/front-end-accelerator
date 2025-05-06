@@ -12,6 +12,7 @@ import ChatEmpty from "./chat-empty";
 
 import { ChatQuickActions } from "./chat-quick-action";
 import { QuickAction } from "@/lib/types/quick-action";
+import { cn } from "@/lib/utils";
 
 const quickActions: QuickAction[] = [
   {
@@ -54,7 +55,9 @@ export function ChatMcp() {
   return (
     <>
       <Card className="flex-1 overflow-y-auto flex flex-col mb-4">
-        <div className={`flex-1 p-4 ${messages.length > 0 ? "space-y-4" : ""}`}>
+        <div
+          className={cn("flex-1 p-4", messages.length > 0 ? "space-y-4" : "")}
+        >
           {messages.length === 0 && (
             <div className="h-full flex items-center justify-center">
               <ChatEmpty />
@@ -64,18 +67,20 @@ export function ChatMcp() {
           {messages.map((message, i) => (
             <div
               key={message.id}
-              className={`flex gap-4 ${
+              className={cn(
+                "flex gap-4",
                 message.role === "user"
                   ? "justify-end"
                   : "justify-start max-w-[80%] flex-row-reverse"
-              }`}
+              )}
             >
               <div
-                className={` rounded-lg px-4 ${
+                className={cn(
+                  "rounded-lg px-4",
                   message.role === "user"
                     ? "bg-primary text-primary-foreground max-w-[80%] py-2"
                     : "w-full"
-                }`}
+                )}
               >
                 {message.parts?.map((part, j) => {
                   switch (part.type) {
@@ -94,11 +99,12 @@ export function ChatMcp() {
                 })}
               </div>
               <div
-                className={`w-10 h-10 border ${
+                className={cn(
+                  "w-10 h-10 border flex items-center justify-center shadow-sm",
                   message.role === "user"
                     ? "rounded-md border-white"
                     : "bg-black border-purple-300 rounded-md"
-                } flex items-center justify-center shadow-sm`}
+                )}
               >
                 {message.role === "user" ? (
                   <div className="text-white w-5 h-5 flex items-center justify-center">

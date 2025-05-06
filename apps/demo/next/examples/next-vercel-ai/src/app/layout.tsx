@@ -4,6 +4,7 @@ import "./globals.css";
 import { Main } from "./main";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-svh w-full`}
+        className={cn("antialiased flex min-h-svh w-full", geistSans.variable, geistMono.variable)}
       >
         <SidebarProvider>
           <AppSidebar />
