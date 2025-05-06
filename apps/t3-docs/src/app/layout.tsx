@@ -4,10 +4,12 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { LoginScreen } from "@/components/login-screen";
 import { SidebarInset } from "@/components/ui/sidebar";
 import { Providers } from "@/trpc/react";
+import { api, HydrateClient } from "@/trpc/server";
 import { type Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 
 import { Header } from "./header";
+import Main from "./main";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -25,7 +27,10 @@ interface Props {
 }
 
 export default async function RootLayout({ children }: Readonly<Props>) {
-  const session = await auth();
+  const [session] = await Promise.all([
+    auth(),
+    api.gitHub.getFolders.prefetch(),
+  ]);
 
   return (
     <html
@@ -37,11 +42,13 @@ export default async function RootLayout({ children }: Readonly<Props>) {
       <body>
         {session ? (
           <Providers>
-            <AppSidebar />
-            <SidebarInset>
-              <Header />
-              <div className="px-4">{children}</div>
-            </SidebarInset>
+            <HydrateClient>
+              <AppSidebar />
+              <SidebarInset>
+                <Header />
+                <Main>{children}</Main>
+              </SidebarInset>
+            </HydrateClient>
           </Providers>
         ) : (
           <LoginScreen />

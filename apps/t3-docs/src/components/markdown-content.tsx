@@ -27,7 +27,7 @@ export function MarkdownContent({ children }: Props) {
               {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>
           ) : (
-            <code className="text-chart-3 border-muted-foreground border p-0.5 px-1 font-bold italic">
+            <code className="text-chart-3 p-0.5 px-1 font-bold italic">
               {children}
             </code>
           );

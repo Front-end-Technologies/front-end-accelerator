@@ -63,10 +63,16 @@ export function AiRoleSelect() {
         <DropdownMenuLabel>Select Language Style</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuCheckboxItem
-            checked={slang === "Compact"}
-            onCheckedChange={(checked) => checked && setAiSlang("Compact")}
+            checked={slang === "Geeky"}
+            onCheckedChange={(checked) => checked && setAiSlang("Geeky")}
           >
-            Compact
+            Geeky
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
+            checked={slang === "Concise"}
+            onCheckedChange={(checked) => checked && setAiSlang("Concise")}
+          >
+            Concise
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
             checked={slang === "Detailed"}
@@ -79,6 +85,13 @@ export function AiRoleSelect() {
             onCheckedChange={(checked) => checked && setAiSlang("Gen-Z")}
           >
             Gen-Z
+          </DropdownMenuCheckboxItem>
+
+          <DropdownMenuCheckboxItem
+            checked={slang === "Emoji"}
+            onCheckedChange={(checked) => checked && setAiSlang("Emoji")}
+          >
+            Emoji
           </DropdownMenuCheckboxItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

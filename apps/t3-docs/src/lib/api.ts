@@ -1,13 +1,12 @@
 import { auth } from "@/auth";
 import { GitHubSession } from "@/interfaces";
-import { githubApiURL } from "@/lib/const";
 import { AtpAgent } from "@atproto/api";
 import axios, { CreateAxiosDefaults } from "axios";
 
 // axios instance
 export const createHttp = (config?: CreateAxiosDefaults) => {
   const http = axios.create({
-    baseURL: config?.baseURL || githubApiURL,
+    baseURL: config?.baseURL || `${process.env.NEXT_PUBLIC_GITHUB_API_URL}`,
     timeout: 5000,
     ...config,
   });

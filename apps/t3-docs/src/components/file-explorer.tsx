@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { GitHubContent } from "@/interfaces";
+import { Framework } from "@/lib/const";
 import { api } from "@/trpc/react";
 import { Folder, FolderOpen } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -17,7 +18,7 @@ export default function FileExplorer({
   const [expandedDirs, setExpandedDirs] = useState<Record<string, boolean>>({});
   const [activePage, setActivePage] = useState<null | string>(null);
   const { framework, name, type } = useParams<{
-    framework: string;
+    framework: Framework;
     name: string;
     type: string;
   }>();

@@ -1,19 +1,39 @@
-import { GitHubContent } from "@/interfaces";
+import { GitHubContent, GithubMember, GithubUser } from "@/interfaces";
 import { createHttp } from "@/lib/api";
+import { Type } from "@/lib/const";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 
 import {
   fetchFolderFiles,
-  mapGithubToWebcontainerFileSystem,
+mapGithubToWebcontainerFileSystem,
 } from "../webcontainer";
 
 const http = createHttp();
 
 export const gitHubRouter = createTRPCRouter({
   getFolders: protectedProcedure.query(async () => {
-    const files: GitHubContent[] = await http.get(`/contents/apps/demo`);
+    const files: GitHubContent[] = await http.get(
+      `/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}/contents/apps/demo`,
+    );
     return files;
+  }),
+  getMembers: protectedProcedure.query(async () => {
+    const members: GithubMember[] = await http.get(
+      `/orgs/Front-end-Technologies/members`,
+    );
+
+    const users = await Promise.all(
+      members.map(async (member) => {
+        const user: GithubUser = await http.get(`/users/${member.login}`);
+        return {
+          ...member,
+          user,
+        };
+      }),
+    );
+
+    return users;
   }),
   getProject: protectedProcedure
     .input(
@@ -21,7 +41,7 @@ export const gitHubRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const repoContent = await fetchFolderFiles(
-        `/contents/apps/demo/${input.framework}/${input.type}/${input.name}`,
+        `/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}/contents/apps/demo/${input.framework}/${input.type}/${input.name}`,
       );
       const webcontainerFiles = mapGithubToWebcontainerFileSystem(repoContent);
 
@@ -34,10 +54,10 @@ export const gitHubRouter = createTRPCRouter({
     .input(z.object({ framework: z.string() }))
     .query(async ({ input }) => {
       const cookbookResponse: Promise<GitHubContent[]> = http.get(
-        `/contents/apps/demo/${input.framework}/cookbook`,
+        `/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}/contents/apps/demo/${input.framework}/${Type.COOKBOOK}`,
       );
       const exampleResponse: Promise<GitHubContent[]> = http.get(
-        `/contents/apps/demo/${input.framework}/examples`,
+        `/repos/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}/contents/apps/demo/${input.framework}/${Type.EXAMPLES}`,
       );
 
       const [cookbook, examples] = await Promise.all([
@@ -46,8 +66,8 @@ export const gitHubRouter = createTRPCRouter({
       ]);
 
       return [
-        { data: cookbook, type: "cookbook" },
-        { data: examples, type: "examples" },
+        { data: cookbook, type: Type.COOKBOOK },
+        { data: examples, type: Type.EXAMPLES },
       ];
     }),
 });

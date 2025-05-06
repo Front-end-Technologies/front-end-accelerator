@@ -7,8 +7,8 @@
     "watch": "ng build --watch --configuration development",
     "serve:ssr:demo-app": "node dist/demo-app/server/server.mjs",
     "lint": "ng lint",
-"test": "playwright test"
-
+    "test": "playwright test",
+    "webcontainer": "ng serve"
   },
   "private": true,
   "dependencies": {

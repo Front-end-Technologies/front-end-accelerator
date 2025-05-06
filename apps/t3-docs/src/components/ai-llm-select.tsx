@@ -1,15 +1,17 @@
 import { useThemeStore } from "@/app/store";
 import { llm } from "@/lib/const";
+import { cn } from "@/lib/utils";
 
+import { Button } from "./ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const getProviderLabel = (provider: string) => {
   switch (provider) {
@@ -33,33 +35,43 @@ export function AiLLMSelect() {
   const setAiLLM = useThemeStore((state) => state.setAiLLM);
 
   return (
-    <Select
-      onValueChange={(value) => {
-        const currentLLM = llm.find((model) => model.name === value);
-
-        if (currentLLM) {
-          setAiLLM(currentLLM);
-        }
-      }}
-      value={currentLLM.name}
-    >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select AI Model" />
-      </SelectTrigger>
-      <SelectContent>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">{currentLLM?.name}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
         {uniqueProviders.map((provider) => (
-          <SelectGroup key={provider}>
-            <SelectLabel>{getProviderLabel(provider)}</SelectLabel>
-            {llm
-              .filter((model) => model.provider === provider)
-              .map((model) => (
-                <SelectItem key={model.name} value={model.name}>
-                  {model.name}
-                </SelectItem>
-              ))}
-          </SelectGroup>
+          <>
+            <DropdownMenuGroup key={provider}>
+              <DropdownMenuLabel>
+                {getProviderLabel(provider)}
+              </DropdownMenuLabel>
+              {llm
+                .filter((model) => model.provider === provider)
+                .map((model) => (
+                  <DropdownMenuCheckboxItem
+                    checked={currentLLM.name === model.name}
+                    className={cn(
+                      "flex flex-col items-start justify-center gap-1",
+                      {
+                        "bg-muted": currentLLM.name === model.name,
+                      },
+                    )}
+                    key={model.name}
+                    onCheckedChange={() => setAiLLM(model)}
+                  >
+                    <p className="font-bold">{model.name}</p>
+                    <p className="text-muted-foreground text-xs italic">
+                      {model.description}
+                    </p>
+                  </DropdownMenuCheckboxItem>
+                ))}
+            </DropdownMenuGroup>
+            {uniqueProviders.indexOf(provider) !==
+              uniqueProviders.length - 1 && <DropdownMenuSeparator />}
+          </>
         ))}
-      </SelectContent>
-    </Select>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
