@@ -3,7 +3,7 @@ import { streamObject } from "ai";
 import { itinerarySchema } from "./schema";
 
 export async function POST(req: Request) {
-  const prompt = await req.json();
+  const prompt = await req.text();
 
   const result = streamObject({
     model: google("gemini-2.0-flash-001"),
