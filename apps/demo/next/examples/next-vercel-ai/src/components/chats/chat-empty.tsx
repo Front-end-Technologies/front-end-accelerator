@@ -16,6 +16,57 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { useSidebar } from "../ui/sidebar";
 
+const cardData = [
+  {
+    href: "/sections/basic",
+    icon: <Code className="h-5 w-5 text-purple-400" />,
+    title: "SDK Fundamentals",
+    description: "Learn basic implementation patterns",
+  },
+  {
+    href: "/sections/tool-calling",
+    icon: <Zap className="h-5 w-5 text-blue-400" />,
+    title: "Tool Calling",
+    description: "AI models invoking functions in your code",
+  },
+  {
+    href: "/sections/user-interaction",
+    icon: <Users className="h-5 w-5 text-green-400" />,
+    title: "User Interaction",
+    description: "Build engaging AI chat interfaces",
+  },
+  {
+    href: "/sections/structured-outputs",
+    icon: <Sparkles className="h-5 w-5 text-pink-400" />,
+    title: "Structured Outputs",
+    description: "Generate structured data from text",
+  },
+  {
+    href: "/sections/mcp",
+    icon: <BookOpen className="h-5 w-5 text-yellow-400" />,
+    title: "Model Context Protocol",
+    description: "Manage context for better responses",
+  },
+  {
+    href: "/sections/database-integrations",
+    icon: <Database className="h-5 w-5 text-cyan-400" />,
+    title: "Database Integrations",
+    description: "Connect AI with persistent storage",
+  },
+  {
+    href: "/sections/images-and-files",
+    icon: <ImageIcon className="h-5 w-5 text-red-400" />,
+    title: "Images and Files",
+    description: "Process and generate visual content",
+  },
+  {
+    href: "/sections/embeddings",
+    icon: <Braces className="h-5 w-5 text-violet-400" />,
+    title: "Embeddings",
+    description: "Create vector representations of text",
+  },
+];
+
 export default function ChatEmpty() {
   const { open } = useSidebar();
 
@@ -38,251 +89,47 @@ export default function ChatEmpty() {
 
       <h3 className="text-lg md:text-xl mb-2 text-white">Get started here</h3>
       <div
-        className={`grid grid-cols-1 md:grid-cols-2  gap-3 mb-8 w-full max-w-4xl ${open ? "grid-cols-2" : "xl:grid-cols-3"}`}
+        className={`grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 w-full max-w-4xl ${
+          open ? "grid-cols-2" : "xl:grid-cols-3"
+        }`}
       >
-        {/* Card 1: SDK Fundamentals */}
-        <Link href="/sections/basic">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
+        {cardData.map((card, index) => (
+          <Link key={`${card.title}-${index}`} href={card.href}>
+            <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
               <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
+                className={`flex items-start space-x-3 ${
+                  open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""
+                }`}
               >
-                <div className="bg-purple-900/30 p-2 rounded-lg">
-                  <Code className="h-5 w-5 text-purple-400" />
+                <div
+                  className={`${
+                    open
+                      ? "flex justify-between items-center w-full xl:w-max"
+                      : ""
+                  }`}
+                >
+                  <div className="bg-blue-900/30 p-2 rounded-lg">
+                    {card.icon}
+                  </div>
+                  <ArrowRight
+                    className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${
+                      open ? "xl:hidden" : "hidden"
+                    }`}
+                  />
+                </div>
+                <div className="flex-1 text-left">
+                  <h3 className="font-medium text-white mb-1">{card.title}</h3>
+                  <p className="text-sm text-gray-400">{card.description}</p>
                 </div>
                 <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
+                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${
+                    open ? "hidden xl:block" : ""
+                  }`}
                 />
               </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  SDK Fundamentals
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Learn basic implementation patterns
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 2: Tool Calling */}
-        <Link href="/sections/tool-calling">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-blue-900/30 p-2 rounded-lg">
-                  <Zap className="h-5 w-5 text-blue-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">Tool Calling</h3>
-                <p className="text-sm text-gray-400">
-                  AI models invoking functions in your code
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 3: User Interaction */}
-        <Link href="/sections/user-interaction">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-green-900/30 p-2 rounded-lg">
-                  <Users className="h-5 w-5 text-green-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  User Interaction
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Build engaging AI chat interfaces
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 4: Structured Outputs */}
-        <Link href="/sections/structured-outputs">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-pink-900/30 p-2 rounded-lg">
-                  <Sparkles className="h-5 w-5 text-pink-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  Structured Outputs
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Generate structured data from text
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 5: Model Context Protocol */}
-        <Link href="/sections/mcp">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-yellow-900/30 p-2 rounded-lg">
-                  <BookOpen className="h-5 w-5 text-yellow-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  Model Context Protocol
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Manage context for better responses
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 6: Database Integrations */}
-        <Link href="/sections/database-integrations">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-cyan-900/30 p-2 rounded-lg">
-                  <Database className="h-5 w-5 text-cyan-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  Database Integrations
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Connect AI with persistent storage
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 7: Images and Files */}
-        <Link href="/sections/images-and-files">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-red-900/30 p-2 rounded-lg">
-                  <ImageIcon className="h-5 w-5 text-red-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">
-                  Images and Files
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Process and generate visual content
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
-
-        {/* Card 8: Embeddings */}
-        <Link href="/sections/embeddings">
-          <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
-            <div
-              className={`flex items-start space-x-3 ${open ? "flex-col gap-2 xl:flex-row xl:gap-0" : ""}`}
-            >
-              <div
-                className={`${open ? "flex justify-between items-center w-full xl:w-max" : ""}`}
-              >
-                <div className="bg-violet-900/30 p-2 rounded-lg">
-                  <Braces className="h-5 w-5 text-violet-400" />
-                </div>
-                <ArrowRight
-                  className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "xl:hidden" : "hidden"}`}
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="font-medium text-white mb-1">Embeddings</h3>
-                <p className="text-sm text-gray-400">
-                  Create vector representations of text
-                </p>
-              </div>
-              <ArrowRight
-                className={`h-5 w-5 text-gray-500 group-hover:text-white transition-colors ${open ? "hidden xl:block" : ""}`}
-              />
-            </div>
-          </Card>
-        </Link>
+            </Card>
+          </Link>
+        ))}
       </div>
 
       <div className="mt-6 text-xs text-gray-500">
