@@ -20,7 +20,7 @@ import { CalendarApproval } from "@/components/calendar-success";
 import ChatEmpty from "./chat-empty";
 
 import { ChatQuickActions } from "./chat-quick-action";
-import { QuickAction } from "../chat";
+import { QuickAction } from "@/lib/types/quick-action";
 
 const quickActions: QuickAction[] = [
   {

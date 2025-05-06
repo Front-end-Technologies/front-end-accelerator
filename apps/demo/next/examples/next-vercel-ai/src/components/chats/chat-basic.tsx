@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatEmpty from "./chat-empty";
 
 import { ChatQuickActions } from "./chat-quick-action";
-import { QuickAction } from "../chat";
+import { QuickAction } from "@/lib/types/quick-action";
 
 const quickActions: QuickAction[] = [
   {
@@ -23,9 +23,6 @@ const quickActions: QuickAction[] = [
     value: "Tell me something about Jack Sparrow",
   },
 ];
-
-const title = "Basic";
-const description = "Explanation of basic functionality within Vercel AI-sdk";
 
 export function ChatBasic() {
   const {

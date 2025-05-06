@@ -9,10 +9,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatEmpty from "./chat-empty";
 
 import { ChatQuickActions } from "./chat-quick-action";
-import { QuickAction } from "../chat";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { itinerarySchema } from "@/app/api/chat/structured-outputs/schema";
 import TravelItineraryViewer from "../travel-itenary-viewer";
+import { QuickAction } from "@/lib/types/quick-action";
 
 const quickActions: QuickAction[] = [
   {
@@ -31,9 +31,6 @@ const quickActions: QuickAction[] = [
     value: `Create a detailed travel itinerary for a ${7}-day trip to ${"London"}. I am interested in: ${"Christmas, History, Monuments, Shopping"}. Include daily activities, accommodations, and local tips.`,
   },
 ];
-
-const title = "Basic";
-const description = "Explanation of basic functionality within Vercel AI-sdk";
 
 export function ChatStructuredOutputs() {
   const [prevInput, setPrevInput] = useState<string | null>(null);

@@ -1,7 +1,7 @@
 import { Flame, Zap } from "lucide-react"
 import { Button } from "../ui/button"
-import { QuickAction } from "../chat"
 import { memo, SetStateAction } from "react"
+import { QuickAction } from "@/lib/types/quick-action"
 
 type ChatQuickActionsParams = {
     readonly quickActions: QuickAction[]
