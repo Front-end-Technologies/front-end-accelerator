@@ -23,48 +23,56 @@ const cardData = [
     icon: <Code className="h-5 w-5 text-purple-400" />,
     title: "SDK Fundamentals",
     description: "Learn basic implementation patterns",
+    enabled: true,
   },
   {
     href: "/sections/tool-calling",
     icon: <Zap className="h-5 w-5 text-blue-400" />,
     title: "Tool Calling",
     description: "AI models invoking functions in your code",
+    enabled: true,
   },
   {
-    href: "/sections/user-interaction",
+    href: "/sections/human-in-the-loop",
     icon: <Users className="h-5 w-5 text-green-400" />,
     title: "User Interaction",
     description: "Build engaging AI chat interfaces",
+    enabled: true,
   },
   {
     href: "/sections/structured-outputs",
     icon: <Sparkles className="h-5 w-5 text-pink-400" />,
     title: "Structured Outputs",
     description: "Generate structured data from text",
+    enabled: true,
   },
   {
     href: "/sections/mcp",
     icon: <BookOpen className="h-5 w-5 text-yellow-400" />,
     title: "Model Context Protocol",
     description: "Manage context for better responses",
+    enabled: true,
   },
   {
     href: "/sections/database-integrations",
     icon: <Database className="h-5 w-5 text-cyan-400" />,
     title: "Database Integrations",
     description: "Connect AI with persistent storage",
+    enabled: false,
   },
   {
     href: "/sections/images-and-files",
     icon: <ImageIcon className="h-5 w-5 text-red-400" />,
     title: "Images and Files",
     description: "Process and generate visual content",
+    enabled: false,
   },
   {
     href: "/sections/embeddings",
     icon: <Braces className="h-5 w-5 text-violet-400" />,
     title: "Embeddings",
     description: "Create vector representations of text",
+    enabled: false,
   },
 ];
 
@@ -95,7 +103,7 @@ export default function ChatEmpty() {
           open ? "grid-cols-2" : "xl:grid-cols-3"
         )}
       >
-        {cardData.map((card, index) => (
+        {cardData.filter(c => c.enabled).map((card, index) => (
           <Link key={`${card.title}-${index}`} href={card.href}>
             <Card className="h-full p-4 bg-gray-900/50 border-gray-800 hover:bg-gray-800/50 transition-colors group cursor-pointer">
               <div
