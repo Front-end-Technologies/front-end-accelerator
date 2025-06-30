@@ -1,0 +1,212 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "age": 29,
+      "department": "Engineering",
+      "isActive": true,
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "age": 34,
+      "department": "Marketing",
+      "isActive": true,
+      "createdAt": "2024-01-20T14:15:00Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "email": "bob.johnson@example.com",
+      "age": 42,
+      "department": "Sales",
+      "isActive": false,
+      "createdAt": "2024-01-10T09:45:00Z"
+    },
+    {
+      "id": "4",
+      "firstName": "Alice",
+      "lastName": "Brown",
+      "email": "alice.brown@example.com",
+      "age": 27,
+      "department": "Engineering",
+      "isActive": true,
+      "createdAt": "2024-02-01T11:20:00Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop Pro",
+      "description": "High-performance laptop for professionals",
+      "price": 1299.99,
+      "category": "Electronics",
+      "inStock": true,
+      "quantity": 15,
+      "rating": 4.5,
+      "tags": [
+        "electronics",
+        "computers",
+        "professional"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Wireless Headphones",
+      "description": "Premium noise-cancelling wireless headphones",
+      "price": 249.99,
+      "category": "Audio",
+      "inStock": true,
+      "quantity": 32,
+      "rating": 4.3,
+      "tags": [
+        "audio",
+        "wireless",
+        "noise-cancelling"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Smart Watch",
+      "description": "Feature-rich smartwatch with health tracking",
+      "price": 399.99,
+      "category": "Wearables",
+      "inStock": false,
+      "quantity": 0,
+      "rating": 4.2,
+      "tags": [
+        "wearables",
+        "health",
+        "smart"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Gaming Mouse",
+      "description": "Precision gaming mouse with RGB lighting",
+      "price": 79.99,
+      "category": "Gaming",
+      "inStock": true,
+      "quantity": 28,
+      "rating": 4.7,
+      "tags": [
+        "gaming",
+        "mouse",
+        "rgb"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Complete project documentation",
+      "description": "Write comprehensive documentation for the new feature",
+      "completed": false,
+      "priority": "high",
+      "assignedTo": 1,
+      "dueDate": "2024-07-15T00:00:00Z",
+      "createdAt": "2024-06-25T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Code review for PR #123",
+      "description": "Review and provide feedback on pull request",
+      "completed": true,
+      "priority": "medium",
+      "assignedTo": 2,
+      "dueDate": "2024-07-01T00:00:00Z",
+      "createdAt": "2024-06-28T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Update dependencies",
+      "description": "Update all project dependencies to latest versions",
+      "completed": false,
+      "priority": "low",
+      "assignedTo": 4,
+      "dueDate": "2024-07-20T00:00:00Z",
+      "createdAt": "2024-06-30T09:15:00Z"
+    },
+    {
+      "id": "4",
+      "title": "Design new landing page",
+      "description": "Create mockups for the new product landing page",
+      "completed": false,
+      "priority": "high",
+      "assignedTo": 2,
+      "dueDate": "2024-07-10T00:00:00Z",
+      "createdAt": "2024-06-29T11:45:00Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "Getting Started with Angular State Management",
+      "content": "Angular provides several ways to manage state in your applications. From simple services to complex state management libraries like NgRx, understanding the right approach for your use case is crucial.",
+      "author": "John Doe",
+      "publishedAt": "2024-06-25T10:00:00Z",
+      "tags": [
+        "angular",
+        "state-management",
+        "tutorial"
+      ],
+      "likes": 42,
+      "comments": [
+        {
+          "id": 1,
+          "author": "Jane Smith",
+          "content": "Great introduction! Very helpful for beginners.",
+          "createdAt": "2024-06-25T14:30:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Bob Johnson",
+          "content": "Would love to see more examples with NgRx Effects.",
+          "createdAt": "2024-06-26T09:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "NgRx Signals vs Traditional NgRx Store",
+      "content": "With the introduction of NgRx Signals, developers now have a more lightweight alternative to the traditional NgRx store pattern. Let's explore the differences and when to use each approach.",
+      "author": "Alice Brown",
+      "publishedAt": "2024-06-28T15:20:00Z",
+      "tags": [
+        "ngrx",
+        "signals",
+        "comparison"
+      ],
+      "likes": 28,
+      "comments": [
+        {
+          "id": 3,
+          "author": "Charlie Wilson",
+          "content": "Signals seem much simpler to work with!",
+          "createdAt": "2024-06-29T10:45:00Z"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "theme": "light",
+    "language": "en",
+    "notifications": {
+      "email": true,
+      "push": false,
+      "sms": true
+    },
+    "preferences": {
+      "autoSave": true,
+      "showTutorials": false,
+      "dataRetention": 30
+    }
+  }
+}

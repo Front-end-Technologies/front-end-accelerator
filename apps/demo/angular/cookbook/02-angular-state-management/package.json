@@ -3,25 +3,36 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "ng serve",
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "json-server": "json-server --watch db.json --port 3001",
+    "start:all": "concurrently \"npm run start\" \"npm run json-server\"",
+    "dev:all": "concurrently \"npm run dev\" \"npm run json-server\""
   },
   "private": true,
   "dependencies": {
     "@angular/common": "^19.1.0",
     "@angular/compiler": "^19.1.0",
     "@angular/core": "^19.1.0",
+    "@angular/forms": "^18.2.13",
     "@angular/platform-browser": "^19.1.0",
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
+    "@ngrx/effects": "^19.2.1",
+    "@ngrx/signals": "^18.1.1",
+    "@ngrx/store": "^19.2.1",
+    "json-server": "1.0.0-beta.3",
+    "rxjs": "~7.8.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.5",
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.0",
+    "concurrently": "^8.2.2",
     "typescript": "^5.7.3"
   },
   "optionalDependencies": {

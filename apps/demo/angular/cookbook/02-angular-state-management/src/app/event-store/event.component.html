@@ -1,0 +1,245 @@
+<div class="container">
+  <header class="header">
+    <h1>User Management</h1>
+    <button
+      class="btn btn-primary"
+      (click)="loadUsers()"
+      [disabled]="eventFacade.loading()"
+    >
+      {{ eventFacade.loading() ? 'Loading...' : 'Refresh Users' }}
+    </button>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-section">
+    <input
+      type="text"
+      placeholder="Search users..."
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Statistics -->
+  @if (eventFacade.hasUsers()) {
+    <div class="stats-section">
+      <div class="stat-card">
+        <span class="stat-label">Total Users</span>
+        <span class="stat-value">{{
+          eventFacade.userStatistics().total
+        }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Active Users</span>
+        <span class="stat-value">{{
+          eventFacade.userStatistics().active
+        }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Departments</span>
+        <span class="stat-value">{{
+          eventFacade.userStatistics().departments
+        }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Average Age</span>
+        <span class="stat-value">{{
+          eventFacade.userStatistics().averageAge
+        }}</span>
+      </div>
+    </div>
+  }
+
+  <!-- Error Message -->
+  @if (eventFacade.hasError()) {
+    <div class="error-message">
+      <p>⚠️ Error: {{ eventFacade.error() }}</p>
+      <button class="btn btn-secondary" (click)="loadUsers()">
+        Try Again
+      </button>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (eventFacade.loading()) {
+    <div class="loading">
+      <p>Loading users...</p>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!eventFacade.hasUsers() && !eventFacade.loading() && !eventFacade.hasError()) {
+    <div class="empty-state">
+      <p>No users found</p>
+      <button class="btn btn-primary" (click)="loadUsers()">
+        Load Users
+      </button>
+    </div>
+  }
+
+  <!-- User List -->
+  @if (eventFacade.hasUsers() && !eventFacade.loading()) {
+    <div class="user-grid">
+      @for (user of displayedUsers(); track user.id) {
+        <div
+          class="user-card"
+          [class.selected]="isUserSelected(user.id)"
+          (click)="selectUser(user.id)"
+        >
+          <div class="user-header">
+            <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+            <span
+              class="status-badge"
+              [class.active]="user.isActive"
+              [class.inactive]="!user.isActive"
+            >
+              {{ user.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+
+          <div class="user-details">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Department:</strong> {{ user.department }}</p>
+            <p><strong>Age:</strong> {{ user.age }}</p>
+            <p>
+              <strong>Created:</strong> {{ user.createdAt | date: 'short' }}
+            </p>
+          </div>
+
+          <div class="user-actions">
+            <button
+              class="btn btn-sm btn-outline"
+              (click)="editUser(user); $event.stopPropagation()"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="deleteUser(user.id); $event.stopPropagation()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Selected User Details -->
+  @if (eventFacade.hasSelectedUser()) {
+    <div class="selected-user-section">
+      <h2>Selected User Details</h2>
+      <div class="selected-user-card">
+        <h3>
+          {{ eventFacade.selectedUser()?.firstName }}
+          {{ eventFacade.selectedUser()?.lastName }}
+        </h3>
+        <p><strong>Email:</strong> {{ eventFacade.selectedUser()?.email }}</p>
+        <p>
+          <strong>Department:</strong>
+          {{ eventFacade.selectedUser()?.department }}
+        </p>
+        <p><strong>Age:</strong> {{ eventFacade.selectedUser()?.age }}</p>
+        <p>
+          <strong>Status:</strong>
+          {{ eventFacade.selectedUser()?.isActive ? 'Active' : 'Inactive' }}
+        </p>
+        <p>
+          <strong>Created:</strong>
+          {{ eventFacade.selectedUser()?.createdAt | date: 'medium' }}
+        </p>
+      </div>
+    </div>
+  }
+
+  <!-- Department Filter -->
+  @if (eventFacade.departments().length > 0) {
+    <div class="filter-section">
+      <h3>Filter by Department</h3>
+      <div class="department-filters">
+        <button
+          class="btn btn-sm"
+          [class.btn-primary]="selectedDepartment === ''"
+          [class.btn-outline]="selectedDepartment !== ''"
+          (click)="filterByDepartment('')"
+        >
+          All Departments
+        </button>
+        @for (dept of eventFacade.departments(); track dept) {
+          <button
+            class="btn btn-sm"
+            [class.btn-primary]="selectedDepartment === dept"
+            [class.btn-outline]="selectedDepartment !== dept"
+            (click)="filterByDepartment(dept)"
+          >
+            {{ dept }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Add User Form -->
+  <div class="add-user-section">
+    <h3>Add New User</h3>
+    <form (ngSubmit)="createUser()" #userForm="ngForm" class="user-form">
+      <div class="form-row">
+        <input
+          type="text"
+          placeholder="First Name"
+          [(ngModel)]="newUser.firstName"
+          name="firstName"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          [(ngModel)]="newUser.lastName"
+          name="lastName"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="newUser.email"
+          name="email"
+          required
+        />
+        <input
+          type="number"
+          placeholder="Age"
+          [(ngModel)]="newUser.age"
+          name="age"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <input
+          type="text"
+          placeholder="Department"
+          [(ngModel)]="newUser.department"
+          name="department"
+          required
+        />
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            [(ngModel)]="newUser.isActive"
+            name="isActive"
+          />
+          Active User
+        </label>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!userForm.valid || eventFacade.loading()"
+      >
+        Add User
+      </button>
+    </form>
+  </div>
+</div>
