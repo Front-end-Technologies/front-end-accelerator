@@ -13,6 +13,7 @@ import { User } from './+state/event.service';
 
 @Component({
   selector: 'app-event',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   providers: [EventFacade],
   templateUrl: './event.component.html',
