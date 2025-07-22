@@ -1,51 +1,16 @@
-# Angular State Management Cookbook
+# 01AngularHelloWorld
 
-This project demonstrates various Angular state management techniques including NgRx Store, NgRx Signals, and traditional services.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
 
 ## Development server
 
-To start the Angular development server only:
+To start a local development server, run:
 
 ```bash
-npm run start
-# or
-npm run dev
+ng serve
 ```
 
-To start both the Angular development server and the JSON server concurrently:
-
-```bash
-npm run start:all
-# or
-npm run dev:all
-```
-
-The Angular app will be available at `http://localhost:4200/` and the JSON server API at `http://localhost:3001/`.
-
-## JSON Server API
-
-The project includes a `db.json` file with sample data for demonstrating state management. The JSON server provides a REST API with the following endpoints:
-
-- `GET /users` - List all users
-- `GET /users/:id` - Get a specific user
-- `GET /products` - List all products
-- `GET /products/:id` - Get a specific product
-- `GET /tasks` - List all tasks
-- `GET /tasks/:id` - Get a specific task
-- `GET /posts` - List all posts
-- `GET /posts/:id` - Get a specific post
-- `GET /settings` - Get application settings
-
-You can also use POST, PUT, PATCH, and DELETE methods to modify the data.
-
-## State Management Examples
-
-This project demonstrates:
-
-1. **NgRx Store** - Traditional Redux-style state management
-2. **NgRx Signals** - Lightweight signal-based state management
-3. **Services with Signals** - Simple state management with Angular signals
-4. **HTTP Client** - Data fetching and caching strategies
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
 
