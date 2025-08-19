@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgRxSignalStore",
+  "title": "NgRx Signal Store Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the feature/module (will use parent folder name if not provided)",
+      "type": "string",
+      "x-prompt": "What name would you like to use for the feature?"
+    },
+    "path": {
+      "description": "The path to create the store files",
+      "type": "string",
+      "format": "path",
+      "default": ""
+    },
+    "skipTests": {
+      "description": "Skip creating test files",
+      "type": "boolean",
+      "default": true,
+      "x-prompt": "Would you like to skip generating test files?"
+    },
+    "flat": {
+      "description": "Create files at the top level of the path",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

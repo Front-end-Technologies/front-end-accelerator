@@ -16,7 +16,11 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022"
+
   },
+    "include": [
+    "schematics/**/*"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
