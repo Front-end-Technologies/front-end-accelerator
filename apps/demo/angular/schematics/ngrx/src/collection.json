@@ -1,0 +1,19 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ngrx": {
+      "description": "A blank schematic.",
+      "factory": "./ngrx/index#ngrx"
+    },
+    "ngrx-signal": {
+      "description": "Generate NgRx Signal Store with reactive state management",
+      "factory": "./ngrx-signal/index#ngrxSignal",
+      "schema": "./ngrx-signal/schema.json"
+    },
+    "ngrx-event": {
+      "description": "Generate NgRx event store with actions, reducer, selectors, and effects",
+      "factory": "./ngrx-event/index#ngrxEvent",
+      "schema": "./ngrx-event/schema.json"
+    }
+  }
+}

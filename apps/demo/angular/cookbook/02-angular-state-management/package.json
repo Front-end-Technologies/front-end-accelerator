@@ -4,11 +4,16 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "build": "ng build",
+    "build": "tsc -p tsconfig.schematics.json",
+    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/my-lib/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "schematics": "./schematics/collection.json",
   "private": true,
+  "ng-add": {
+    "save": "devDependencies"
+  },
   "dependencies": {
     "@angular/common": "^19.1.0",
     "@angular/compiler": "^19.1.0",
