@@ -1,5 +1,5 @@
 {
-  "name": "angular-recipe-01-hello-world",
+  "name": "angular-recipe-02-state-management",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
