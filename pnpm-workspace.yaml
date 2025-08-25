@@ -1,11 +1,17 @@
 packages:
-  - "apps/*"
-  - "packages/*"
-  - "apps/demo/angular/cookbook/*"
-  - "apps/demo/angular/examples/*"
-  - "apps/demo/react/cookbook/*"
-  - "apps/demo/react/examples/*"
-  - "apps/demo/next/cookbook/*"
-  - "apps/demo/next/examples/*"
-  - "apps/demo/nuxt/cookbook/*"
-  - "apps/demo/nuxt/examples/*"
+  - apps/*
+  - packages/*
+  - apps/demo/angular/cookbook/*
+  - apps/demo/angular/examples/*
+  - apps/demo/react/cookbook/*
+  - apps/demo/react/examples/*
+  - apps/demo/next/cookbook/*
+  - apps/demo/next/examples/*
+  - apps/demo/nuxt/cookbook/*
+  - apps/demo/nuxt/examples/*
+
+onlyBuiltDependencies:
+  - esbuild
+  - lmdb
+  - sharp
+  - vue-demi
