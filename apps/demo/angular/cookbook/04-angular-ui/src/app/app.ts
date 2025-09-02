@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { EctzButtonModule, CardComponent, PageComponent } from './ui';
+import { EctzButtonModule, CardComponent, PageComponent } from '../ui';
 
 @Component({
   imports: [EctzButtonModule, CardComponent, PageComponent],
