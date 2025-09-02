@@ -10,7 +10,8 @@
     "test": "ng test",
     "json-server": "json-server --watch db.json --port 3001",
     "start:all": "concurrently \"npm run start\" \"npm run json-server\"",
-    "dev:all": "concurrently \"npm run dev\" \"npm run json-server\""
+    "dev:all": "concurrently \"npm run dev\" \"npm run json-server\"",
+    "webcontainer": "ng serve"
   },
   "private": true,
   "dependencies": {
