@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { EctzButtonModule, CardComponent, PageComponent } from '../ui';
+import { Component } from '@angular/core';
+import { EctzButtonModule, EctzCardModule, PageModule } from '../ui';
 
 @Component({
-  imports: [EctzButtonModule, CardComponent, PageComponent],
+  imports: [EctzButtonModule, EctzCardModule, PageModule],
   selector: 'app-root',
   template: `
     <main class="ectz p-4">
