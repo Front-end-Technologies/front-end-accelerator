@@ -11,7 +11,10 @@ packages:
   - apps/demo/nuxt/examples/*
 
 onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
   - esbuild
   - lmdb
+  - nice-napi
   - sharp
+  - unrs-resolver
   - vue-demi

@@ -1,12 +1,12 @@
 import { getAiModel } from "@/lib/utils";
-import { CoreMessage, streamText } from "ai";
+import { ModelMessage, streamText } from "ai";
 
 interface ChatRequest {
   llm: {
     name: string;
     provider: string;
   };
-  messages: CoreMessage[];
+  messages: ModelMessage[];
   role: string;
   slang: string;
 }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     system: `You are a helpful expert in front-end development with deep knowledge of all front-end frameworks. You explain like a ${role} with ${slang} slang. Your outputs are a visual diagram, key concepts, best practices, and a summary.`,
   });
 
-  const response = result.toDataStreamResponse();
+  const response = result.toTextStreamResponse();
 
   return response;
 }

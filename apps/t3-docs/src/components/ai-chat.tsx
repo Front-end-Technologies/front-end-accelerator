@@ -1,9 +1,9 @@
-import { useThemeStore } from "@/app/store";
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import clsx from "clsx";
 import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { AiCoach } from "./ai-coach";
 import { MarkdownContent } from "./markdown-content";
@@ -12,22 +12,25 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export function AIChat() {
+  const [input, setInput] = useState("");
   const { data: session } = useSession();
-  const llm = useThemeStore((state) => state.ai.llm);
-
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  const { error, handleInputChange, handleSubmit, input, messages } = useChat({
-    api: `${process.env.NEXT_PUBLIC_BASE_URL}/api/ai/chat`,
-    body: { llm },
-    initialMessages: [
+  const { error, messages, sendMessage } = useChat({
+    messages: [
       {
-        content: "Hello, how can I help you?",
         id: "1",
+        parts: [
+          {
+            text: "Hello, how can I help you?",
+            type: "reasoning",
+          },
+        ],
         role: "assistant",
       },
     ],
+    transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
   });
 
   const isUser = (role: string) => role === "user";
@@ -39,6 +42,12 @@ export function AIChat() {
 
     currentRef.scrollTop = currentRef.scrollHeight;
   }, [messages]);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    sendMessage({ text: input });
+    setInput("");
+  };
 
   return (
     <div
@@ -101,7 +110,7 @@ export function AIChat() {
 
       <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
         <Input
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.target.value)}
           onSubmit={handleSubmit}
           placeholder="Say something..."
           value={input}
