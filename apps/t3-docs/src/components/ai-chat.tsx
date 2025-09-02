@@ -62,7 +62,7 @@ export function AIChat() {
           <AiCoach />
         </div>
 
-        {messages.map(({ content, id, role }) => (
+        {messages.map(({ id, parts, role }) => (
           <div className="flex flex-col space-y-2 p-4" key={id}>
             <div
               className={clsx("flex items-center gap-4", {
@@ -91,7 +91,9 @@ export function AIChat() {
                   },
                 )}
               >
-                <MarkdownContent>{content}</MarkdownContent>
+                <MarkdownContent>
+                  {parts.map((part) => part.text).join("\n")}
+                </MarkdownContent>
               </div>
             </div>
             {isAi(role) && (
