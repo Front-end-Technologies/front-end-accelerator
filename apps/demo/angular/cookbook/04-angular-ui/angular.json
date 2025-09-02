@@ -51,10 +51,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "01-angular-hello-world:build:production"
+              "buildTarget": "04-angular-ui:build:production"
             },
             "development": {
-              "buildTarget": "01-angular-hello-world:build:development"
+              "buildTarget": "04-angular-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
