@@ -1,0 +1,46 @@
+.ectz .ectz-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.ectz .ectz-card__visual-wrapper {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+.ectz .ectz-card__visual {
+  height: 12.25rem;
+  object-fit: cover;
+  transition-duration: 0.3s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+    transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .ectz .ectz-card:hover .ectz-card__visual {
+    transform: translate(0) rotate(0) skewX(0) skewY(0) scaleX(1.05) scaleY(1.05);
+  }
+}
+.ectz .ectz-card__label {
+  align-items: center;
+  background-color: #fff;
+  border-color: #b1b4b6;
+  border-radius: 1rem;
+  border-width: 1px;
+  display: flex;
+  flex-grow: 1;
+  font-size: 1rem;
+  font-weight: 520;
+  justify-content: space-between;
+  line-height: 1.25rem;
+  margin-top: -1.25rem;
+  padding: 1.25rem;
+  position: relative;
+  z-index: 20;
+}
+.ectz .ectz-card__label > * {
+  flex-shrink: 0;
+}

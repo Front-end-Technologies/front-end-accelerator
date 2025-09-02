@@ -1,0 +1,12 @@
+.ectz .ectz-cursor-default {
+  cursor: default !important;
+}
+.ectz .ectz-cursor-pointer {
+  cursor: pointer !important;
+}
+.ectz .ectz-cursor-wait {
+  cursor: wait !important;
+}
+.ectz .ectz-cursor-not-allowed {
+  cursor: not-allowed !important;
+}

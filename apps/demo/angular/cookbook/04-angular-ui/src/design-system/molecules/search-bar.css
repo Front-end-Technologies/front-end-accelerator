@@ -1,0 +1,22 @@
+.ectz .ectz-search-bar {
+  align-items: center;
+  background-color: #ebebf5;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-search-bar {
+    border-radius: 9999px;
+    flex-direction: row;
+    gap: 0;
+    padding-left: 2.5rem;
+    padding-right: 1rem;
+  }
+}
+.ectz .ectz-search-bar > div {
+  width: 100%;
+}

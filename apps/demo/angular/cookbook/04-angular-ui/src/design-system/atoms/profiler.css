@@ -1,0 +1,101 @@
+.ectz .ectz-profiler {
+  border-radius: 1.5rem;
+  color: #2f3e8b;
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  position: relative;
+  transition-duration: 0.3s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 13.75rem;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-profiler {
+    display: block;
+  }
+}
+.ectz .ectz-profiler:hover {
+  background-color: #ebebf5;
+}
+.ectz .ectz-profiler-wrapper {
+  border-color: #2f3e8b;
+  border-radius: 1.5rem;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  height: 3.5rem;
+  justify-content: center;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.ectz .ectz-profiler-wrapper:after {
+  aspect-ratio: 1/1;
+  background-color: currentColor;
+  display: inline-block;
+  height: 1em;
+  mask-image: var(--svg);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath fill='currentColor' d='M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z'/%3E%3C/svg%3E");
+  aspect-ratio: 512/512;
+  border-color: #fff transparent transparent;
+  color: #2f3e8b;
+  content: '';
+  height: 1.5rem;
+  position: absolute;
+  right: 1.5rem;
+  top: auto;
+  width: 1.5rem;
+}
+.ectz .ectz-profiler:is(.active, :focus-within) {
+  border-radius: 1.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ectz .ectz-profiler:is(.active, :focus-within) > .ectz-profiler-wrapper {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ectz .ectz-profiler:is(.active, :focus-within) > .ectz-profiler-wrapper:after {
+  transform: translate(0) rotate(180deg) skewX(0) skewY(0) scaleX(1) scaleY(1);
+}
+.ectz .ectz-profiler__label {
+  font-weight: 520;
+}
+.ectz .ectz-profiler__name-selected-item {
+  color: #505a5f;
+  font-size: 0.75rem;
+  font-weight: 320;
+  line-height: 1.25rem;
+}
+.ectz .ectz-profiler:not(:focus-within) .ectz-profiler__select-list {
+  display: none;
+}
+.ectz .ectz-profiler__select-list {
+  background-color: #ebebf5;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  border-color: transparent #2f3e8b #2f3e8b;
+  border-width: 1px;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+}
+.ectz .ectz-profiler__select-list-item {
+  border-bottom-width: 2px;
+  border-color: #ced0d1;
+}
+.ectz .ectz-profiler__select-list-link {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 1rem 1.25rem;
+}
+.ectz .ectz-profiler__select-list-link:hover {
+  text-decoration-line: underline;
+}
+.ectz .ectz-profiler__select-list-item:last-child {
+  border-style: none;
+}

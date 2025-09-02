@@ -1,0 +1,34 @@
+.ectz .ectz-administration-item {
+  align-items: center;
+  background-color: #ebebf5;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  transition-duration: 0.15s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+    transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+.ectz .ectz-administration-item:hover {
+  background-color: #e0e0ef;
+}
+.ectz .ectz-administration-item__avatar {
+  background-color: #fff;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  height: 3rem;
+  overflow: hidden;
+  width: 3rem;
+}
+.ectz .ectz-administration-item__label {
+  color: #2f3e8b;
+  font-weight: 520;
+  text-decoration-line: underline;
+  width: 100%;
+}
+.ectz .ectz-administration-item--active {
+  box-shadow: inset 0 0 0 2px #323e86;
+}

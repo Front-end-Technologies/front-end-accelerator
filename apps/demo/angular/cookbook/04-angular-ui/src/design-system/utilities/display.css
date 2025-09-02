@@ -1,0 +1,197 @@
+.ectz .ectz-block {
+  display: block !important;
+}
+.ectz .ectz-inline-block {
+  display: inline-block !important;
+}
+.ectz .ectz-inline {
+  display: inline !important;
+}
+.ectz .ectz-flex {
+  display: flex !important;
+}
+.ectz .ectz-inline-flex {
+  display: inline-flex !important;
+}
+.ectz .ectz-grid {
+  display: grid !important;
+}
+.ectz .ectz-inline-grid {
+  display: inline-grid !important;
+}
+.ectz .ectz-contents {
+  display: contents !important;
+}
+.ectz .ectz-hidden {
+  display: none !important;
+}
+.ectz .hover\:ectz-block:hover {
+  display: block !important;
+}
+.ectz .hover\:ectz-inline-block:hover {
+  display: inline-block !important;
+}
+.ectz .hover\:ectz-inline:hover {
+  display: inline !important;
+}
+.ectz .hover\:ectz-flex:hover {
+  display: flex !important;
+}
+.ectz .hover\:ectz-inline-flex:hover {
+  display: inline-flex !important;
+}
+.ectz .hover\:ectz-grid:hover {
+  display: grid !important;
+}
+.ectz .hover\:ectz-inline-grid:hover {
+  display: inline-grid !important;
+}
+.ectz .hover\:ectz-contents:hover {
+  display: contents !important;
+}
+.ectz .hover\:ectz-hidden:hover {
+  display: none !important;
+}
+.ectz .focus\:ectz-block:focus {
+  display: block !important;
+}
+.ectz .focus\:ectz-inline-block:focus {
+  display: inline-block !important;
+}
+.ectz .focus\:ectz-inline:focus {
+  display: inline !important;
+}
+.ectz .focus\:ectz-flex:focus {
+  display: flex !important;
+}
+.ectz .focus\:ectz-inline-flex:focus {
+  display: inline-flex !important;
+}
+.ectz .focus\:ectz-grid:focus {
+  display: grid !important;
+}
+.ectz .focus\:ectz-inline-grid:focus {
+  display: inline-grid !important;
+}
+.ectz .focus\:ectz-contents:focus {
+  display: contents !important;
+}
+.ectz .focus\:ectz-hidden:focus {
+  display: none !important;
+}
+@media (min-width: 640px) {
+  .ectz .sm\:ectz-block {
+    display: block !important;
+  }
+  .ectz .sm\:ectz-inline-block {
+    display: inline-block !important;
+  }
+  .ectz .sm\:ectz-inline {
+    display: inline !important;
+  }
+  .ectz .sm\:ectz-flex {
+    display: flex !important;
+  }
+  .ectz .sm\:ectz-inline-flex {
+    display: inline-flex !important;
+  }
+  .ectz .sm\:ectz-grid {
+    display: grid !important;
+  }
+  .ectz .sm\:ectz-inline-grid {
+    display: inline-grid !important;
+  }
+  .ectz .sm\:ectz-contents {
+    display: contents !important;
+  }
+  .ectz .sm\:ectz-hidden {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .ectz .md\:ectz-block {
+    display: block !important;
+  }
+  .ectz .md\:ectz-inline-block {
+    display: inline-block !important;
+  }
+  .ectz .md\:ectz-inline {
+    display: inline !important;
+  }
+  .ectz .md\:ectz-flex {
+    display: flex !important;
+  }
+  .ectz .md\:ectz-inline-flex {
+    display: inline-flex !important;
+  }
+  .ectz .md\:ectz-grid {
+    display: grid !important;
+  }
+  .ectz .md\:ectz-inline-grid {
+    display: inline-grid !important;
+  }
+  .ectz .md\:ectz-contents {
+    display: contents !important;
+  }
+  .ectz .md\:ectz-hidden {
+    display: none !important;
+  }
+}
+@media (min-width: 1024px) {
+  .ectz .lg\:ectz-block {
+    display: block !important;
+  }
+  .ectz .lg\:ectz-inline-block {
+    display: inline-block !important;
+  }
+  .ectz .lg\:ectz-inline {
+    display: inline !important;
+  }
+  .ectz .lg\:ectz-flex {
+    display: flex !important;
+  }
+  .ectz .lg\:ectz-inline-flex {
+    display: inline-flex !important;
+  }
+  .ectz .lg\:ectz-grid {
+    display: grid !important;
+  }
+  .ectz .lg\:ectz-inline-grid {
+    display: inline-grid !important;
+  }
+  .ectz .lg\:ectz-contents {
+    display: contents !important;
+  }
+  .ectz .lg\:ectz-hidden {
+    display: none !important;
+  }
+}
+@media (min-width: 1280px) {
+  .ectz .xl\:ectz-block {
+    display: block !important;
+  }
+  .ectz .xl\:ectz-inline-block {
+    display: inline-block !important;
+  }
+  .ectz .xl\:ectz-inline {
+    display: inline !important;
+  }
+  .ectz .xl\:ectz-flex {
+    display: flex !important;
+  }
+  .ectz .xl\:ectz-inline-flex {
+    display: inline-flex !important;
+  }
+  .ectz .xl\:ectz-grid {
+    display: grid !important;
+  }
+  .ectz .xl\:ectz-inline-grid {
+    display: inline-grid !important;
+  }
+  .ectz .xl\:ectz-contents {
+    display: contents !important;
+  }
+  .ectz .xl\:ectz-hidden {
+    display: none !important;
+  }
+}

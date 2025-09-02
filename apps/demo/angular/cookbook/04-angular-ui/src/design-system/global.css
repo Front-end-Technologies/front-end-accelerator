@@ -1,0 +1,66 @@
+/**
+ * Base layer
+ */
+@import 'generic/fonts.css';
+
+@import 'base/body.css';
+
+@import 'generic/headings.css';
+@import 'generic/links.css';
+@import 'generic/reset.css';
+
+/**
+ * Components layer
+ */
+@import 'atoms/administration-item.css';
+@import 'atoms/breadcrumb.css';
+@import 'atoms/btn.css';
+@import 'atoms/card.css';
+@import 'atoms/checkbox.css';
+@import 'atoms/chips.css';
+@import 'atoms/container.css';
+@import 'atoms/cta-card.css';
+@import 'atoms/field.css';
+@import 'atoms/icon.css';
+@import 'atoms/label-tag.css';
+@import 'atoms/language-switcher.css';
+@import 'atoms/message.css';
+@import 'atoms/notification-badge.css';
+@import 'atoms/pagination.css';
+@import 'atoms/profiler.css';
+@import 'atoms/radio.css';
+@import 'atoms/result-list.css';
+@import 'atoms/select.css';
+@import 'atoms/separator.css';
+@import 'atoms/switch.css';
+@import 'atoms/toaster.css';
+@import 'atoms/tooltip.css';
+
+@import 'molecules/accordeon.css';
+@import 'molecules/appointment.css';
+@import 'molecules/content-area.css';
+@import 'molecules/filter-box.css';
+@import 'molecules/footer.css';
+@import 'molecules/header.css';
+@import 'molecules/hero.css';
+@import 'molecules/last-requests.css';
+@import 'molecules/list-table.css';
+@import 'molecules/mobile-menu.css';
+@import 'molecules/modal.css';
+@import 'molecules/page.css';
+@import 'molecules/search-bar.css';
+@import 'molecules/sub-navigation.css';
+
+/**
+ * Utilities layer
+ */
+@import 'utilities/border-radius.css';
+@import 'utilities/color.css';
+@import 'utilities/cursor.css';
+@import 'utilities/display.css';
+@import 'utilities/flex.css';
+@import 'utilities/font-size.css';
+@import 'utilities/font-weight.css';
+@import 'utilities/gap.css';
+@import 'utilities/max-width.css';
+@import 'utilities/spacing.css';

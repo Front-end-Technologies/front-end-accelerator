@@ -1,0 +1,76 @@
+.ectz .ectz-select {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  display: flex;
+  height: 3.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.ectz .ectz-select:after {
+  aspect-ratio: 1/1;
+  background-color: currentColor;
+  display: inline-block;
+  height: 1em;
+  mask-image: var(--svg);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath fill='currentColor' d='M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z'/%3E%3C/svg%3E");
+  aspect-ratio: 512/512;
+  background-color: #222d65;
+  content: '';
+  height: 1.5rem;
+  position: absolute;
+  right: 0.75rem;
+  width: 1.5rem;
+  z-index: 10;
+}
+.ectz .ectz-select:has(input:disabled):after {
+  background-color: #858aac;
+}
+.ectz .ectz-select:has(.ectz-select-control-rounded):after {
+  right: 1.25rem;
+}
+.ectz .ectz-select:focus {
+  border-color: #222d65;
+  border-width: 2px;
+}
+.ectz .ectz-select:has(:disabled) {
+  border-color: #e0e0ef;
+}
+.ectz .ectz-select > select {
+  appearance: none;
+  background-color: transparent;
+  border-color: #b1b4b6;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  color: #2f3e8b;
+  font-size: 1rem;
+  font-weight: 520;
+  height: 100%;
+  line-height: 1.25rem;
+  padding: 0.5rem 3rem 0.5rem 0.75rem;
+  position: relative;
+  text-overflow: ellipsis;
+  width: 100%;
+  z-index: 20;
+}
+.ectz .ectz-select > select:disabled {
+  background-color: #ebebf5;
+  color: #858aac;
+}
+.ectz .ectz-select > select.ectz-select-control-rounded {
+  border-radius: 9999px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.ectz .ectz-select.ectz-error:after {
+  background-color: #d4351c;
+}
+.ectz .ectz-select.ectz-error > select {
+  border-color: #d4351c;
+  border-width: 2px;
+  color: #d4351c;
+  outline-color: #d4351c;
+}

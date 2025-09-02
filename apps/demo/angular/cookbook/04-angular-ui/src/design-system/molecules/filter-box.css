@@ -1,0 +1,63 @@
+.ectz .ectz-filter-box {
+  background-color: #fff;
+  border-color: #b1b4b6;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  padding: 1rem 0.75rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details[open] .ectz-filter-box_summary-icon {
+  transform: translate(0) rotate(180deg) skewX(0) skewY(0) scaleX(1) scaleY(1);
+}
+.ectz .ectz-filter-box .ectz-filter-box_summary {
+  align-items: center;
+  color: #2f3e8b;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 520;
+  justify-content: space-between;
+  line-height: 1.25rem;
+  list-style-type: none;
+}
+.ectz .ectz-filter-box .ectz-filter-box_summary-icon {
+  align-items: center;
+  display: flex;
+  font-size: 1.188rem;
+  height: 1.5rem;
+  justify-content: center;
+  line-height: 1.563rem;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 1.5rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-content {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-resuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  max-height: 11rem;
+  overflow-y: scroll;
+  padding: 0.125rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-resuts-list::-webkit-scrollbar {
+  width: 1rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-resuts-list::-webkit-scrollbar-track {
+  background-color: #ebebf5;
+  border-radius: 0.5rem;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-resuts-list::-webkit-scrollbar-thumb {
+  background-color: #2f3e8b;
+  border-radius: 0.5rem;
+  cursor: grab;
+}
+.ectz .ectz-filter-box .ectz-filter-box_details-buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}

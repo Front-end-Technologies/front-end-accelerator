@@ -1,0 +1,123 @@
+.ectz .ectz-btn {
+  --ectz-btn-border-width: 2px;
+  --ectz-btn-spacing-y: 0.875rem;
+  --ectz-btn-spacing-x: 1.5rem;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 9999px;
+  border-style: solid;
+  border-width: var(--ectz-btn-border-width);
+  color: #2f3e8b;
+  display: flex;
+  flex-shrink: 0;
+  font-weight: 500;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: calc(var(--ectz-btn-spacing-y) + 2px - var(--ectz-btn-border-width))
+    calc(var(--ectz-btn-spacing-x) + 2px - var(--ectz-btn-border-width));
+  transition-duration: 0.3s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .ectz .ectz-btn {
+    width: auto;
+  }
+}
+.ectz .ectz-btn:hover {
+  color: #222d65;
+}
+.ectz .ectz-btn:focus-visible {
+  background-color: #ebebf5;
+  border-color: #222d65;
+  color: #222d65;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.ectz .ectz-btn--disabled,
+.ectz .ectz-btn--disabled:hover,
+.ectz .ectz-btn:disabled,
+.ectz .ectz-btn:disabled:hover {
+  color: #8c88d2;
+}
+.ectz .ectz-btn--active,
+.ectz .ectz-btn--active:hover {
+  background-color: #000;
+  color: #fff;
+}
+.ectz .ectz-btn--primary {
+  background-color: #2f3e8b;
+  color: #fff;
+}
+.ectz .ectz-btn--primary:hover {
+  background-color: #222d65;
+  color: #fff;
+}
+.ectz .ectz-btn--primary.ectz-btn--disabled,
+.ectz .ectz-btn--primary.ectz-btn--disabled:hover,
+.ectz .ectz-btn--primary.ectz-btn:disabled,
+.ectz .ectz-btn--primary.ectz-btn:disabled:hover {
+  background-color: #ebebf5;
+  color: #8c88d2;
+}
+.ectz .ectz-btn--secondary {
+  --ectz-btn-border-width: 1px;
+  background-color: #fff;
+  border-color: #2f3e8b;
+}
+.ectz .ectz-btn--secondary:hover {
+  border-color: #222d65;
+  color: #222d65;
+}
+.ectz .ectz-btn--secondary:focus {
+  --ectz-btn-border-width: 2px;
+  background-color: #ebebf5;
+  border-color: #222d65;
+  border-style: solid;
+  color: #222d65;
+}
+.ectz .ectz-btn--tertiary {
+  background-color: #ebebf5;
+}
+.ectz .ectz-btn--tertiary:hover {
+  background-color: #2f3e8b;
+  color: #fff;
+}
+.ectz .ectz-btn--tertiary:focus {
+  --ectz-btn-border-width: 4px;
+  background-color: #ebebf5;
+  border-color: #222d65;
+  border-style: solid;
+  color: #222d65;
+}
+.ectz .ectz-btn--functionnal {
+  border-radius: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.ectz .ectz-btn--sm {
+  --ectz-btn-spacing-y: 0.625rem;
+  --ectz-btn-spacing-x: 1rem;
+}
+.ectz .ectz-btn--lg {
+  --ectz-btn-spacing-y: 1.125rem;
+  --ectz-btn-spacing-x: 1.5rem;
+}
+.ectz .ectz-btn--icon {
+  aspect-ratio: 1/1;
+  padding: 0;
+  width: 3.5rem;
+}
+.ectz .ectz-btn--icon.ectz-btn--sm {
+  width: 3rem;
+}
+.ectz .ectz-btn--icon.ectz-btn--lg {
+  width: 4rem;
+}
+.ectz .ectz-btn--squared {
+  aspect-ratio: 1/1;
+  height: 100%;
+  min-height: min-content;
+  padding: 0;
+}

@@ -1,0 +1,46 @@
+.ectz .ectz-message {
+  background-color: #e0e0ef;
+  border-radius: 1rem;
+  color: #2f3e8b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+}
+.ectz .ectz-message .ectz-message__head {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.ectz .ectz-message .ectz-message__head .ectz-message__title {
+  font-weight: 520;
+}
+.ectz .ectz-message .ectz-message__head .ectz-icon {
+  font-size: 1.188rem;
+  line-height: 1.563rem;
+}
+.ectz .ectz-message .ectz-message__content {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.25rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 640px) {
+  .ectz .ectz-message .ectz-message__content {
+    padding-right: 2rem;
+  }
+}
+.ectz .ectz-message.ectz-message__positive {
+  background-color: #c7f0dd;
+  color: #00703c;
+}
+.ectz .ectz-message.ectz-message__notice {
+  background-color: #fff1cc;
+  color: #a43b00;
+}
+.ectz .ectz-message.ectz-message__negative {
+  background-color: #ffece8;
+  color: #b12a15;
+}

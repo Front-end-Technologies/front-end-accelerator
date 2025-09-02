@@ -1,0 +1,143 @@
+.ectz .ectz-font-thin {
+  font-weight: 100 !important;
+}
+.ectz .ectz-font-extralight {
+  font-weight: 200 !important;
+}
+.ectz .ectz-font-light {
+  font-weight: 300 !important;
+}
+.ectz .ectz-font-normal {
+  font-weight: 320 !important;
+}
+.ectz .ectz-font-medium {
+  font-weight: 500 !important;
+}
+.ectz .ectz-font-semibold {
+  font-weight: 520 !important;
+}
+.ectz .ectz-font-bold {
+  font-weight: 665 !important;
+}
+.ectz .ectz-font-extrabold {
+  font-weight: 800 !important;
+}
+.ectz .ectz-font-black {
+  font-weight: 900 !important;
+}
+@media (min-width: 640px) {
+  .ectz .sm\:ectz-font-thin {
+    font-weight: 100 !important;
+  }
+  .ectz .sm\:ectz-font-extralight {
+    font-weight: 200 !important;
+  }
+  .ectz .sm\:ectz-font-light {
+    font-weight: 300 !important;
+  }
+  .ectz .sm\:ectz-font-normal {
+    font-weight: 320 !important;
+  }
+  .ectz .sm\:ectz-font-medium {
+    font-weight: 500 !important;
+  }
+  .ectz .sm\:ectz-font-semibold {
+    font-weight: 520 !important;
+  }
+  .ectz .sm\:ectz-font-bold {
+    font-weight: 665 !important;
+  }
+  .ectz .sm\:ectz-font-extrabold {
+    font-weight: 800 !important;
+  }
+  .ectz .sm\:ectz-font-black {
+    font-weight: 900 !important;
+  }
+}
+@media (min-width: 768px) {
+  .ectz .md\:ectz-font-thin {
+    font-weight: 100 !important;
+  }
+  .ectz .md\:ectz-font-extralight {
+    font-weight: 200 !important;
+  }
+  .ectz .md\:ectz-font-light {
+    font-weight: 300 !important;
+  }
+  .ectz .md\:ectz-font-normal {
+    font-weight: 320 !important;
+  }
+  .ectz .md\:ectz-font-medium {
+    font-weight: 500 !important;
+  }
+  .ectz .md\:ectz-font-semibold {
+    font-weight: 520 !important;
+  }
+  .ectz .md\:ectz-font-bold {
+    font-weight: 665 !important;
+  }
+  .ectz .md\:ectz-font-extrabold {
+    font-weight: 800 !important;
+  }
+  .ectz .md\:ectz-font-black {
+    font-weight: 900 !important;
+  }
+}
+@media (min-width: 1024px) {
+  .ectz .lg\:ectz-font-thin {
+    font-weight: 100 !important;
+  }
+  .ectz .lg\:ectz-font-extralight {
+    font-weight: 200 !important;
+  }
+  .ectz .lg\:ectz-font-light {
+    font-weight: 300 !important;
+  }
+  .ectz .lg\:ectz-font-normal {
+    font-weight: 320 !important;
+  }
+  .ectz .lg\:ectz-font-medium {
+    font-weight: 500 !important;
+  }
+  .ectz .lg\:ectz-font-semibold {
+    font-weight: 520 !important;
+  }
+  .ectz .lg\:ectz-font-bold {
+    font-weight: 665 !important;
+  }
+  .ectz .lg\:ectz-font-extrabold {
+    font-weight: 800 !important;
+  }
+  .ectz .lg\:ectz-font-black {
+    font-weight: 900 !important;
+  }
+}
+@media (min-width: 1280px) {
+  .ectz .xl\:ectz-font-thin {
+    font-weight: 100 !important;
+  }
+  .ectz .xl\:ectz-font-extralight {
+    font-weight: 200 !important;
+  }
+  .ectz .xl\:ectz-font-light {
+    font-weight: 300 !important;
+  }
+  .ectz .xl\:ectz-font-normal {
+    font-weight: 320 !important;
+  }
+  .ectz .xl\:ectz-font-medium {
+    font-weight: 500 !important;
+  }
+  .ectz .xl\:ectz-font-semibold {
+    font-weight: 520 !important;
+  }
+  .ectz .xl\:ectz-font-bold {
+    font-weight: 665 !important;
+  }
+  .ectz .xl\:ectz-font-extrabold {
+    font-weight: 800 !important;
+  }
+  .ectz .xl\:ectz-font-black {
+    font-weight: 900 !important;
+  }
+}

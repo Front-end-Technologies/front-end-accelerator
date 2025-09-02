@@ -1,0 +1,74 @@
+.ectz .ectz-checkbox {
+  align-items: center;
+  column-gap: 0.625rem;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  line-height: 1;
+  position: relative;
+  user-select: none;
+}
+.ectz .ectz-checkbox.ectz-error {
+  color: #d4351c;
+}
+.ectz .ectz-checkbox.ectz-error .ectz-checkbox__checkmark-wrapper {
+  border-color: #d4351c;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 0 0 1px currentColor;
+  color: #d4351c;
+}
+.ectz .ectz-checkbox__input {
+  cursor: pointer;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+.ectz .ectz-checkbox__checkmark-wrapper {
+  align-items: center;
+  background-color: #fff;
+  border-color: #b1b4b6;
+  border-radius: 0.125rem;
+  border-width: 1px;
+  display: flex;
+  height: 1.5rem;
+  justify-content: center;
+  position: relative;
+  width: 1.5rem;
+}
+.ectz .ectz-checkbox input:focus ~ .ectz-checkbox__checkmark-wrapper {
+  border-color: #222d65;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 0 0 1px currentColor;
+  color: #222d65;
+}
+.ectz .ectz-checkbox input:disabled ~ .ectz-checkbox__checkmark-wrapper {
+  background-color: #ebebf5;
+  border-color: #ced0d1;
+  cursor: not-allowed;
+}
+.ectz .ectz-checkbox__checkmark-wrapper:after {
+  aspect-ratio: 1/1;
+  background-color: currentColor;
+  display: inline-block;
+  height: 1em;
+  mask-image: var(--svg);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10'%3E%3Cpath fill='currentColor' d='M10.969 0 4.875 6 2.031 3.2 0 5.2 4.875 10 13 2z'/%3E%3C/svg%3E");
+  aspect-ratio: 13/10;
+  content: '';
+  height: 0.625rem;
+  visibility: hidden;
+}
+.ectz .ectz-checkbox input:checked ~ .ectz-checkbox__checkmark-wrapper:after {
+  visibility: visible;
+}
+.ectz .ectz-checkbox input:disabled ~ .ectz-checkbox__checkmark-wrapper:after {
+  opacity: 0.2;
+}

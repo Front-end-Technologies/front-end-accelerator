@@ -1,0 +1,143 @@
+.ectz .ectz-toaster {
+  align-items: flex-start;
+  background-color: #ebebf5;
+  border-radius: 1rem;
+  color: #2f3e8b;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+.ectz .ectz-toaster .ectz-icon {
+  font-size: 1.188rem;
+  line-height: 1.563rem;
+  margin-top: 0.125rem;
+}
+.ectz .ectz-toaster .ectz-icon.ectz-icon-close {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.ectz .ectz-toaster .ectz-toaster__closer {
+  align-items: center;
+  border-radius: 9999px;
+  display: flex;
+  flex-shrink: 0;
+  height: 1.75rem;
+  justify-content: center;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 1.75rem;
+}
+.ectz .ectz-toaster .ectz-toaster__closer:hover {
+  background-color: #fff;
+}
+.ectz .ectz-toaster .ectz-btn--secondary {
+  background-color: transparent;
+  border-color: #2f3e8b;
+  border-width: 1px;
+  color: #2f3e8b;
+}
+.ectz .ectz-toaster .ectz-btn--secondary:hover {
+  background-color: #222d65;
+  border-color: #222d65;
+  color: #fff;
+}
+.ectz .ectz-toaster__content-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+.ectz .ectz-toaster__infos-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+.ectz .ectz-toaster--success {
+  background-color: #c7f0dd;
+  color: #00703c;
+}
+.ectz .ectz-toaster--success .ectz-btn--primary {
+  background-color: #00703c;
+  color: #fff;
+}
+.ectz .ectz-toaster--success .ectz-btn--primary:hover {
+  background-color: #00562e;
+  color: #fff;
+}
+.ectz .ectz-toaster--success .ectz-btn--secondary {
+  background-color: transparent;
+  border-color: #00703c;
+  border-width: 1px;
+  color: #00703c;
+}
+.ectz .ectz-toaster--success .ectz-btn--secondary:hover {
+  background-color: #00562e;
+  border-color: #00562e;
+  color: #fff;
+}
+.ectz .ectz-toaster--warning {
+  background-color: #fff1cc;
+  color: #a43b00;
+}
+.ectz .ectz-toaster--warning .ectz-btn--primary {
+  background-color: #a43b00;
+  color: #fff;
+}
+.ectz .ectz-toaster--warning .ectz-btn--primary:hover {
+  background-color: #843000;
+  color: #fff;
+}
+.ectz .ectz-toaster--warning .ectz-btn--secondary {
+  background-color: transparent;
+  border-color: #a43b00;
+  border-width: 1px;
+  color: #a43b00;
+}
+.ectz .ectz-toaster--warning .ectz-btn--secondary:hover {
+  background-color: #843000;
+  border-color: #843000;
+  color: #fff;
+}
+.ectz .ectz-toaster--error {
+  background-color: #ffece8;
+  color: #d4351c;
+}
+.ectz .ectz-toaster--error .ectz-btn--primary {
+  background-color: #d4351c;
+  color: #fff;
+}
+.ectz .ectz-toaster--error .ectz-btn--primary:hover {
+  background-color: #b12a15;
+  color: #fff;
+}
+.ectz .ectz-toaster--error .ectz-btn--secondary {
+  background-color: transparent;
+  border-color: #d4351c;
+  border-width: 1px;
+  color: #d4351c;
+}
+.ectz .ectz-toaster--error .ectz-btn--secondary:hover {
+  background-color: #b12a15;
+  border-color: #b12a15;
+  color: #fff;
+}
+.ectz .ectz-toaster__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.125rem;
+}
+.ectz .ectz-toaster__buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-toaster__buttons-wrapper {
+    flex-direction: row;
+  }
+}

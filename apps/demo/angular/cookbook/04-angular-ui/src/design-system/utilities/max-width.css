@@ -1,0 +1,188 @@
+.ectz .ectz-max-w-none {
+  max-width: none !important;
+}
+.ectz .ectz-max-w-xs {
+  max-width: 20rem !important;
+}
+.ectz .ectz-max-w-sm {
+  max-width: 24rem !important;
+}
+.ectz .ectz-max-w-md {
+  max-width: 28rem !important;
+}
+.ectz .ectz-max-w-lg {
+  max-width: 32rem !important;
+}
+.ectz .ectz-max-w-xl {
+  max-width: 36rem !important;
+}
+.ectz .ectz-max-w-2xl {
+  max-width: 42rem !important;
+}
+.ectz .ectz-max-w-3xl {
+  max-width: 48rem !important;
+}
+.ectz .ectz-max-w-full {
+  max-width: 100% !important;
+}
+.ectz .ectz-max-w-min {
+  max-width: min-content !important;
+}
+.ectz .ectz-max-w-max {
+  max-width: max-content !important;
+}
+.ectz .ectz-max-w-fit {
+  max-width: fit-content !important;
+}
+@media (min-width: 640px) {
+  .ectz .sm\:ectz-max-w-none {
+    max-width: none !important;
+  }
+  .ectz .sm\:ectz-max-w-xs {
+    max-width: 20rem !important;
+  }
+  .ectz .sm\:ectz-max-w-sm {
+    max-width: 24rem !important;
+  }
+  .ectz .sm\:ectz-max-w-md {
+    max-width: 28rem !important;
+  }
+  .ectz .sm\:ectz-max-w-lg {
+    max-width: 32rem !important;
+  }
+  .ectz .sm\:ectz-max-w-xl {
+    max-width: 36rem !important;
+  }
+  .ectz .sm\:ectz-max-w-2xl {
+    max-width: 42rem !important;
+  }
+  .ectz .sm\:ectz-max-w-3xl {
+    max-width: 48rem !important;
+  }
+  .ectz .sm\:ectz-max-w-full {
+    max-width: 100% !important;
+  }
+  .ectz .sm\:ectz-max-w-min {
+    max-width: min-content !important;
+  }
+  .ectz .sm\:ectz-max-w-max {
+    max-width: max-content !important;
+  }
+  .ectz .sm\:ectz-max-w-fit {
+    max-width: fit-content !important;
+  }
+}
+@media (min-width: 768px) {
+  .ectz .md\:ectz-max-w-none {
+    max-width: none !important;
+  }
+  .ectz .md\:ectz-max-w-xs {
+    max-width: 20rem !important;
+  }
+  .ectz .md\:ectz-max-w-sm {
+    max-width: 24rem !important;
+  }
+  .ectz .md\:ectz-max-w-md {
+    max-width: 28rem !important;
+  }
+  .ectz .md\:ectz-max-w-lg {
+    max-width: 32rem !important;
+  }
+  .ectz .md\:ectz-max-w-xl {
+    max-width: 36rem !important;
+  }
+  .ectz .md\:ectz-max-w-2xl {
+    max-width: 42rem !important;
+  }
+  .ectz .md\:ectz-max-w-3xl {
+    max-width: 48rem !important;
+  }
+  .ectz .md\:ectz-max-w-full {
+    max-width: 100% !important;
+  }
+  .ectz .md\:ectz-max-w-min {
+    max-width: min-content !important;
+  }
+  .ectz .md\:ectz-max-w-max {
+    max-width: max-content !important;
+  }
+  .ectz .md\:ectz-max-w-fit {
+    max-width: fit-content !important;
+  }
+}
+@media (min-width: 1024px) {
+  .ectz .lg\:ectz-max-w-none {
+    max-width: none !important;
+  }
+  .ectz .lg\:ectz-max-w-xs {
+    max-width: 20rem !important;
+  }
+  .ectz .lg\:ectz-max-w-sm {
+    max-width: 24rem !important;
+  }
+  .ectz .lg\:ectz-max-w-md {
+    max-width: 28rem !important;
+  }
+  .ectz .lg\:ectz-max-w-lg {
+    max-width: 32rem !important;
+  }
+  .ectz .lg\:ectz-max-w-xl {
+    max-width: 36rem !important;
+  }
+  .ectz .lg\:ectz-max-w-2xl {
+    max-width: 42rem !important;
+  }
+  .ectz .lg\:ectz-max-w-3xl {
+    max-width: 48rem !important;
+  }
+  .ectz .lg\:ectz-max-w-full {
+    max-width: 100% !important;
+  }
+  .ectz .lg\:ectz-max-w-min {
+    max-width: min-content !important;
+  }
+  .ectz .lg\:ectz-max-w-max {
+    max-width: max-content !important;
+  }
+  .ectz .lg\:ectz-max-w-fit {
+    max-width: fit-content !important;
+  }
+}
+@media (min-width: 1280px) {
+  .ectz .xl\:ectz-max-w-none {
+    max-width: none !important;
+  }
+  .ectz .xl\:ectz-max-w-xs {
+    max-width: 20rem !important;
+  }
+  .ectz .xl\:ectz-max-w-sm {
+    max-width: 24rem !important;
+  }
+  .ectz .xl\:ectz-max-w-md {
+    max-width: 28rem !important;
+  }
+  .ectz .xl\:ectz-max-w-lg {
+    max-width: 32rem !important;
+  }
+  .ectz .xl\:ectz-max-w-xl {
+    max-width: 36rem !important;
+  }
+  .ectz .xl\:ectz-max-w-2xl {
+    max-width: 42rem !important;
+  }
+  .ectz .xl\:ectz-max-w-3xl {
+    max-width: 48rem !important;
+  }
+  .ectz .xl\:ectz-max-w-full {
+    max-width: 100% !important;
+  }
+  .ectz .xl\:ectz-max-w-min {
+    max-width: min-content !important;
+  }
+  .ectz .xl\:ectz-max-w-max {
+    max-width: max-content !important;
+  }
+  .ectz .xl\:ectz-max-w-fit {
+    max-width: fit-content !important;
+  }
+}

@@ -1,0 +1,71 @@
+.ectz .ectz-header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.ectz .ectz-header.ectz-scrolled {
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+.ectz .ectz-header a {
+  flex-shrink: 0;
+}
+.ectz .ectz-header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-header__wrapper {
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+  }
+}
+.ectz .ectz-header__col {
+  align-items: center;
+  display: flex;
+}
+.ectz .ectz-header__col-left {
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-header__col-left {
+    gap: 2rem;
+  }
+}
+.ectz .ectz-header__col-right {
+  gap: 0.5rem;
+}
+.ectz .ectz-header__logo {
+  border-style: none;
+  display: block;
+  height: auto;
+  width: 8rem;
+}
+@media (min-width: 768px) {
+  .ectz .ectz-header__logo {
+    height: 2rem;
+    width: 12.625rem;
+  }
+}
+.ectz .ectz-header__main-nav {
+  display: flex;
+  gap: 2rem;
+}
+.ectz .ectz-header__main-nav-link {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .ectz .ectz-header__main-nav-link {
+    display: flex;
+  }
+}
+.ectz .ectz-header .ectz-icon {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}

@@ -1,0 +1,132 @@
+.ectz .ectz-bg-transparent {
+  background-color: transparent !important;
+}
+.ectz .ectz-bg-current {
+  background-color: currentColor !important;
+}
+.ectz .ectz-bg-white {
+  background-color: #fff !important;
+}
+.ectz .ectz-bg-black {
+  background-color: #000 !important;
+}
+.ectz .ectz-bg-blue-100 {
+  background-color: #ebebf5 !important;
+}
+.ectz .ectz-bg-blue-500 {
+  background-color: #2f3e8b !important;
+}
+.ectz .ectz-bg-yellow-500 {
+  background-color: #fff64d !important;
+}
+.ectz .ectz-bg-green-500 {
+  background-color: #00703c !important;
+}
+.ectz .ectz-bg-red-500 {
+  background-color: #d4351c !important;
+}
+.ectz .ectz-bg-purple-500 {
+  background-color: #8c88d2 !important;
+}
+.ectz .ectz-bg-grey-500 {
+  background-color: #505a5f !important;
+}
+.ectz .ectz-text-transparent {
+  color: transparent !important;
+}
+.ectz .ectz-text-current {
+  color: currentColor !important;
+}
+.ectz .ectz-text-white {
+  color: #fff !important;
+}
+.ectz .ectz-text-black {
+  color: #000 !important;
+}
+.ectz .ectz-text-blue-100 {
+  color: #ebebf5 !important;
+}
+.ectz .ectz-text-blue-500 {
+  color: #2f3e8b !important;
+}
+.ectz .ectz-text-yellow-500 {
+  color: #fff64d !important;
+}
+.ectz .ectz-text-green-500 {
+  color: #00703c !important;
+}
+.ectz .ectz-text-red-500 {
+  color: #d4351c !important;
+}
+.ectz .ectz-text-purple-500 {
+  color: #8c88d2 !important;
+}
+.ectz .ectz-text-grey-500 {
+  color: #505a5f !important;
+}
+.ectz .hover\:ectz-bg-transparent:hover {
+  background-color: transparent !important;
+}
+.ectz .hover\:ectz-bg-current:hover {
+  background-color: currentColor !important;
+}
+.ectz .hover\:ectz-bg-white:hover {
+  background-color: #fff !important;
+}
+.ectz .hover\:ectz-bg-black:hover {
+  background-color: #000 !important;
+}
+.ectz .hover\:ectz-bg-blue-100:hover {
+  background-color: #ebebf5 !important;
+}
+.ectz .hover\:ectz-bg-blue-500:hover {
+  background-color: #2f3e8b !important;
+}
+.ectz .hover\:ectz-bg-yellow-500:hover {
+  background-color: #fff64d !important;
+}
+.ectz .hover\:ectz-bg-green-500:hover {
+  background-color: #00703c !important;
+}
+.ectz .hover\:ectz-bg-red-500:hover {
+  background-color: #d4351c !important;
+}
+.ectz .hover\:ectz-bg-purple-500:hover {
+  background-color: #8c88d2 !important;
+}
+.ectz .hover\:ectz-bg-grey-500:hover {
+  background-color: #505a5f !important;
+}
+.ectz .hover\:ectz-text-transparent:hover {
+  color: transparent !important;
+}
+.ectz .hover\:ectz-text-current:hover {
+  color: currentColor !important;
+}
+.ectz .hover\:ectz-text-white:hover {
+  color: #fff !important;
+}
+.ectz .hover\:ectz-text-black:hover {
+  color: #000 !important;
+}
+.ectz .hover\:ectz-text-blue-100:hover {
+  color: #ebebf5 !important;
+}
+.ectz .hover\:ectz-text-blue-500:hover {
+  color: #2f3e8b !important;
+}
+.ectz .hover\:ectz-text-yellow-500:hover {
+  color: #fff64d !important;
+}
+.ectz .hover\:ectz-text-green-500:hover {
+  color: #00703c !important;
+}
+.ectz .hover\:ectz-text-red-500:hover {
+  color: #d4351c !important;
+}
+.ectz .hover\:ectz-text-purple-500:hover {
+  color: #8c88d2 !important;
+}
+.ectz .hover\:ectz-text-grey-500:hover {
+  color: #505a5f !important;
+}

@@ -1,0 +1,205 @@
+.ectz *,
+.ectz :after,
+.ectz :before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.ectz,
+.ectz :host {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-tap-highlight-color: transparent;
+}
+.ectz {
+  line-height: inherit;
+  margin: 0;
+}
+.ectz hr {
+  border-top-width: 1px;
+  color: inherit;
+  height: 0;
+}
+.ectz abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+.ectz h1,
+.ectz h2,
+.ectz h3,
+.ectz h4,
+.ectz h5,
+.ectz h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+.ectz a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.ectz b,
+.ectz strong {
+  font-weight: bolder;
+}
+.ectz code,
+.ectz kbd,
+.ectz pre,
+.ectz samp {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
+  font-feature-settings: normal;
+  font-size: 1em;
+  font-variation-settings: normal;
+}
+.ectz small {
+  font-size: 80%;
+}
+.ectz sub,
+.ectz sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.ectz sub {
+  bottom: -0.25em;
+}
+.ectz sup {
+  top: -0.5em;
+}
+.ectz table {
+  border-collapse: collapse;
+  border-color: inherit;
+  text-indent: 0;
+}
+.ectz button,
+.ectz input,
+.ectz optgroup,
+.ectz select,
+.ectz textarea {
+  color: inherit;
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-size: 100%;
+  font-variation-settings: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+.ectz button,
+.ectz select {
+  text-transform: none;
+}
+.ectz button,
+.ectz input:where([type='button']),
+.ectz input:where([type='reset']),
+.ectz input:where([type='submit']) {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+.ectz :-moz-focusring {
+  outline: auto;
+}
+.ectz :-moz-ui-invalid {
+  box-shadow: none;
+}
+.ectz progress {
+  vertical-align: baseline;
+}
+.ectz ::-webkit-inner-spin-button,
+.ectz ::-webkit-outer-spin-button {
+  height: auto;
+}
+.ectz [type='search'] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+.ectz ::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.ectz ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+.ectz summary {
+  display: list-item;
+}
+.ectz blockquote,
+.ectz dd,
+.ectz dl,
+.ectz figure,
+.ectz h1,
+.ectz h2,
+.ectz h3,
+.ectz h4,
+.ectz h5,
+.ectz h6,
+.ectz hr,
+.ectz p,
+.ectz pre {
+  margin: 0;
+}
+.ectz fieldset {
+  margin: 0;
+  padding: 0;
+}
+.ectz legend {
+  padding: 0;
+}
+.ectz menu,
+.ectz ol,
+.ectz ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ectz dialog {
+  padding: 0;
+}
+.ectz textarea {
+  resize: vertical;
+}
+.ectz input::placeholder,
+.ectz textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+.ectz [role='button'],
+.ectz button {
+  cursor: pointer;
+}
+.ectz :disabled {
+  cursor: default;
+}
+.ectz audio,
+.ectz canvas,
+.ectz embed,
+.ectz iframe,
+.ectz img,
+.ectz object,
+.ectz svg,
+.ectz video {
+  display: block;
+  vertical-align: middle;
+}
+.ectz img,
+.ectz video {
+  height: auto;
+  max-width: 100%;
+}
+.ectz [hidden] {
+  display: none;
+}

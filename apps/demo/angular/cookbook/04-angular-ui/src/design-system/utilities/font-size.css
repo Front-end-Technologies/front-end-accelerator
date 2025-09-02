@@ -1,0 +1,116 @@
+.ectz .ectz-text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1.25rem !important;
+}
+.ectz .ectz-text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+.ectz .ectz-text-base {
+  font-size: 1rem !important;
+  line-height: 1.25rem !important;
+}
+.ectz .ectz-text-lg {
+  font-size: 1.188rem !important;
+  line-height: 1.563rem !important;
+}
+.ectz .ectz-text-xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+@media (min-width: 640px) {
+  .ectz .sm\:ectz-text-xs {
+    font-size: 0.75rem !important;
+  }
+  .ectz .sm\:ectz-text-sm,
+  .ectz .sm\:ectz-text-xs {
+    line-height: 1.25rem !important;
+  }
+  .ectz .sm\:ectz-text-sm {
+    font-size: 0.875rem !important;
+  }
+  .ectz .sm\:ectz-text-base {
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+  }
+  .ectz .sm\:ectz-text-lg {
+    font-size: 1.188rem !important;
+    line-height: 1.563rem !important;
+  }
+  .ectz .sm\:ectz-text-xl {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+}
+@media (min-width: 768px) {
+  .ectz .md\:ectz-text-xs {
+    font-size: 0.75rem !important;
+  }
+  .ectz .md\:ectz-text-sm,
+  .ectz .md\:ectz-text-xs {
+    line-height: 1.25rem !important;
+  }
+  .ectz .md\:ectz-text-sm {
+    font-size: 0.875rem !important;
+  }
+  .ectz .md\:ectz-text-base {
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+  }
+  .ectz .md\:ectz-text-lg {
+    font-size: 1.188rem !important;
+    line-height: 1.563rem !important;
+  }
+  .ectz .md\:ectz-text-xl {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+}
+@media (min-width: 1024px) {
+  .ectz .lg\:ectz-text-xs {
+    font-size: 0.75rem !important;
+  }
+  .ectz .lg\:ectz-text-sm,
+  .ectz .lg\:ectz-text-xs {
+    line-height: 1.25rem !important;
+  }
+  .ectz .lg\:ectz-text-sm {
+    font-size: 0.875rem !important;
+  }
+  .ectz .lg\:ectz-text-base {
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+  }
+  .ectz .lg\:ectz-text-lg {
+    font-size: 1.188rem !important;
+    line-height: 1.563rem !important;
+  }
+  .ectz .lg\:ectz-text-xl {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+}
+@media (min-width: 1280px) {
+  .ectz .xl\:ectz-text-xs {
+    font-size: 0.75rem !important;
+  }
+  .ectz .xl\:ectz-text-sm,
+  .ectz .xl\:ectz-text-xs {
+    line-height: 1.25rem !important;
+  }
+  .ectz .xl\:ectz-text-sm {
+    font-size: 0.875rem !important;
+  }
+  .ectz .xl\:ectz-text-base {
+    font-size: 1rem !important;
+    line-height: 1.25rem !important;
+  }
+  .ectz .xl\:ectz-text-lg {
+    font-size: 1.188rem !important;
+    line-height: 1.563rem !important;
+  }
+  .ectz .xl\:ectz-text-xl {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+}
