@@ -1,7 +1,7 @@
-import { Component, inject, resource } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { UsersResponse } from '../interfaces/user.interface';
 import { CommonModule } from '@angular/common';
+import { Component, inject, resource } from '@angular/core';
+
+import { UserService } from '../services/user.service';
 
 @Component({
   imports: [CommonModule],

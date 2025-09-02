@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { EctzButtonModule, EctzCardModule, PageModule } from '../ui';
 
 @Component({

@@ -1,5 +1,6 @@
-import { Component, effect, inject, signal, computed } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { AppStore, ThemeStore } from './app.store';
 
 @Component({
@@ -56,9 +57,7 @@ import { AppStore, ThemeStore } from './app.store';
 export class App {
   // Local state
   readonly count = signal(0);
-  readonly inputValue = signal(0);
   readonly effectValue = signal('');
-
   readonly heavyComputed = computed(() => {
     const n = this.count();
     const fib = (num: number): number => {
@@ -77,35 +76,8 @@ export class App {
     return `Heavy computed result: ${sum}`;
   });
 
-  increment() {
-    this.count.update((c) => c + 1);
-  }
-
-  decrement() {
-    this.count.update((c) => c - 1);
-  }
-
-  setCount(value: number) {
-    this.count.set(Number(value));
-  }
-
-  resetLocalState() {
-    this.count.set(0);
-    this.inputValue.set(0);
-  }
-
   // Global state
   readonly store = inject(AppStore);
-  readonly globalInputValue = signal(0);
-
-  toNumber(value: string): number {
-    return Number(value);
-  }
-
-  resetGlobalState() {
-    this.store.setCount(0);
-    this.globalInputValue.set(0);
-  }
 
   // Effects
   readonly countEffect = effect(() => {
@@ -114,6 +86,35 @@ export class App {
     );
   });
 
+  readonly globalInputValue = signal(0);
+
+  readonly inputValue = signal(0);
+
   // Theme
   readonly themeStore = inject(ThemeStore);
+
+  decrement() {
+    this.count.update((c) => c - 1);
+  }
+  increment() {
+    this.count.update((c) => c + 1);
+  }
+
+  resetGlobalState() {
+    this.store.setCount(0);
+    this.globalInputValue.set(0);
+  }
+
+  resetLocalState() {
+    this.count.set(0);
+    this.inputValue.set(0);
+  }
+
+  setCount(value: number) {
+    this.count.set(Number(value));
+  }
+
+  toNumber(value: string): number {
+    return Number(value);
+  }
 }

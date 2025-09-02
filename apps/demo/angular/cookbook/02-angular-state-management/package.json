@@ -25,5 +25,8 @@
     "@angular/cli": "^20.2.1",
     "@angular/compiler-cli": "^20.2.0",
     "typescript": "~5.9.2"
+  },
+  "optionalDependencies": {
+    "@repo/eslint-config": "*"
   }
 }

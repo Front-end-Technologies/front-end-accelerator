@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 
 @Component({
+  selector: 'ectz-page',
   template: `
     <section class="flex flex-col gap-8">
       @if (title()) {
@@ -11,7 +12,6 @@ import { Component, input } from '@angular/core';
       <ng-content />
     </section>
   `,
-  selector: 'ectz-page',
 })
 export class PageComponent {
   title = input<string>();

@@ -5,7 +5,7 @@ import { CardComponent } from './card.component';
 export * from './card.component';
 
 @NgModule({
-    imports: [CardComponent],
-    exports: [CardComponent],
+  exports: [CardComponent],
+  imports: [CardComponent],
 })
 export class EctzCardModule {}

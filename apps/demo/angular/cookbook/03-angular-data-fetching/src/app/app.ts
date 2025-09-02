@@ -1,8 +1,8 @@
-import { Component, inject, resource, signal } from '@angular/core';
-import { UserService } from './services/user.service';
 import { CommonModule } from '@angular/common';
-import { UsersResponse } from './interfaces/user.interface';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { UserService } from './services/user.service';
 
 @Component({
   imports: [CommonModule, RouterModule],

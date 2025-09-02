@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { injectQuery } from '@tanstack/angular-query-experimental';
+
+import { UserService } from '../services/user.service';
 
 @Component({
   imports: [CommonModule],
@@ -39,7 +40,7 @@ export class RxTanstackComponent {
   protected readonly userService = inject(UserService);
 
   usersQuery = injectQuery(() => ({
-    queryKey: ['users'],
     queryFn: () => this.userService.getUsersPromise(),
+    queryKey: ['users'],
   }));
 }

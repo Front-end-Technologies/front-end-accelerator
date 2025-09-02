@@ -10,22 +10,22 @@ export const AppStore = signalStore(
   { providedIn: 'root' },
   withState({ count: 0 }),
   withMethods((store) => ({
-    increment() {
-      patchState(store, (state) => ({ count: state.count + 1 }));
-    },
     decrement() {
       patchState(store, (state) => ({ count: state.count - 1 }));
+    },
+    increment() {
+      patchState(store, (state) => ({ count: state.count + 1 }));
     },
     setCount(value: number) {
       patchState(store, () => ({ count: value }));
     },
   })),
   withHooks({
-    onInit(store) {
-      console.log('init', store);
-    },
     onDestroy(store) {
       console.log('destroy', store);
+    },
+    onInit(store) {
+      console.log('init', store);
     },
   }),
 );
@@ -44,6 +44,9 @@ export const ThemeStore = signalStore(
   })),
 
   withHooks({
+    onDestroy(store) {
+      localStorage.removeItem('theme');
+    },
     onInit(store) {
       const savedTheme = localStorage.getItem('theme');
       let themeToUse: string;
@@ -57,9 +60,6 @@ export const ThemeStore = signalStore(
       patchState(store, () => ({ theme: themeToUse }));
       document.documentElement.classList.add(themeToUse);
       localStorage.setItem('theme', themeToUse);
-    },
-    onDestroy(store) {
-      localStorage.removeItem('theme');
     },
   }),
 );

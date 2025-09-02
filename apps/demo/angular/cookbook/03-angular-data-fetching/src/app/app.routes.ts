@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { FetchComponent } from './components/fetch.component';
 import { ResourceComponent } from './components/resource.component';
 import { RxResourceComponent } from './components/rx-resource.component';
@@ -7,23 +8,23 @@ import { TanstackComponent } from './components/tanstack.component';
 
 export const routes: Routes = [
   {
-    path: '',
     component: FetchComponent,
+    path: '',
   },
   {
-    path: 'resource',
     component: ResourceComponent,
+    path: 'resource',
   },
   {
-    path: 'rx-resource',
     component: RxResourceComponent,
+    path: 'rx-resource',
   },
   {
-    path: 'rx-tanstack',
     component: RxTanstackComponent,
+    path: 'rx-tanstack',
   },
   {
-    path: 'tanstack',
     component: TanstackComponent,
+    path: 'tanstack',
   },
 ];

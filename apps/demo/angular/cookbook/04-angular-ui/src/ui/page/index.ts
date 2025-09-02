@@ -5,7 +5,7 @@ import { PageComponent } from './page.component';
 export * from './page.component';
 
 @NgModule({
-    imports: [PageComponent],
-    exports: [PageComponent],
+  exports: [PageComponent],
+  imports: [PageComponent],
 })
 export class PageModule {}

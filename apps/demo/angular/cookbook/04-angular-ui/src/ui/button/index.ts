@@ -5,7 +5,7 @@ import { ButtonDirective } from './button.directive';
 export * from './button.directive';
 
 @NgModule({
-    imports: [ButtonDirective],
-    exports: [ButtonDirective],
+  exports: [ButtonDirective],
+  imports: [ButtonDirective],
 })
 export class EctzButtonModule {}

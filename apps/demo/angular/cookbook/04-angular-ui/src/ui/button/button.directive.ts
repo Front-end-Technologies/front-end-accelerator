@@ -1,24 +1,17 @@
-import {
-  HostBinding,
-  Directive,
-  OnChanges,
-  Input,
-  input,
-  effect,
-} from '@angular/core';
-import { VariantProps, cva } from 'class-variance-authority';
+import { Directive, effect, HostBinding, input } from '@angular/core';
+import { cva, VariantProps } from 'class-variance-authority';
 
 const buttonStyles = cva('ectz-btn', {
   variants: {
-    variant: {
-      secondary: 'ectz-btn--secondary',
-      primary: 'ectz-btn--primary',
-      default: '',
-    },
     size: {
-      sm: 'ectz-btn--sm',
-      md: 'ectz-btn--md',
       lg: 'ectz-btn--lg',
+      md: 'ectz-btn--md',
+      sm: 'ectz-btn--sm',
+    },
+    variant: {
+      default: '',
+      primary: 'ectz-btn--primary',
+      secondary: 'ectz-btn--secondary',
     },
   },
 });
@@ -31,10 +24,10 @@ type ButtonVariantProps = VariantProps<typeof buttonStyles>;
 export class ButtonDirective {
   @HostBinding('class') classes = '';
 
-  variant = input<ButtonVariantProps['variant']>('default');
   size = input<ButtonVariantProps['size'] | undefined>('md');
+  variant = input<ButtonVariantProps['variant']>('default');
 
   buttonEffect = effect(() => {
-    this.classes = buttonStyles({ variant: this.variant(), size: this.size() });
+    this.classes = buttonStyles({ size: this.size(), variant: this.variant() });
   });
 }
