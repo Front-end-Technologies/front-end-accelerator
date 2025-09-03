@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-about',
   template: `
     <h2>About</h2>
-    <p>This route public and is lazy loaded</p>
+    <p>This route public and is lazy-loaded</p>
   `,
 })
 export class AboutComponent {}

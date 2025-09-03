@@ -57,10 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    const auth = localStorage.getItem('auth');
-    if (auth) {
-      this.credentials.set(JSON.parse(auth));
-    }
+    this.logout();
   }
 
   async onSubmit() {

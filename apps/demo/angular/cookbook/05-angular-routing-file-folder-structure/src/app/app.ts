@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   template: `
     <h1>Routing</h1>
 
-    <p>This is a simple example of Angular routing.</p>
+    <p>This is a simple example of Angular routing</p>
 
     <nav>
       <ul>

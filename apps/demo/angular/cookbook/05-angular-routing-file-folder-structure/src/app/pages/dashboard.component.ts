@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
     <h2>Dashboard</h2>
     <h3>Protected route</h3>
     <p>
-      This route has a auth guard that checks with an authenticated resquest to
+      This route has an auth guard that checks with an authenticated request to
       see if you have access
     </p>
 
