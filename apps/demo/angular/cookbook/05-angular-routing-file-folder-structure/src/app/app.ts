@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { Auth } from './interfaces/auth.interface';
 import { AuthService } from './services/auth.service';
@@ -67,15 +67,17 @@ import { AuthService } from './services/auth.service';
 export class App implements OnInit {
   authService = inject(AuthService);
   credentials = signal<Auth | null>(null);
-
   loginForm = new FormGroup({
     password: new FormControl('emilyspass', Validators.required),
     username: new FormControl('emilys', Validators.required),
   });
 
+  router = inject(Router);
+
   logout() {
     this.credentials.set(null);
     localStorage.removeItem('auth');
+    this.router.navigate(['/']);
   }
 
   ngOnInit() {
@@ -95,6 +97,7 @@ export class App implements OnInit {
 
       this.credentials.set(res);
       localStorage.setItem('auth', JSON.stringify(res));
+      this.router.navigate(['/dashboard']);
     }
   }
 }

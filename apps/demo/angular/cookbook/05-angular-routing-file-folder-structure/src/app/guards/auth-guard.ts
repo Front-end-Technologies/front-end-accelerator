@@ -13,8 +13,8 @@ export const authGuard: CanActivateFn = async () => {
   const accessToken = toJson?.accessToken as Auth['accessToken'];
 
   if (!accessToken) {
-    const loginPath = router.parseUrl('/login');
-    return new RedirectCommand(loginPath);
+    const noAccess = router.parseUrl('/no-access');
+    return new RedirectCommand(noAccess);
   }
 
   const me = await authService.me(accessToken);
