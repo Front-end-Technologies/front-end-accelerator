@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: ` <h1>{{ this.title }}</h1>`,
+  standalone: true,
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent {
-  title = '01-angular-hello-world';
+  title = 'Angular Authentication Demo';
 }
+
+// https://localhost:5555/signin?code=eyJraWQiOiI3SkNfd3JmM2g5cG5EblI0YTZPSGdwM1U3aXkwR2pzamRoSWtjSWZiQkZZIiwidmVyIjoiMS4wIiwiemlwIjoiRGVmbGF0ZSIsInNlciI6IjEuMCJ9.OsNpZJivyph9TXY6KngAaVQTvz7-gk0NgxS87_7NYe-_AEYNgxU1q3RUBuUJaCsjR858v6_On5uW6RQyo2sIsRMOsq5v_SnVhQSTg-7rcw4OHGWmg9NsUmfaHgOSy5bm1bU50fJLlLvq661gvnNs23XWGCdI6Kq6C9rsrdceKv16iF3kBHVwT-FY13qri-9y1tPc2R1WT_6vKDB-sK5_PbxRFImL7gFbO9jZvYfDjtv9ZAWaC7-r4txdwnGzLV8_cKBc2ZWt79gulIln2_wiDu2iQBOU0T4mpC6GM5dcJxQRBD4WF-F45tc-DAC-qEKcZMo0cJAWpczpv8hxj3fPdQ.9ttoEFE7Q-uNcPX0.MmfZKJvCfxY5Q8Kv6L6gzFtaqASuM3Bo8ps-ck7YYkZzh9ERqK0SRYryJcpIkUgKwewgBWGu55vVtyQHJLnkeFttoVFC2RjtomrzGwmayIFklQT0oxzF_P548dyMpvxO3Ux1V9JvViFDRkAirNWtvXvlODrxDiCyNVSm4Q3MMCBBdCN5EObDFdDbjMpxhdr6r4eBLXJod8dOlMkErz96diEdklESSUOtV7_MzV9GsM1BsY9sO1_KjFLlvHETwuUsY4fj0F88VDjO5WHf9uTcHa3-iCCuSfFsh3KoShacBPnXX0XuRiQfAHC31KfDvsN885tbDAgzauQvF4q-QeoeSFITIqLITr6UfOKl9n-xIla0LMESkHMetMXn4eNnh-eM3KyU6iXYg1BdLMDFsnKvA6mdFSdJV8XNHa_2ZY-1GtP5tbamvQPlMCxJAi105aDV4EjLG_LjikAkeo6uVlzOX2XsNx4kuHkII5Tya-wWJbgQxlFKvy_LmcRdnxQ-wBUm6bvJNAOnIaPL6UATxQQpDWF3MxfjUhHdi2CrN6l91v6aLAN18hnhwk84W7c_ruhmyVKEmmGMShVK0c1GJgEZ9HAmWTNWH_DAeSulc9kDLcYlsS8b3iRyGZ7OHASvc5hluporING9ZsrTXrszmJZX-gH0tAWt7cVx53hSO9uzVnpGUdcOBiowqwB7heuRh0E5vEu2drSfszzjNznXWzze.NLm921Heu_B9ZO9vazTDpQ
