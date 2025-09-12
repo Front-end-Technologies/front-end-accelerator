@@ -1,20 +1,6 @@
 "use client";
 
 import "@xterm/xterm/css/xterm.css";
-import { useThemeStore } from "@/app/store";
-import { AiResponseDialog } from "@/components/ai-response-dialog";
-import FileExplorer from "@/components/file-explorer";
-import { FrameworkSelect } from "@/components/framework-select";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { File } from "@/interfaces";
-import { Framework } from "@/lib/const";
-import { handleAIStream } from "@/lib/utils";
-import { api } from "@/trpc/react";
 import { javascript } from "@codemirror/lang-javascript";
 import { materialLight } from "@uiw/codemirror-theme-material";
 import { tokyoNightStorm } from "@uiw/codemirror-theme-tokyo-night-storm";
@@ -30,6 +16,21 @@ import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+
+import { useThemeStore } from "@/app/store";
+import { AiResponseDialog } from "@/components/ai-response-dialog";
+import FileExplorer from "@/components/file-explorer";
+import { FrameworkSelect } from "@/components/framework-select";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { File } from "@/interfaces";
+import { Framework } from "@/lib/const";
+import { handleAIStream } from "@/lib/utils";
+import { api } from "@/trpc/react";
 
 interface Params {
   [key: string]: string;
