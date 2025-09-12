@@ -87,41 +87,52 @@ export function AppSidebar() {
             Architecture
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link className="flex items-center gap-3" href="/architect/spa">
-                  <Boxes />
-                  Single Page App
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link className="flex items-center gap-3" href="/architect/mpa">
-                  <Boxes />
-                  Multi Page App
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link className="flex items-center gap-3" href="/architect/mfe">
-                  <Boxes />
-                  Micro Front-Ends
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link
-                  className="flex items-center gap-3"
-                  href="/architect/recommended"
-                >
-                  <Boxes />
-                  Recommended Hybrid
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link
+                    className="flex items-center gap-3"
+                    href="/architect/spa"
+                  >
+                    <Boxes />
+                    Single Page App
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link
+                    className="flex items-center gap-3"
+                    href="/architect/mpa"
+                  >
+                    <Boxes />
+                    Multi Page App
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link
+                    className="flex items-center gap-3"
+                    href="/architect/mfe"
+                  >
+                    <Boxes />
+                    Micro Front-Ends
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link
+                    className="flex items-center gap-3"
+                    href="/architect/recommended"
+                  >
+                    <Boxes />
+                    Recommended Hybrid
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
