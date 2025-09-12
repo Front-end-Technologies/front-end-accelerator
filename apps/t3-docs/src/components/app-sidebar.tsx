@@ -1,5 +1,9 @@
 "use client";
 
+import { Boxes, LoaderCircle } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
 import {
   Sidebar,
   SidebarContent,
@@ -12,9 +16,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Framework } from "@/lib/const";
 import { api } from "@/trpc/react";
-import { LoaderCircle } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
 
 import { FoldersSelect } from "./folders-select";
 import { ThemeDropdown } from "./theme-dropdown";
@@ -82,7 +83,51 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Framework</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-bold uppercase">
+            Architecture
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link className="flex items-center gap-3" href="/architect/spa">
+                  <Boxes />
+                  Single Page App
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link className="flex items-center gap-3" href="/architect/mpa">
+                  <Boxes />
+                  Multi Page App
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link className="flex items-center gap-3" href="/architect/mfe">
+                  <Boxes />
+                  Micro Front-Ends
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link
+                  className="flex items-center gap-3"
+                  href="/architect/recommended"
+                >
+                  <Boxes />
+                  Recommended Hybrid
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel className="font-bold uppercase">
+            Framework
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <FoldersSelect />
           </SidebarGroupContent>

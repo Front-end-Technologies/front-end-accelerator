@@ -1,5 +1,11 @@
 "use client";
 
+import { AppBskyEmbedExternal } from "@atproto/api";
+import { CircleX, Link, Sparkle } from "lucide-react";
+import { useParams } from "next/navigation";
+import { useState } from "react";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+
 import { AiCoach } from "@/components/ai-coach";
 import { MarkdownContent } from "@/components/markdown-content";
 import { Button } from "@/components/ui/button";
@@ -7,11 +13,6 @@ import { useToggle } from "@/hooks/use-toggle";
 import { Framework } from "@/lib/const";
 import { cn, handleAIStream } from "@/lib/utils";
 import { api } from "@/trpc/react";
-import { AppBskyEmbedExternal } from "@atproto/api";
-import { CircleX, Link, Sparkle } from "lucide-react";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 import { useThemeStore } from "../store";
 
