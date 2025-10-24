@@ -12,16 +12,11 @@ export default async function Home() {
       style={{ height: "calc(100vh - 5rem)" }}
     >
       <p>
-        Our mission is to accelerate frontend development by offering a robust
-        suite of tools and best practices. By simplifying workflows, we empower
-        developers to create high-quality applications with greater speed and
-        efficiency.
-      </p>
-
-      <p>
         We are always excited to welcome new members and contributors to our
         team. Front-end enthusiasts of all skill levels and experiences are
-        encouraged to join us!
+        encouraged to join us! Don&apos;t forget to join our Teams and Slack
+        Community for collaboration and support. Many thanks goes out to our
+        sponsor, Cegeka Applications Global.
       </p>
 
       <Contributors />

@@ -74,17 +74,55 @@ export function AppSidebar() {
             </div>
 
             <p className="flex flex-col space-y-4 text-xs leading-5">
-              Speed up your Front-end development with our AI-infused cookbooks
-              and examples. Explore the latest trends and best practices to
-              enhance your skills and stay up-to-date with the ever-evolving
-              world of front-end development.
+              Still watching coding tutorials 🥸? Build real-world projects
+              faster with our AI-infused cookbooks instead ✨. Setup your
+              project by using our blueprints and generate your components based
+              on our examples.
             </p>
           </SidebarGroupContent>
         </SidebarGroup>
 
         <SidebarGroup>
           <SidebarGroupLabel className="font-bold uppercase">
-            Architecture
+            Select your framework
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <FoldersSelect />
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {isLoading && (
+          <div className="flex items-center space-x-2 p-4">
+            <LoaderCircle className="animate-spin" />
+            <span className="grow text-xs">Fetching projects...</span>
+          </div>
+        )}
+
+        {isSuccess &&
+          projects.map(({ data, type }) => (
+            <SidebarGroup key={type}>
+              <SidebarGroupLabel className="font-bold uppercase">
+                {type}
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {data.map((project) => (
+                    <SidebarMenuItem key={project.name}>
+                      <SidebarMenuButton asChild>
+                        <Link href={`/${framework}/${type}/${project.name}`}>
+                          <span>{project.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="font-bold uppercase">
+            Blueprints
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -135,43 +173,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel className="font-bold uppercase">
-            Framework
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <FoldersSelect />
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {isLoading && (
-          <div className="flex items-center space-x-2 p-4">
-            <LoaderCircle className="animate-spin" />
-            <span className="grow text-xs">Fetching projects...</span>
-          </div>
-        )}
-
-        {isSuccess &&
-          projects.map(({ data, type }) => (
-            <SidebarGroup key={type}>
-              <SidebarGroupLabel className="font-bold uppercase">
-                {type}
-              </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {data.map((project) => (
-                    <SidebarMenuItem key={project.name}>
-                      <SidebarMenuButton asChild>
-                        <Link href={`/${framework}/${type}/${project.name}`}>
-                          <span>{project.name}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          ))}
       </SidebarContent>
     </Sidebar>
   );

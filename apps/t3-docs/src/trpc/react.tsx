@@ -1,8 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { type AppRouter } from "@/server/api/root";
 import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { httpBatchStreamLink, loggerLink } from "@trpc/client";
@@ -11,6 +8,10 @@ import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { SessionProvider } from "next-auth/react";
 import { useState } from "react";
 import SuperJSON from "superjson";
+
+import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { type AppRouter } from "@/server/api/root";
 
 import { createQueryClient } from "./query-client";
 
@@ -79,7 +80,7 @@ export function Providers(props: { children: React.ReactNode }) {
             <api.Provider client={trpcClient} queryClient={queryClient}>
               {props.children}
             </api.Provider>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </QueryClientProvider>
         </SidebarProvider>
       </ThemeProvider>

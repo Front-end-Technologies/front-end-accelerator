@@ -3,7 +3,9 @@ import { DefaultChatTransport } from "ai";
 import clsx from "clsx";
 import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { useThemeStore } from "@/app/store";
 
 import { AiCoach } from "./ai-coach";
 import { MarkdownContent } from "./markdown-content";
@@ -12,25 +14,33 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export function AIChat() {
+  const llm = useThemeStore((state) => state.ai.llm);
+  const role = useThemeStore((state) => state.ai.role);
+  const slang = useThemeStore((state) => state.ai.slang);
+
   const [input, setInput] = useState("");
   const { data: session } = useSession();
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  const { error, messages, sendMessage } = useChat({
+  const { error, messages, sendMessage, status } = useChat({
     messages: [
       {
         id: "1",
         parts: [
           {
-            text: "Hello, how can I help you?",
-            type: "reasoning",
+            text: `Hello, how can I help you?`,
+            type: "text",
           },
         ],
         role: "assistant",
       },
     ],
-    transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
+
+    transport: new DefaultChatTransport({
+      api: "/api/chat",
+      body: { llm, role, slang },
+    }),
   });
 
   const isUser = (role: string) => role === "user";
@@ -42,12 +52,6 @@ export function AIChat() {
 
     currentRef.scrollTop = currentRef.scrollHeight;
   }, [messages]);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput("");
-  };
 
   return (
     <div
@@ -62,15 +66,15 @@ export function AIChat() {
           <AiCoach />
         </div>
 
-        {messages.map(({ id, parts, role }) => (
-          <div className="flex flex-col space-y-2 p-4" key={id}>
+        {messages.map((message) => (
+          <div className="flex flex-col space-y-2 p-4" key={message.id}>
             <div
               className={clsx("flex items-center gap-4", {
-                "flex-row": isAi(role),
-                "flex-row-reverse": isUser(role),
+                "flex-row": isAi(message.role),
+                "flex-row-reverse": isUser(message.role),
               })}
             >
-              {isUser(role) && session?.user?.image ? (
+              {isUser(message.role) && session?.user?.image ? (
                 <Avatar>
                   <AvatarImage src={session.user.image} />
                   <AvatarFallback>{session.user.name}</AvatarFallback>
@@ -86,17 +90,19 @@ export function AIChat() {
                 className={clsx(
                   "border-border space-y-4 rounded-xl border p-3",
                   {
-                    "bg-emerald-100 dark:bg-emerald-900": isUser(role),
-                    "bg-sky-100 dark:bg-sky-900": isAi(role),
+                    "bg-emerald-100 dark:bg-emerald-900": isUser(message.role),
+                    "bg-sky-100 dark:bg-sky-900": isAi(message.role),
                   },
                 )}
               >
                 <MarkdownContent>
-                  {parts.map((part) => part.text).join("\n")}
+                  {message.parts
+                    .map((part) => (part.type === "text" ? part.text : ""))
+                    .join("\n")}
                 </MarkdownContent>
               </div>
             </div>
-            {isAi(role) && (
+            {isAi(message.role) && (
               <div className="flex items-center justify-end"></div>
             )}
           </div>
@@ -110,14 +116,22 @@ export function AIChat() {
         </p>
       )}
 
-      <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
+      <form
+        className="flex items-center space-x-4 p-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input.trim()) {
+            sendMessage({ text: input });
+            setInput("");
+          }
+        }}
+      >
         <Input
           onChange={(e) => setInput(e.target.value)}
-          onSubmit={handleSubmit}
-          placeholder="Say something..."
+          placeholder="Ask me anything..."
           value={input}
         />
-        <Button onClick={handleSubmit} type="submit">
+        <Button disabled={status !== "ready"} type="submit">
           <Send />
         </Button>
       </form>
