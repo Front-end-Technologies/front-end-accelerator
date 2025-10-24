@@ -1,6 +1,7 @@
-import { llm } from "@/lib/const";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+
+import { llm } from "@/lib/const";
 
 interface ThemeState {
   ai: {

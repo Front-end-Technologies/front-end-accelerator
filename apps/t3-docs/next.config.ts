@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // Keep proxy URLs as provided (required when migrating middleware -> proxy)
+  skipProxyUrlNormalize: true,
 };
 
 export default nextConfig;

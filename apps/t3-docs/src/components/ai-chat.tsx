@@ -17,37 +17,44 @@ export function AIChat() {
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  const { error, messages, sendMessage } = useChat({
-    messages: [
-      {
-        id: "1",
-        parts: [
-          {
-            text: "Hello, how can I help you?",
-            type: "reasoning",
-          },
-        ],
-        role: "assistant",
-      },
-    ],
-    transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
+  const { error, messages, sendMessage, status } = useChat({
+    transport: new DefaultChatTransport({
+      api: "/ai/api/chat",
+    }),
   });
 
-  const isUser = (role: string) => role === "user";
-  const isAi = (role: string) => role !== "user";
+  console.log("messages: ", messages);
+  // const { error, messages, sendMessage } = useChat({
+  //   messages: [
+  //     {
+  //       id: "1",
+  //       parts: [
+  //         {
+  //           text: "Hello, how can I help you?",
+  //           type: "reasoning",
+  //         },
+  //       ],
+  //       role: "assistant",
+  //     },
+  //   ],
+  //   transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
+  // });
 
-  useEffect(() => {
-    const currentRef = messagesRef.current;
-    if (!currentRef) return;
+  // const isUser = (role: string) => role === "user";
+  // const isAi = (role: string) => role !== "user";
 
-    currentRef.scrollTop = currentRef.scrollHeight;
-  }, [messages]);
+  // useEffect(() => {
+  //   const currentRef = messagesRef.current;
+  //   if (!currentRef) return;
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput("");
-  };
+  //   currentRef.scrollTop = currentRef.scrollHeight;
+  // }, [messages]);
+
+  // const handleSubmit = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   sendMessage({ text: input });
+  //   setInput("");
+  // };
 
   return (
     <div
@@ -61,8 +68,8 @@ export function AIChat() {
         <div className="bg-code sticky top-0 z-50 flex items-center rounded-t-xl p-4">
           <AiCoach />
         </div>
-
-        {messages.map(({ id, parts, role }) => (
+        messages come here
+        {/* {messages.map(({ id, parts, role }) => (
           <div className="flex flex-col space-y-2 p-4" key={id}>
             <div
               className={clsx("flex items-center gap-4", {
@@ -100,17 +107,17 @@ export function AIChat() {
               <div className="flex items-center justify-end"></div>
             )}
           </div>
-        ))}
+        ))} */}
       </div>
 
-      {error && (
+      {/* {error && (
         <p className="flex items-center space-x-4 font-semibold text-red-500">
           <AlertCircleIcon />
           <span>{error.message}</span>
         </p>
-      )}
+      )} */}
 
-      <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
+      {/* <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
         <Input
           onChange={(e) => setInput(e.target.value)}
           onSubmit={handleSubmit}
@@ -118,6 +125,26 @@ export function AIChat() {
           value={input}
         />
         <Button onClick={handleSubmit} type="submit">
+          <Send />
+        </Button>
+      </form> */}
+      <form
+        className="flex items-center space-x-4 p-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input.trim()) {
+            sendMessage({ text: input });
+            setInput("");
+          }
+        }}
+      >
+        <Input
+          disabled={status !== "ready"}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Say something..."
+          value={input}
+        />
+        <Button disabled={status !== "ready"} type="submit">
           <Send />
         </Button>
       </form>

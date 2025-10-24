@@ -41,8 +41,8 @@ export function AiLLMSelect() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {uniqueProviders.map((provider) => (
-          <>
-            <DropdownMenuGroup key={provider}>
+          <div key={provider}>
+            <DropdownMenuGroup>
               <DropdownMenuLabel>
                 {getProviderLabel(provider)}
               </DropdownMenuLabel>
@@ -69,7 +69,7 @@ export function AiLLMSelect() {
             </DropdownMenuGroup>
             {uniqueProviders.indexOf(provider) !==
               uniqueProviders.length - 1 && <DropdownMenuSeparator />}
-          </>
+          </div>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
