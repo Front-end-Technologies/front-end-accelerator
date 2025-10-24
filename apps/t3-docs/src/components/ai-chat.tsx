@@ -3,7 +3,9 @@ import { DefaultChatTransport } from "ai";
 import clsx from "clsx";
 import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { useThemeStore } from "@/app/store";
 
 import { AiCoach } from "./ai-coach";
 import { MarkdownContent } from "./markdown-content";
@@ -12,49 +14,44 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export function AIChat() {
+  const llm = useThemeStore((state) => state.ai.llm);
+  const role = useThemeStore((state) => state.ai.role);
+  const slang = useThemeStore((state) => state.ai.slang);
+
   const [input, setInput] = useState("");
   const { data: session } = useSession();
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   const { error, messages, sendMessage, status } = useChat({
+    messages: [
+      {
+        id: "1",
+        parts: [
+          {
+            text: `Hello, how can I help you?`,
+            type: "text",
+          },
+        ],
+        role: "assistant",
+      },
+    ],
+
     transport: new DefaultChatTransport({
-      api: "/ai/api/chat",
+      api: "/api/chat",
+      body: { llm, role, slang },
     }),
   });
 
-  console.log("messages: ", messages);
-  // const { error, messages, sendMessage } = useChat({
-  //   messages: [
-  //     {
-  //       id: "1",
-  //       parts: [
-  //         {
-  //           text: "Hello, how can I help you?",
-  //           type: "reasoning",
-  //         },
-  //       ],
-  //       role: "assistant",
-  //     },
-  //   ],
-  //   transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
-  // });
+  const isUser = (role: string) => role === "user";
+  const isAi = (role: string) => role !== "user";
 
-  // const isUser = (role: string) => role === "user";
-  // const isAi = (role: string) => role !== "user";
+  useEffect(() => {
+    const currentRef = messagesRef.current;
+    if (!currentRef) return;
 
-  // useEffect(() => {
-  //   const currentRef = messagesRef.current;
-  //   if (!currentRef) return;
-
-  //   currentRef.scrollTop = currentRef.scrollHeight;
-  // }, [messages]);
-
-  // const handleSubmit = (e: FormEvent) => {
-  //   e.preventDefault();
-  //   sendMessage({ text: input });
-  //   setInput("");
-  // };
+    currentRef.scrollTop = currentRef.scrollHeight;
+  }, [messages]);
 
   return (
     <div
@@ -68,16 +65,16 @@ export function AIChat() {
         <div className="bg-code sticky top-0 z-50 flex items-center rounded-t-xl p-4">
           <AiCoach />
         </div>
-        messages come here
-        {/* {messages.map(({ id, parts, role }) => (
-          <div className="flex flex-col space-y-2 p-4" key={id}>
+
+        {messages.map((message) => (
+          <div className="flex flex-col space-y-2 p-4" key={message.id}>
             <div
               className={clsx("flex items-center gap-4", {
-                "flex-row": isAi(role),
-                "flex-row-reverse": isUser(role),
+                "flex-row": isAi(message.role),
+                "flex-row-reverse": isUser(message.role),
               })}
             >
-              {isUser(role) && session?.user?.image ? (
+              {isUser(message.role) && session?.user?.image ? (
                 <Avatar>
                   <AvatarImage src={session.user.image} />
                   <AvatarFallback>{session.user.name}</AvatarFallback>
@@ -93,41 +90,32 @@ export function AIChat() {
                 className={clsx(
                   "border-border space-y-4 rounded-xl border p-3",
                   {
-                    "bg-emerald-100 dark:bg-emerald-900": isUser(role),
-                    "bg-sky-100 dark:bg-sky-900": isAi(role),
+                    "bg-emerald-100 dark:bg-emerald-900": isUser(message.role),
+                    "bg-sky-100 dark:bg-sky-900": isAi(message.role),
                   },
                 )}
               >
                 <MarkdownContent>
-                  {parts.map((part) => part.text).join("\n")}
+                  {message.parts
+                    .map((part) => (part.type === "text" ? part.text : ""))
+                    .join("\n")}
                 </MarkdownContent>
               </div>
             </div>
-            {isAi(role) && (
+            {isAi(message.role) && (
               <div className="flex items-center justify-end"></div>
             )}
           </div>
-        ))} */}
+        ))}
       </div>
 
-      {/* {error && (
+      {error && (
         <p className="flex items-center space-x-4 font-semibold text-red-500">
           <AlertCircleIcon />
           <span>{error.message}</span>
         </p>
-      )} */}
+      )}
 
-      {/* <form className="flex items-center space-x-4 p-4" onSubmit={handleSubmit}>
-        <Input
-          onChange={(e) => setInput(e.target.value)}
-          onSubmit={handleSubmit}
-          placeholder="Say something..."
-          value={input}
-        />
-        <Button onClick={handleSubmit} type="submit">
-          <Send />
-        </Button>
-      </form> */}
       <form
         className="flex items-center space-x-4 p-4"
         onSubmit={(e) => {
@@ -139,9 +127,8 @@ export function AIChat() {
         }}
       >
         <Input
-          disabled={status !== "ready"}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Say something..."
+          placeholder="Ask me anything..."
           value={input}
         />
         <Button disabled={status !== "ready"} type="submit">

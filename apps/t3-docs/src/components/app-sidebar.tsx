@@ -74,10 +74,10 @@ export function AppSidebar() {
             </div>
 
             <p className="flex flex-col space-y-4 text-xs leading-5">
-              Speed up your Front-end development with our AI-infused cookbooks
-              and examples. Explore the latest trends and best practices to
-              enhance your skills and stay up-to-date with the ever-evolving
-              world of front-end development.
+              Still watching coding tutorials 🥸? Build real-world projects
+              faster with our AI-infused cookbooks instead ✨. Setup your
+              project by using our blueprints and generate your components based
+              on our examples.
             </p>
           </SidebarGroupContent>
         </SidebarGroup>
