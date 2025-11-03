@@ -1,6 +1,9 @@
-import { useThemeStore } from "@/app/store";
+"use client";
+
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Dialog } from "@radix-ui/react-dialog";
+
+import { useThemeStore } from "@/app/store";
 
 import { MarkdownContent } from "./markdown-content";
 import { Avatar, AvatarFallback } from "./ui/avatar";

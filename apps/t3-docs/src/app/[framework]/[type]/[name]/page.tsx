@@ -1,6 +1,6 @@
 "use client";
 
-import "@xterm/xterm/css/xterm.css";
+// import "@xterm/xterm/css/xterm.css";
 import { javascript } from "@codemirror/lang-javascript";
 import { materialLight } from "@uiw/codemirror-theme-material";
 import { tokyoNightStorm } from "@uiw/codemirror-theme-tokyo-night-storm";
@@ -9,7 +9,7 @@ import CodeMirror, {
   ReactCodeMirrorRef,
 } from "@uiw/react-codemirror";
 import { WebContainer } from "@webcontainer/api";
-import { FitAddon } from "@xterm/addon-fit";
+// import { FitAddon } from "@xterm/addon-fit";
 import { Terminal } from "@xterm/xterm";
 import { GitCompare, MessageCircleCode, WandSparkles } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -91,11 +91,11 @@ function WebIDE() {
 
   useEffect(() => {
     const bootWebContainer = async () => {
-      const fitAddon = new FitAddon();
+      // const fitAddon = new FitAddon();
       const terminal = new Terminal({ convertEol: true });
-      terminal.loadAddon(fitAddon);
+      // terminal.loadAddon(fitAddon);
       terminal.open(terminalRef.current!);
-      fitAddon.fit();
+      // fitAddon.fit();
 
       webcontainerRef.current = await WebContainer.boot();
 

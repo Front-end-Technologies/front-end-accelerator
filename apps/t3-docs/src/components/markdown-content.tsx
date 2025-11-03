@@ -2,11 +2,14 @@
 
 import { useTheme } from "next-themes";
 import Markdown from "react-markdown";
-// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-// import {
-//   nightOwl,
-//   oneLight,
-// } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  nightOwl,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
 
 interface Props {
   children: string;
@@ -21,20 +24,22 @@ export function MarkdownContent({ children }: Props) {
         code({ children, className }) {
           const match = /language-(\w+)/.exec(className || "");
           return match ? (
-            // <SyntaxHighlighter
-            //   language={match[1]}
-            //   PreTag="div"
-            //   style={theme === "dark" ? nightOwl : oneLight}
-            // >
-            <div>{String(children).replace(/\n$/, "")}</div>
+            <SyntaxHighlighter
+              language={match[1]}
+              PreTag="div"
+              style={theme === "dark" ? nightOwl : oneLight}
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
           ) : (
-            // </SyntaxHighlighter>
             <code className="text-chart-3 p-0.5 px-1 font-bold italic">
               {children}
             </code>
           );
         },
       }}
+      rehypePlugins={[rehypeRaw, rehypeSanitize]}
+      remarkPlugins={[remarkGfm]}
     >
       {children}
     </Markdown>

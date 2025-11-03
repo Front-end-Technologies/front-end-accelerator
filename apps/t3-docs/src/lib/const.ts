@@ -22,68 +22,23 @@ export enum Type {
 
 export const llm = [
   {
-    description: "Best for complex reasoning and advanced problem-solving.",
-    name: "gemini-2.5-pro-exp-03-25",
+    description: "Your everyday versatile assistant",
+    name: "gemini-2.5-flash",
     provider: "google",
   },
   {
-    description: "Ideal for real-time chatbots and live support.",
-    name: "gemini-2.0-flash-001",
-    provider: "google",
-  },
-  {
-    description: "Great for summarization, Q&A, and content drafting.",
-    name: "gemini-1.5-flash-latest",
-    provider: "google",
-  },
-  {
-    description: "Reliable for technical writing and code generation.",
-    name: "gemini-1.5-pro-latest",
-    provider: "google",
-  },
-  {
-    description: "Suited for lightweight mobile and embedded apps.",
-    name: "o3-mini",
+    description: "Good for repeatable tasks and structured outputs.",
+    name: "gpt-5",
     provider: "openai",
   },
   {
-    description: "Efficient for quick prototyping and low-latency tasks.",
-    name: "o4-mini",
-    provider: "openai",
-  },
-  {
-    description: "Excels at advanced reasoning and content creation.",
-    name: "gpt-4.1",
-    provider: "openai",
-  },
-  {
-    description: "Faster for scalable deployments with moderate complexity.",
+    description: "Lightweight and fast model for quick responses.",
     name: "gpt-4.1-mini",
     provider: "openai",
   },
   {
-    description: "Best for IoT and edge computing with minimal resources.",
-    name: "gpt-4.1-nano",
-    provider: "openai",
-  },
-  {
-    description: "Optimized for domain-specific chatbots.",
-    name: "gpt-4o-mini",
-    provider: "openai",
-  },
-  {
-    description: "Great for brainstorming and creative writing.",
-    name: "claude-3-5-haiku-latest",
-    provider: "anthropic",
-  },
-  {
-    description: "Best for structured outputs and workflow automation.",
-    name: "claude-3-5-sonnet-latest",
-    provider: "anthropic",
-  },
-  {
-    description: "Robust for enterprise and high-volume content generation.",
-    name: "claude-3-opus-latest",
+    description: "Excellent for coding tasks and complex problem solving.",
+    name: "claude-3-7-sonnet-20250219",
     provider: "anthropic",
   },
 ];

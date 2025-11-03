@@ -1,3 +1,5 @@
+"use client";
+
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import clsx from "clsx";
