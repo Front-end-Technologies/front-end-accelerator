@@ -31,7 +31,7 @@ export function AIChat() {
         id: "1",
         parts: [
           {
-            text: `Hello, how can I help you?`,
+            text: `Hello, I am connected to the Cegeka Wiki, what would you like to know?`,
             type: "text",
           },
         ],

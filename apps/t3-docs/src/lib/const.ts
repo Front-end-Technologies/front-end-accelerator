@@ -32,6 +32,16 @@ export const llm = [
     provider: "openai",
   },
   {
+    description: "Faster than gtp-5 with slightly lower accuracy.",
+    name: "gpt-5-mini",
+    provider: "openai",
+  },
+  {
+    description: "Balanced model for general-purpose use.",
+    name: "gpt-5-nano",
+    provider: "openai",
+  },
+  {
     description: "Lightweight and fast model for quick responses.",
     name: "gpt-4.1-mini",
     provider: "openai",

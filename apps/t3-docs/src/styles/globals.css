@@ -5,6 +5,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import "github-markdown-css/github-markdown.css";
+
+.markdown-body {
+  @apply !text-foreground !bg-transparent !font-mono !text-sm;
+
+  pre {
+    @apply bg-background;
+    code {
+      @apply w-full break-words whitespace-pre-wrap;
+    }
+  }
+  li {
+    @apply list-disc;
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
