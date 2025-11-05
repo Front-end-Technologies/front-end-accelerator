@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
+import { DefaultChatTransport, UIMessage } from "ai";
 import clsx from "clsx";
 import { AlertCircleIcon, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -20,12 +20,13 @@ export function AIChat() {
   const role = useThemeStore((state) => state.ai.role);
   const slang = useThemeStore((state) => state.ai.slang);
 
-  const [input, setInput] = useState("");
+  const input = useRef("");
   const { data: session } = useSession();
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  const { error, messages, sendMessage, status } = useChat({
+  const { error, messages, sendMessage, status } = useChat<UIMessage>({
+    experimental_throttle: 500,
     messages: [
       {
         id: "1",
@@ -88,25 +89,71 @@ export function AIChat() {
                 </Avatar>
               )}
 
-              <div
-                className={clsx(
-                  "border-border space-y-4 rounded-xl border p-3",
-                  {
-                    "bg-emerald-100 dark:bg-emerald-900": isUser(message.role),
-                    "bg-sky-100 dark:bg-sky-900": isAi(message.role),
-                  },
-                )}
-              >
-                <MarkdownContent>
-                  {message.parts
-                    .map((part) => (part.type === "text" ? part.text : ""))
-                    .join("\n")}
-                </MarkdownContent>
+              <div className="flex flex-col gap-4">
+                {message.parts.map((part, index) => {
+                  switch (part.type) {
+                    case "text":
+                      return (
+                        <div
+                          key={`${message.id}-${index}`}
+                          className={clsx(
+                            "border-border space-y-4 rounded-xl border p-3",
+                            {
+                              "bg-emerald-100 dark:bg-emerald-900": isUser(
+                                message.role,
+                              ),
+                              "bg-sky-100 dark:bg-sky-900": isAi(message.role),
+                            },
+                          )}
+                        >
+                          <MarkdownContent>{part.text}</MarkdownContent>
+                        </div>
+                      );
+
+                    case "dynamic-tool":
+                      switch (part.state) {
+                        case "input-streaming":
+                          return (
+                            <div
+                              key={`${message.id}-${index}`}
+                              className="text-muted-foreground text-sm italic"
+                            >
+                              {`👀 Preparing wiki search: ${part.toolName}`}
+                            </div>
+                          );
+                        case "input-available":
+                          return (
+                            <div
+                              key={`${message.id}-${index}`}
+                              className="text-muted-foreground text-sm italic"
+                            >
+                              {`⚡️ Fetching wiki content: ${part.toolName}`}
+                            </div>
+                          );
+                        case "output-available":
+                          return (
+                            <div
+                              key={`${message.id}-${index}`}
+                              className="text-muted-foreground text-sm italic"
+                            >
+                              {`✅ Wiki content retrieved: ${part.toolName}`}
+                            </div>
+                          );
+                        case "output-error":
+                          return (
+                            <div key={`${message.id}-${index}`}>
+                              {`❌ Failed to fetch wiki docs: ${part.errorText}`}
+                            </div>
+                          );
+                        default:
+                          return null;
+                      }
+                    default:
+                      return null;
+                  }
+                })}
               </div>
             </div>
-            {isAi(message.role) && (
-              <div className="flex items-center justify-end"></div>
-            )}
           </div>
         ))}
       </div>
@@ -122,16 +169,18 @@ export function AIChat() {
         className="flex items-center space-x-4 p-4"
         onSubmit={(e) => {
           e.preventDefault();
-          if (input.trim()) {
-            sendMessage({ text: input });
-            setInput("");
+          if (input.current.trim()) {
+            sendMessage({ text: input.current });
+            input.current = "";
+            (e.currentTarget as HTMLFormElement).reset();
           }
         }}
       >
         <Input
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            input.current = e.target.value;
+          }}
           placeholder="Ask me anything..."
-          value={input}
         />
         <Button disabled={status !== "ready"} type="submit">
           <Send />

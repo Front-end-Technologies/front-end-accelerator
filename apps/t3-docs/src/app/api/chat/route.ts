@@ -33,6 +33,7 @@ export async function POST(req: Request) {
   );
   const mcpClient = await experimental_createMCPClient({
     transport: httpTransport,
+    name: "cegeka-wiki-mcp-client",
   });
 
   const mcpTools = await mcpClient.tools();
@@ -42,9 +43,9 @@ export async function POST(req: Request) {
   const result = streamText({
     messages: convertToModelMessages(messages),
     model: getAiModel(llm.provider, llm.name),
-    system: `You are a highly competent front-end engineering assistant. Speak like a ${role} using ${slang} language, but remain precise and professional. Provide answers first from the Cegeka Bookstack Wiki, especially in the architect book, Front-end chapter. If nothing is found, provide your best answer based on your knowledge.`,
+    system: `You are a highly competent front-end engineering assistant. Speak like a ${role} using ${slang} language, but remain precise and professional. Provide answers first from the Cegeka Bookstack Wiki, especially in the architect book, Front-end chapter. If nothing is found look into other chapters. provide your best answer based on your knowledge. Always include references with bullet points to the articles you used from the wiki. If you don't find anything, say that you don't know and suggest to ask a colleague.`,
     tools: { ...mcpTools } as ToolSet,
-    stopWhen: stepCountIs(5),
+    stopWhen: stepCountIs(10),
     onFinish: async () => {
       await mcpClient.close();
     },

@@ -10,17 +10,33 @@ export default function Main({ children }: { children: React.ReactNode }) {
   const ai = useThemeStore((state) => state.ai);
   const { open } = useSidebar();
 
+  // When the AI chat panel is open we want the main panel and chat panel
+  // to sum to 100%. Compute sensible defaults so we don't trigger the
+  // "Invalid layout total size" warning from react-resizable-panels.
+  const chatOpen = !!ai.chat.open;
+  const chatSize = chatOpen ? 25 : 0; // percent
+  const mainSize = chatOpen ? 100 - chatSize : 100; // percent
+
   return (
     <PanelGroup
-      className="flex flex-col gap-2 px-4"
+      className="gap-2 px-4"
       direction="horizontal"
       style={{ width: open ? `calc(100vw - 16rem)` : `100vw` }}
     >
-      <Panel defaultSize={100}>{children}</Panel>
-      {ai.chat.open && (
+      <Panel id="main-panel" order={0} defaultSize={mainSize}>
+        {children}
+      </Panel>
+
+      {chatOpen && (
         <>
           <PanelResizeHandle />
-          <Panel defaultSize={25} maxSize={50} minSize={20}>
+          <Panel
+            id="ai-chat-panel"
+            order={1}
+            defaultSize={chatSize}
+            maxSize={50}
+            minSize={20}
+          >
             <AIChat />
           </Panel>
         </>
