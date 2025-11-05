@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     {
       requestInit: {
         headers: {
-          Authorization: `Bearer ALhJN2IYO2v0I37Il5DPScdo4JiVCzv6:NSCHTYzZrIA6I1eb9jUCQUNDOOZEpJEG`,
+          Authorization: `Bearer ${process.env.BOOKSTACK_API_KEY}`,
         },
       },
     },
