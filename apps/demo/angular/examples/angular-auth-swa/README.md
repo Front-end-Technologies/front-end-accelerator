@@ -9,7 +9,7 @@ To run the static web app locally:
 1. Install the Azure Static Web Apps CLI globally:
 
    ```bash
-   npm install -g @azure/static-web-apps-cli
+   pnpm install -g @azure/static-web-apps-cli
    ```
 
 2. Start the development server:

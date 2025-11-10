@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "webcontainer": "swa start"
+    "webcontainer": "pnpm install -g @azure/static-web-apps-cli && swa start"
   },
   "prettier": {
     "overrides": [
