@@ -33,10 +33,13 @@
     "paths": {
       "@/*": [
         "./src/*"
+<<<<<<< HEAD
       ],
       // temporary fix for react types
       "react": [
         "./node_modules/@types/react"
+=======
+>>>>>>> angular-auth-ms-b2c
       ]
     }
   },
