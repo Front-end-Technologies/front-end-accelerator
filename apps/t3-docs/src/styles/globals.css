@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@config "../../tailwind.config.ts";
-
 @custom-variant dark (&:is(.dark *));
 
 @import "github-markdown-css/github-markdown.css";
@@ -130,6 +128,12 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-code: var(--code);
 }
+
+/* @utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+} */
 
 @layer base {
   * {

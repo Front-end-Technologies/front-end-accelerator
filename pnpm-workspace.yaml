@@ -11,9 +11,11 @@ packages:
   - apps/demo/nuxt/examples/*
 
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - '@tailwindcss/oxide'
   - esbuild
   - lmdb
+  - msgpackr-extract
   - nice-napi
   - sharp
   - unrs-resolver
