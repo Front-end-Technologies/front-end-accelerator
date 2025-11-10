@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import {
   fetchFolderFiles,
-mapGithubToWebcontainerFileSystem,
+  mapGithubToWebcontainerFileSystem,
 } from "../webcontainer";
 
 const http = createHttp();
