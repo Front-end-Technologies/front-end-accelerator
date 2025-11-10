@@ -4,8 +4,8 @@
     "angular": {
       "appLocation": ".",
       "outputLocation": ".",
-      "appBuildCommand": "npm run build",
-      "run": "npm start",
+      "appBuildCommand": "pnpm run build",
+      "run": "pnpm start",
       "appDevserverUrl": "http://localhost:4200"
     }
   }

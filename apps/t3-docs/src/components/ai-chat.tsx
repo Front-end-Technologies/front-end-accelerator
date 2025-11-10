@@ -19,6 +19,7 @@ export function AIChat() {
   const llm = useThemeStore((state) => state.ai.llm);
   const role = useThemeStore((state) => state.ai.role);
   const slang = useThemeStore((state) => state.ai.slang);
+  const mcp = useThemeStore((state) => state.ai.mcp);
 
   const input = useRef("");
   const { data: session } = useSession();
@@ -32,18 +33,14 @@ export function AIChat() {
         id: "1",
         parts: [
           {
-            text: `Hello, I am connected to the Cegeka Wiki, what would you like to know?`,
+            text: `Hello, what would you like to know from ${mcp.provider}?`,
             type: "text",
           },
         ],
         role: "assistant",
       },
     ],
-
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-      body: { llm, role, slang },
-    }),
+    transport: new DefaultChatTransport({ api: mcp.route }),
   });
 
   const isUser = (role: string) => role === "user";
@@ -109,6 +106,16 @@ export function AIChat() {
                           <MarkdownContent>{part.text}</MarkdownContent>
                         </div>
                       );
+                    case "reasoning":
+                      return (
+                        <div
+                          key={`${message.id}-${index}`}
+                          className="text-muted-foreground text-sm italic"
+                        >
+                          {part.state === "streaming" && `🤔 Thinking...`}
+                          {part.state === "done" && `✅ Time for action!`}
+                        </div>
+                      );
 
                     case "dynamic-tool":
                       switch (part.state) {
@@ -118,7 +125,7 @@ export function AIChat() {
                               key={`${message.id}-${index}`}
                               className="text-muted-foreground text-sm italic"
                             >
-                              {`👀 Preparing wiki search: ${part.toolName}`}
+                              {`👀 Preparing search: ${part.toolName}`}
                             </div>
                           );
                         case "input-available":
@@ -127,7 +134,7 @@ export function AIChat() {
                               key={`${message.id}-${index}`}
                               className="text-muted-foreground text-sm italic"
                             >
-                              {`⚡️ Fetching wiki content: ${part.toolName}`}
+                              {`⚡️ Fetching content: ${part.toolName}`}
                             </div>
                           );
                         case "output-available":
@@ -136,13 +143,13 @@ export function AIChat() {
                               key={`${message.id}-${index}`}
                               className="text-muted-foreground text-sm italic"
                             >
-                              {`✅ Wiki content retrieved: ${part.toolName}`}
+                              {`✅ Content retrieved: ${part.toolName}`}
                             </div>
                           );
                         case "output-error":
                           return (
                             <div key={`${message.id}-${index}`}>
-                              {`❌ Failed to fetch wiki docs: ${part.errorText}`}
+                              {`❌ Failed to fetch content: ${part.errorText}`}
                             </div>
                           );
                         default:
@@ -170,7 +177,12 @@ export function AIChat() {
         onSubmit={(e) => {
           e.preventDefault();
           if (input.current.trim()) {
-            sendMessage({ text: input.current });
+            sendMessage(
+              { text: input.current },
+              {
+                body: { llm, role, slang, mcp },
+              },
+            );
             input.current = "";
             (e.currentTarget as HTMLFormElement).reset();
           }
@@ -182,7 +194,7 @@ export function AIChat() {
           }}
           placeholder="Ask me anything..."
         />
-        <Button disabled={status !== "ready"} type="submit">
+        <Button disabled={status === "streaming"} type="submit">
           <Send />
         </Button>
       </form>
