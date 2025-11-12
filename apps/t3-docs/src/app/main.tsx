@@ -37,7 +37,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
             maxSize={50}
             minSize={20}
           >
-            <AIChat />
+            <AIChat key={ai.mcp.name} />
           </Panel>
         </>
       )}

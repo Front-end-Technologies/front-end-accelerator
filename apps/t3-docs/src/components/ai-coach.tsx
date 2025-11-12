@@ -16,7 +16,7 @@ export function AiCoach() {
           {ai.slang} {ai.role}
         </span>
         <span className="text-xs">
-          {ai.llm.provider} {ai.llm.name}
+          {ai.llm.provider} {ai.llm.name} X {ai.mcp.name}
         </span>
       </div>
     </div>

@@ -26,6 +26,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { useThemeStore } from "./store";
+import { AiMcpSelect } from "@/components/ai-mcp-select";
 
 interface Params {
   [key: string]: Framework | string;
@@ -56,12 +57,15 @@ export function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
-        <Button onClick={toggleAIChat} size="icon" variant="outline">
-          {aiChatIsOpen ? <CircleX /> : <MessageCircleCode />}
-        </Button>
+        <span>use</span>
         <AiLLMSelect />
         <span>as</span>
         <AiRoleSelect />
+        <span>with</span>
+        <AiMcpSelect />
+        <Button onClick={toggleAIChat} size="icon" variant="outline">
+          {aiChatIsOpen ? <CircleX /> : <MessageCircleCode />}
+        </Button>
 
         {framework && name && (
           <Button
