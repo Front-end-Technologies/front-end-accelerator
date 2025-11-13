@@ -9,6 +9,7 @@ import { experimental_createMCPClient } from "@ai-sdk/mcp";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 
 import { getAiModel } from "@/lib/utils";
+import { ThemeState } from "@/app/store";
 
 interface ChatRequest {
   llm: {
@@ -23,12 +24,9 @@ interface ChatRequest {
 export async function POST(req: Request) {
   const { llm, messages, role, slang } = (await req.json()) as ChatRequest;
 
-  const bookstackEndpoint =
-    process.env.BOOKSTACK_MCP_URL ?? "https://mcp-wiki.cegeka.com";
-
   const mcpClient = await experimental_createMCPClient({
     transport: new StreamableHTTPClientTransport(
-      new URL(bookstackEndpoint),
+      new URL("https://mcp-wiki.cegeka.com"),
       {
         requestInit: {
           headers: {
