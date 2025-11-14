@@ -17,17 +17,27 @@ export default function Contributors() {
                 <AvatarImage alt={member.avatar_url} src={member.avatar_url} />
                 <AvatarFallback>UI</AvatarFallback>
               </Avatar>
-              <div className="flex flex-col gap-2">
+              <div className="flex min-w-0 flex-col gap-2">
                 <a
-                  className="text-sm font-bold"
+                  className="block truncate text-sm font-bold"
                   href={`https://github.com/${member.login}`}
                   rel="noopener noreferrer"
                   target="_blank"
+                  title={`@${member.login || "/"}`}
                 >
                   {`@${member.login || "/"}`}
                 </a>
 
-                <div className="text-xs font-normal italic">
+                <div
+                  className="truncate text-xs font-normal italic"
+                  title={[
+                    member.user.name,
+                    member.user.location,
+                    member.user.company,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                >
                   {[member.user.name, member.user.location, member.user.company]
                     .filter(Boolean)
                     .join(", ")}
