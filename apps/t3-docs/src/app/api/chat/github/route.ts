@@ -50,7 +50,7 @@ export async function POST(req: Request) {
 
 If you cannot find any relevant information, respond: "I don't know — no relevant content found in the organization's MCP results." Then suggest an answer based on your own knowledge, but clearly indicate it is not from the MCP server. Always include references to the articles you used from the MCP server in a bullet list format.`,
     tools: { ...githubTools } as ToolSet,
-    stopWhen: stepCountIs(20),
+    stopWhen: stepCountIs(50),
     onFinish: async () => {
       await githubClient.close();
     },
