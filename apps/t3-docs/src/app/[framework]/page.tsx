@@ -31,7 +31,8 @@ export default function Detail() {
         <div
           className={cn("scrollbar-hide overflow-auto", {
             "flex flex-col gap-4": detailToggle.open,
-            "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3":
+            // Use container-responsive grid so it adapts within the resizable panel
+            "grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-4":
               !detailToggle.open,
           })}
           style={{ height: "calc(100vh - 5rem)" }}
