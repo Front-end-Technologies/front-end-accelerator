@@ -1,3 +1,5 @@
+import { url } from "inspector";
+
 export const githubRepoURL = `https://www.github.com/${process.env.NEXT_PUBLIC_GITHUB_USER}/${process.env.NEXT_PUBLIC_GITHUB_REPO}`;
 
 export enum Framework {
@@ -22,33 +24,52 @@ export enum Type {
 
 export const llm = [
   {
-    description: "Your everyday versatile assistant",
+    description: "Good for looking up information quickly.",
     name: "gemini-2.5-flash",
     provider: "google",
   },
   {
-    description: "Good for repeatable tasks and structured outputs.",
+    description: "Cheap and fast, but not so smart.",
+    name: "gpt-4.1-nano",
+    provider: "openai",
+  },
+  {
+    description: "Smart but slow",
     name: "gpt-5",
     provider: "openai",
   },
   {
-    description: "Faster than gtp-5 with slightly lower accuracy.",
+    description: "Still smart, still slow, but cheaper.",
     name: "gpt-5-mini",
     provider: "openai",
   },
   {
-    description: "Balanced model for general-purpose use.",
+    description: "Fast and capable for most tasks. But slow in reasoning.",
     name: "gpt-5-nano",
-    provider: "openai",
-  },
-  {
-    description: "Lightweight and fast model for quick responses.",
-    name: "gpt-4.1-mini",
     provider: "openai",
   },
   {
     description: "Excellent for coding tasks and complex problem solving.",
     name: "claude-3-7-sonnet-20250219",
     provider: "anthropic",
+  },
+];
+
+export const mcps = [
+  {
+    description:
+      "Ask questions or give tasks based on the Front-end Accelerator code repo",
+    name: "github-copilot-mcp-client",
+    provider: "GitHub",
+    url: "https://api.githubcopilot.com/mcp",
+    route: "/api/chat/github",
+  },
+  {
+    description:
+      "Ask questions or give tasks based on the Cegeka Bookstack Wiki",
+    name: "bookstack-mcp-client",
+    provider: "Bookstack",
+    url: "https://mcp-wiki.cegeka.com",
+    route: "/api/chat/bookstack",
   },
 ];

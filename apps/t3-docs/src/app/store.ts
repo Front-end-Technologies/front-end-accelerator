@@ -1,10 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { llm } from "@/lib/const";
+import { llm, mcps } from "@/lib/const";
 
-interface ThemeState {
+export interface ThemeState {
   ai: {
+    mcp: {
+      name: string;
+      provider: string;
+      description: string;
+      url: string;
+      route: string;
+    };
     chat: { open: boolean };
     framework: { output: string };
     llm: {
@@ -20,12 +27,14 @@ interface ThemeState {
   setAiRole: (slang: string) => void;
   setAiSlang: (style: string) => void;
   toggleAIChat: () => void;
+  setAiMcp: (mcp: ThemeState["ai"]["mcp"]) => void;
 }
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
       ai: {
+        mcp: mcps[0]!,
         chat: {
           open: false,
         },
@@ -35,6 +44,14 @@ export const useThemeStore = create<ThemeState>()(
         llm: llm[0]!,
         role: "Software Architect",
         slang: "Detailed",
+      },
+      setAiMcp: (mcp: ThemeState["ai"]["mcp"]) => {
+        set((state) => ({
+          ai: {
+            ...state.ai,
+            mcp,
+          },
+        }));
       },
       setAiLLM: (llm: ThemeState["ai"]["llm"]) => {
         set((state) => ({
