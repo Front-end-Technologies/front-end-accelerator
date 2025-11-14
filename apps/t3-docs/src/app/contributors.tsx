@@ -8,7 +8,7 @@ export default function Contributors() {
   const [data] = api.gitHub.getMembers.useSuspenseQuery();
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-8">
       {data.map((member) => (
         <Card key={member.id}>
           <CardHeader>
